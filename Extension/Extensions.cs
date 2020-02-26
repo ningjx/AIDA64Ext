@@ -125,7 +125,7 @@ namespace AIDA64Ext.Extension
         /// <param name="checkedListBox"></param>
         public static void SetAllSelected(this CheckedListBox checkedListBox)
         {
-            for(int i = 0;i< checkedListBox.Items.Count; i++)
+            for (int i = 0; i < checkedListBox.Items.Count; i++)
             {
                 checkedListBox.SetItemCheckState(i, CheckState.Checked);
             }

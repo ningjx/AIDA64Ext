@@ -20,7 +20,6 @@ namespace AIDA64Ext.Forms
         public AIDAParamForm()
         {
             InitializeComponent();
-
         }
 
         private void AIDAParamForm_Load(object sender, EventArgs e)
@@ -49,30 +48,6 @@ namespace AIDA64Ext.Forms
             checkedListBox2.AddAIDAItems(AIDADataType.Temperature);
             checkedListBox3.AddAIDAItems(AIDADataType.Volt);
             checkedListBox4.AddAIDAItems(AIDADataType.Power);
-            //AIDA64.AIDA64Infos.AIDA64Info.System?.ForEach(t => {
-            //    if (Config.Config.AIDAShownItems.Contains(t.Label))
-            //        checkedListBox1.Items.Add(t.Label, true);
-            //    else
-            //        checkedListBox1.Items.Add(t.Label, false);
-            //});
-            //AIDA64.AIDA64Infos.AIDA64Info.Temperature?.ForEach(t => {
-            //    if (Config.Config.AIDAShownItems.Contains(t.Label))
-            //        checkedListBox2.Items.Add(t.Label, true);
-            //    else
-            //        checkedListBox2.Items.Add(t.Label, false);
-            //});
-            //AIDA64.AIDA64Infos.AIDA64Info.Volt?.ForEach(t => {
-            //    if (Config.Config.AIDAShownItems.Contains(t.Label))
-            //        checkedListBox3.Items.Add(t.Label, true);
-            //    else
-            //        checkedListBox3.Items.Add(t.Label, false);
-            //});
-            //AIDA64.AIDA64Infos.AIDA64Info.Power?.ForEach(t => {
-            //    if (Config.Config.AIDAShownItems.Contains(t.Label))
-            //        checkedListBox4.Items.Add(t.Label, true);
-            //    else
-            //        checkedListBox4.Items.Add(t.Label, false);
-            //});
         }
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
