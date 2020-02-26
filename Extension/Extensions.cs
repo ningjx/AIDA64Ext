@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AIDA64Ext.Enums;
+using AIDA64Ext.Models;
 using AIDA64Ext.Handlers;
 using static System.Windows.Forms.CheckedListBox;
 
@@ -12,14 +13,38 @@ namespace AIDA64Ext.Extension
 {
     public static class Extensions
     {
+        /// <summary>
+        /// 给复选列表添加一个全选按钮
+        /// </summary>
+        /// <param name="checkedListBox"></param>
         public static void AddSeleAllItem(this CheckedListBox checkedListBox)
         {
             checkedListBox.Items.Add("全选", false);
         }
 
-        public static void AddAIDAItems(this CheckedListBox checkedListBox)
+        /// <summary>
+        /// 在复选列表添加AIDA数据项
+        /// </summary>
+        /// <param name="checkedListBox"></param>
+        public static void AddAIDAItems(this CheckedListBox checkedListBox, AIDADataType aIDADataType)
         {
-            AIDA64.AIDA64Infos.AIDA64Info.System?.ForEach(t =>
+            List<Item> items = new List<Item>();
+            switch (aIDADataType)
+            {
+                case AIDADataType.System:
+                    items = AIDA64.AIDA64Infos.AIDA64Info.System ?? new List<Item>();
+                    break;
+                case AIDADataType.Temperature:
+                    items = AIDA64.AIDA64Infos.AIDA64Info.Temperature ?? new List<Item>();
+                    break;
+                case AIDADataType.Volt:
+                    items = AIDA64.AIDA64Infos.AIDA64Info.Volt ?? new List<Item>();
+                    break;
+                case AIDADataType.Power:
+                    items = AIDA64.AIDA64Infos.AIDA64Info.Power ?? new List<Item>();
+                    break;
+            }
+            items.ForEach(t =>
             {
                 if (Config.Config.AIDAShownItems.Contains(t.Label))
                     checkedListBox.Items.Add(t.Label, true);

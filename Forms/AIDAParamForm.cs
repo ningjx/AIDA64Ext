@@ -40,15 +40,15 @@ namespace AIDA64Ext.Forms
             checkedListBox3.Items.Clear();
             checkedListBox4.Items.Clear();
 
-            checkedListBox1.AddSeleAllItem();
-            checkedListBox2.AddSeleAllItem();
-            checkedListBox3.AddSeleAllItem();
-            checkedListBox4.AddSeleAllItem();
+            //checkedListBox1.AddSeleAllItem();
+            //checkedListBox2.AddSeleAllItem();
+            //checkedListBox3.AddSeleAllItem();
+            //checkedListBox4.AddSeleAllItem();
 
-            checkedListBox1.AddAIDAItems();
-            checkedListBox2.AddAIDAItems();
-            checkedListBox3.AddAIDAItems();
-            checkedListBox4.AddAIDAItems();
+            checkedListBox1.AddAIDAItems(AIDADataType.System);
+            checkedListBox2.AddAIDAItems(AIDADataType.Temperature);
+            checkedListBox3.AddAIDAItems(AIDADataType.Volt);
+            checkedListBox4.AddAIDAItems(AIDADataType.Power);
             //AIDA64.AIDA64Infos.AIDA64Info.System?.ForEach(t => {
             //    if (Config.Config.AIDAShownItems.Contains(t.Label))
             //        checkedListBox1.Items.Add(t.Label, true);
@@ -77,45 +77,45 @@ namespace AIDA64Ext.Forms
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (checkedListBox1.CheckedItems.Contains("全选"))
-            {
-                checkedListBox1.Items.SyncAllItems(AIDADataType.System);
-                checkedListBox1.SetAllSelected();
-            }
-            else
+            //if (checkedListBox1.CheckedItems.Contains("全选"))
+            //{
+            //    checkedListBox1.Items.SyncAllItems(AIDADataType.System);
+            //    checkedListBox1.SetAllSelected();
+            //}
+            //else
                 checkedListBox1.CheckedItems.SyncSeletedItems(AIDADataType.System);
         }
 
         private void checkedListBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (checkedListBox2.CheckedItems.Contains("全选"))
-            {
-                checkedListBox2.Items.SyncAllItems(AIDADataType.Temperature);
-                checkedListBox2.SetAllSelected();
-            }
-            else
+            //if (checkedListBox2.CheckedItems.Contains("全选"))
+            //{
+            //    checkedListBox2.Items.SyncAllItems(AIDADataType.Temperature);
+            //    checkedListBox2.SetAllSelected();
+            //}
+            //else
                 checkedListBox2.CheckedItems.SyncSeletedItems(AIDADataType.Temperature);
         }
 
         private void checkedListBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (checkedListBox3.CheckedItems.Contains("全选"))
-            {
-                checkedListBox3.Items.SyncAllItems(AIDADataType.Volt);
-                checkedListBox3.SetAllSelected();
-            }
-            else
+            //if (checkedListBox3.CheckedItems.Contains("全选"))
+            //{
+            //    checkedListBox3.Items.SyncAllItems(AIDADataType.Volt);
+            //    checkedListBox3.SetAllSelected();
+            //}
+            //else
                 checkedListBox3.CheckedItems.SyncSeletedItems(AIDADataType.Volt);
         }
 
         private void checkedListBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (checkedListBox4.CheckedItems.Contains("全选"))
-            {
-                checkedListBox4.Items.SyncAllItems(AIDADataType.Power);
-                checkedListBox4.SetAllSelected();
-            }  
-            else
+            //if (checkedListBox4.CheckedItems.Contains("全选"))
+            //{
+            //    checkedListBox4.Items.SyncAllItems(AIDADataType.Power);
+            //    checkedListBox4.SetAllSelected();
+            //}  
+            //else
                 checkedListBox4.CheckedItems.SyncSeletedItems(AIDADataType.Power);
         }
     }
