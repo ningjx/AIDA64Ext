@@ -15,7 +15,9 @@ namespace AIDA64ExtTest
         [TestMethod]
         public void TestMethod1()
         {
-            var test = AIDA64.AIDA64Infos.Get("TCC-1-1");
+            AIDA64.Start();
+
+            var test = AIDA64.GetInfos();
         }
     }
 }

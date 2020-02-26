@@ -9,18 +9,8 @@ namespace AIDA64Ext.Models
 {
     public class AIDA64Infos
     {
-        public AIDA64Infos()
-        {
-            AIDA64Info = new AIDA64Data();
-        }
-
         [JsonProperty("AIDA64Info")]
-        public AIDA64Data AIDA64Info { get; set; }
-
-        public string Get(string id)
-        {
-            return AIDA64Info.Get(id);
-        }
+        public AIDA64Data AIDA64Info { get; set; } = new AIDA64Data();
     }
 
     public class AIDA64Data
@@ -29,41 +19,41 @@ namespace AIDA64Ext.Models
         /// 系统
         /// </summary>
         [JsonProperty("sys")]
-        public List<Item> System { get; set; }
+        public List<Item> System { get; set; } = new List<Item>();
 
         /// <summary>
         /// 温度
         /// </summary>
         [JsonProperty("temp")]
-        public List<Item> Temperature { get; set; }
+        public List<Item> Temperature { get; set; } = new List<Item>();
 
         /// <summary>
         /// 电压
         /// </summary>
         [JsonProperty("volt")]
-        public List<Item> Volt { get; set; }
+        public List<Item> Volt { get; set; } = new List<Item>();
 
         /// <summary>
         /// 功耗
         /// </summary>
         [JsonProperty("pwr")]
-        public List<Item> Power { get; set; }
+        public List<Item> Power { get; set; } = new List<Item>();
 
-        public string Get(string id)
+        public List<Item> Items
         {
-            List<Item> allItems = new List<Item>();
-            if (System != null)
-                allItems.AddRange(System);
-            if (Temperature != null)
-                allItems.AddRange(Temperature);
-            if (Volt != null)
-                allItems.AddRange(Volt);
-            if (Power != null)
-                allItems.AddRange(Power);
-            Item item = allItems.Where(t => t.ID == id).FirstOrDefault();
-            if (item == null)
-                return "null";
-            return item.Value;
+            get
+            {
+                List<Item> allItems = new List<Item>();
+                if (System != null)
+                    allItems.AddRange(System);
+                if (Temperature != null)
+                    allItems.AddRange(Temperature);
+                if (Volt != null)
+                    allItems.AddRange(Volt);
+                if (Power != null)
+                    allItems.AddRange(Power);
+                return allItems;
+            }
         }
     }
 
