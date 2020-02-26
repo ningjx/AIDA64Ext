@@ -53,6 +53,11 @@ namespace AIDA64Ext.Extension
             });
         }
 
+        /// <summary>
+        /// 将选择的项目同步到<see cref="AIDAShownItems"/>中
+        /// </summary>
+        /// <param name="checkedItemCollection"></param>
+        /// <param name="aIDADataType"></param>
         public static void SyncSeletedItems(this CheckedItemCollection checkedItemCollection, AIDADataType aIDADataType)
         {
             List<string> items = new List<string>();
@@ -81,6 +86,11 @@ namespace AIDA64Ext.Extension
             }
         }
 
+        /// <summary>
+        /// 同步列表所有项目到<see cref="AIDAShownItems"/>中
+        /// </summary>
+        /// <param name="objectCollection"></param>
+        /// <param name="aIDADataType"></param>
         public static void SyncAllItems(this ObjectCollection objectCollection, AIDADataType aIDADataType)
         {
             List<string> items = new List<string>();
@@ -109,11 +119,15 @@ namespace AIDA64Ext.Extension
             }
         }
 
+        /// <summary>
+        /// 选中所有项目
+        /// </summary>
+        /// <param name="checkedListBox"></param>
         public static void SetAllSelected(this CheckedListBox checkedListBox)
         {
             for(int i = 0;i< checkedListBox.Items.Count; i++)
             {
-                checkedListBox.SetSelected(i, true);
+                checkedListBox.SetItemCheckState(i, CheckState.Checked);
             }
         }
     }
