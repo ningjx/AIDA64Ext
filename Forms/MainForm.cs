@@ -31,5 +31,11 @@ namespace AIDA64Ext
             StutasForm stutasForm = new StutasForm();
             stutasForm.Show();
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            this.FormBorderStyle = FormBorderStyle.None;     //设置窗体为无边框样式
+            this.WindowState = FormWindowState.Maximized;    //最大化窗体 
+        }
     }
 }
