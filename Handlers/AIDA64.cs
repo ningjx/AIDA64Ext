@@ -19,10 +19,12 @@ namespace AIDA64Ext.Handlers
 
         static AIDA64()
         {
-            Timer timer = new Timer(1000);
-            timer.AutoReset = true;
+            Timer timer = new Timer(1000)
+            {
+                AutoReset = true,
+                Enabled = true,
+            };
             timer.Elapsed += Timer_Elapsed;
-            timer.Enabled = true;
             timer.Start();
         }
 
@@ -46,14 +48,7 @@ namespace AIDA64Ext.Handlers
                 string json = JsonConvert.SerializeXmlNode(doc);
                 AIDA64Infos = JsonConvert.DeserializeObject<AIDA64Infos>(json);
             }
-            catch (Exception ex)
-            {
-
-            }
-        }
-        public static void Start()
-        {
-
+            catch{}
         }
 
         public static AIDA64Infos GetInfos()
@@ -79,6 +74,7 @@ namespace AIDA64Ext.Handlers
         {
             return AllItems.Where(t => t.Label == label).FirstOrDefault() ?? new Item();
         }
+
         public static Item GetItemById(string id)
         {
             return AllItems.Where(t => t.ID == id).FirstOrDefault() ?? new Item();

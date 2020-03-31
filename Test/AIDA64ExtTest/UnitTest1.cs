@@ -15,7 +15,7 @@ namespace AIDA64ExtTest
         [TestMethod]
         public void TestMethod1()
         {
-            AIDA64.Start();
+            //AIDA64.Start();
 
             var test = AIDA64.GetInfos();
         }
