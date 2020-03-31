@@ -38,5 +38,10 @@ namespace AIDA64Ext.Forms
         {
 
         }
+
+        private void StutasForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -53,6 +53,7 @@
             this.Controls.Add(this.richTextBox1);
             this.Name = "StutasForm";
             this.Text = "StutasForm";
+            this.Load += new System.EventHandler(this.StutasForm_Load);
             this.ResumeLayout(false);
 
         }
