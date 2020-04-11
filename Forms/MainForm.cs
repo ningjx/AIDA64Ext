@@ -18,18 +18,23 @@ namespace AIDA64Ext
         {
             StaticForms.Forms.Add("MainForm", this);
             InitializeComponent();
+            //FormBorderStyle = FormBorderStyle.None;     //设置窗体为无边框样式
+            //WindowState = FormWindowState.Maximized;    //最大化窗体 
+            Task.Run(() => { AIDA64.Start(); });
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             AIDAParamForm form = new AIDAParamForm();
             form.Show();
+            Hide();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             StutasForm stutasForm = new StutasForm();
             stutasForm.Show();
+            Hide();
         }
 
         private void MainForm_Load(object sender, EventArgs e)

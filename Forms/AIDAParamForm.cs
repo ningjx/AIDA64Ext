@@ -20,6 +20,8 @@ namespace AIDA64Ext.Forms
         public AIDAParamForm()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;     //设置窗体为无边框样式
+            //this.WindowState = FormWindowState.Maximized;    //最大化窗体 
         }
 
         private void AIDAParamForm_Load(object sender, EventArgs e)
@@ -29,10 +31,10 @@ namespace AIDA64Ext.Forms
             checkedListBox3.CheckOnClick = true;
             checkedListBox4.CheckOnClick = true;
 
-            tabPage1.Text += $"({AIDA64.AIDA64Infos.AIDA64Info.System?.Count??0})";
-            tabPage2.Text += $"({AIDA64.AIDA64Infos.AIDA64Info.Temperature?.Count??0})";
-            tabPage3.Text += $"({AIDA64.AIDA64Infos.AIDA64Info.Volt?.Count??0})";
-            tabPage4.Text += $"({AIDA64.AIDA64Infos.AIDA64Info.Power?.Count??0})";
+            tabPage1.Text += $"({AIDA64.AIDA64Infos.AIDA64Info.System?.Count ?? 0})";
+            tabPage2.Text += $"({AIDA64.AIDA64Infos.AIDA64Info.Temperature?.Count ?? 0})";
+            tabPage3.Text += $"({AIDA64.AIDA64Infos.AIDA64Info.Volt?.Count ?? 0})";
+            tabPage4.Text += $"({AIDA64.AIDA64Infos.AIDA64Info.Power?.Count ?? 0})";
 
             checkedListBox1.Items.Clear();
             checkedListBox2.Items.Clear();
@@ -52,46 +54,51 @@ namespace AIDA64Ext.Forms
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if (checkedListBox1.CheckedItems.Contains("全选"))
-            //{
-            //    checkedListBox1.Items.SyncAllItems(AIDADataType.System);
-            //    checkedListBox1.SetAllSelected();
-            //}
-            //else
-                checkedListBox1.CheckedItems.SyncSeletedItems(AIDADataType.System);
+            checkedListBox1.CheckedItems.SyncSeletedItems(AIDADataType.System);
         }
 
         private void checkedListBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if (checkedListBox2.CheckedItems.Contains("全选"))
-            //{
-            //    checkedListBox2.Items.SyncAllItems(AIDADataType.Temperature);
-            //    checkedListBox2.SetAllSelected();
-            //}
-            //else
-                checkedListBox2.CheckedItems.SyncSeletedItems(AIDADataType.Temperature);
+            checkedListBox2.CheckedItems.SyncSeletedItems(AIDADataType.Temperature);
         }
 
         private void checkedListBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if (checkedListBox3.CheckedItems.Contains("全选"))
-            //{
-            //    checkedListBox3.Items.SyncAllItems(AIDADataType.Volt);
-            //    checkedListBox3.SetAllSelected();
-            //}
-            //else
-                checkedListBox3.CheckedItems.SyncSeletedItems(AIDADataType.Volt);
+            checkedListBox3.CheckedItems.SyncSeletedItems(AIDADataType.Volt);
         }
 
         private void checkedListBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if (checkedListBox4.CheckedItems.Contains("全选"))
-            //{
-            //    checkedListBox4.Items.SyncAllItems(AIDADataType.Power);
-            //    checkedListBox4.SetAllSelected();
-            //}  
-            //else
-                checkedListBox4.CheckedItems.SyncSeletedItems(AIDADataType.Power);
+            checkedListBox4.CheckedItems.SyncSeletedItems(AIDADataType.Power);
+        }
+
+        private void tabPage5_Click(object sender, EventArgs e)
+        {
+            Dispose();
+            StaticForms.Forms["MainForm"].Show();
+        }
+
+        private void AIDAParamForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                Dispose();
+                StaticForms.Forms["MainForm"].Show();
+            }
+        }
+
+        private void tabControl1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                Dispose();
+                StaticForms.Forms["MainForm"].Show();
+            }
+        }
+
+        private void tabControl1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

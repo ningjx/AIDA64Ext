@@ -16,6 +16,8 @@ namespace AIDA64Ext.Forms
         public StutasForm()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;     //设置窗体为无边框样式
+            //this.WindowState = FormWindowState.Maximized;    //最大化窗体 
             timer1.Interval = 1000;
             timer1.Enabled = true;
             timer1.Tick += Timer1_Tick;
@@ -42,6 +44,20 @@ namespace AIDA64Ext.Forms
         private void StutasForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void StutasForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                Dispose();
+                StaticForms.Forms["MainForm"].Show();
+            }
+        }
+
+        private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            StutasForm_KeyPress(sender, e);
         }
     }
 }

@@ -17,6 +17,11 @@ namespace AIDA64Ext.Handlers
     {
         public static AIDA64Infos AIDA64Infos = new AIDA64Infos();
 
+        public static void Start()
+        {
+
+        }
+
         static AIDA64()
         {
             Timer timer = new Timer(1000)

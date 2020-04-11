@@ -20,14 +20,14 @@ namespace AIDA64Ext.Forms
         private void DisplayForm_Load(object sender, EventArgs e)
         {
             FormBorderStyle = FormBorderStyle.None;     //设置窗体为无边框样式
-            WindowState = FormWindowState.Maximized;    //最大化窗体 
+            //WindowState = FormWindowState.Maximized;    //最大化窗体 
         }
 
         private void DisplayForm_KeyPress(object sender, KeyPressEventArgs e)
         {
             if(e.KeyChar == (char)Keys.Escape)
             {
-                Close();
+                Dispose();
                 StaticForms.Forms["MainForm"].Show();
             }
         }

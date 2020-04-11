@@ -44,16 +44,18 @@
             this.richTextBox1.Size = new System.Drawing.Size(759, 426);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
+            this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
             // 
             // StutasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1041, 586);
+            this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.Controls.Add(this.richTextBox1);
             this.Name = "StutasForm";
             this.Text = "StutasForm";
             this.Load += new System.EventHandler(this.StutasForm_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.StutasForm_KeyPress);
             this.ResumeLayout(false);
 
         }

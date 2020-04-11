@@ -71,7 +71,7 @@ namespace AIDA64Ext
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(553, 340);
+            this.button2.Location = new System.Drawing.Point(540, 340);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
@@ -81,7 +81,7 @@ namespace AIDA64Ext
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(668, 398);
+            this.button3.Location = new System.Drawing.Point(540, 391);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 5;
@@ -93,7 +93,7 @@ namespace AIDA64Ext
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -105,6 +105,7 @@ namespace AIDA64Ext
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
