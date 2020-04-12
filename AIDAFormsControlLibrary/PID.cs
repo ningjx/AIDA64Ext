@@ -18,7 +18,7 @@ namespace AIDAFormsControlLibrary
         private float err_last;  //定义最上前的偏差值      
         private float Kp, Ki, Kd; //定义比例、积分、微分系数 
         private float currentTar = -1;
-
+        private float currentResultBuffer;
         /// <summary>
         /// p越小，曲线越平直
         /// </summary>
@@ -54,6 +54,8 @@ namespace AIDAFormsControlLibrary
         {
             if (currentTar == target)
                 return;
+            if (currentResultBuffer != 0)
+                current = currentResultBuffer;
             float originTar = current;
             bool reverse = false;
             if (target < current)
@@ -69,17 +71,19 @@ namespace AIDAFormsControlLibrary
 
             float lastResult = current;
             float currentResult;
-            while (Math.Abs(target - (currentResult = PIDCaculate(target))) > 0.1 && currentTar == target)
+            while (Math.Abs(target - (currentResult = PIDCaculate(target))) > 0.01 && currentTar == target)
             {
                 if (reverse)
                 {
                     PIDOutEvent_Float?.Invoke(originTar - currentResult);
+                    currentResultBuffer = originTar - currentResult;
                     if ((int)lastResult < (int)currentResult)
                         PIDOutEvent_Int?.Invoke(originTar - currentResult);
                 }
                 else
                 {
                     PIDOutEvent_Float?.Invoke(currentResult);
+                    currentResultBuffer = currentResult;
                     if ((int)lastResult < (int)currentResult)
                         PIDOutEvent_Int?.Invoke(currentResult);
                 }
@@ -87,11 +91,13 @@ namespace AIDAFormsControlLibrary
             }
             if (currentTar == target && !reverse)
             {
+                currentResultBuffer = target;
                 PIDOutEvent_Float?.Invoke(target);
                 PIDOutEvent_Int?.Invoke(target);
             }
             else if (currentTar == target && reverse)
             {
+                currentResultBuffer = current;
                 PIDOutEvent_Float?.Invoke(current);
                 PIDOutEvent_Int?.Invoke(current);
             }

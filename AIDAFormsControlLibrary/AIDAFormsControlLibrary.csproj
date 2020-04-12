@@ -48,6 +48,17 @@
     <Compile Include="BaseControl.Designer.cs">
       <DependentUpon>BaseControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Instrument1\Instrument1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Instrument1\Instrument1.Designer.cs">
+      <DependentUpon>Instrument1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Instrument1\Instrument1Reasource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Instrument1Reasource.resx</DependentUpon>
+    </Compile>
     <Compile Include="PID.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TempControl\TempControl.cs">
@@ -64,12 +75,30 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Instrument1\Images\0.png" />
+    <Content Include="Instrument1\Images\1.png" />
+    <Content Include="Instrument1\Images\10.png" />
+    <Content Include="Instrument1\Images\2.png" />
+    <Content Include="Instrument1\Images\3.png" />
+    <Content Include="Instrument1\Images\4.png" />
+    <Content Include="Instrument1\Images\5.png" />
+    <Content Include="Instrument1\Images\6.png" />
+    <Content Include="Instrument1\Images\7.png" />
+    <Content Include="Instrument1\Images\8.png" />
+    <Content Include="Instrument1\Images\9.png" />
+    <Content Include="Instrument1\Images\apingreen.png" />
+    <Content Include="Instrument1\Images\back.png" />
+    <Content Include="Instrument1\Images\spinred.png" />
     <Content Include="TempControl\Images\back.png" />
     <Content Include="TempControl\Images\temBack.png" />
     <Content Include="TempControl\Images\temCover.png" />
     <Content Include="TempControl\Images\topCover.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Instrument1\Instrument1Reasource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Instrument1Reasource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="TempControl\TempControlReasource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TempControlReasource.Designer.cs</LastGenOutput>

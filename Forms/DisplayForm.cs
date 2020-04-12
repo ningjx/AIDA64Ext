@@ -20,8 +20,10 @@ namespace AIDA64Ext.Forms
         private void DisplayForm_Load(object sender, EventArgs e)
         {
             FormBorderStyle = FormBorderStyle.None;     //设置窗体为无边框样式
-            //WindowState = FormWindowState.Maximized;    //最大化窗体 
+            WindowState = FormWindowState.Maximized;    //最大化窗体 
             tempControl1.SetLable("CPU温度");
+            instrument11.SetLable("内存占用");
+            instrument12.SetLable("CPU占用");
         }
 
         private void DisplayForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -39,30 +41,12 @@ namespace AIDA64Ext.Forms
             StaticForms.Forms["MainForm"].Show();
         }
 
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-            textBox2.Text = (trackBar1.Value / 100F).ToString();
-        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             tempControl1.SetTempWithPID(Convert.ToInt32(AIDA64.GetItemByLabel("CPU Package").Value));
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void trackBar2_Scroll(object sender, EventArgs e)
-        {
-            
-            textBox3.Text = (trackBar2.Value / 100F).ToString();
-        }
-
-        private void trackBar3_Scroll(object sender, EventArgs e)
-        {
-            textBox3.Text = (trackBar3.Value / 100F).ToString();
+            instrument11.SetValueWithPID(Convert.ToInt32(AIDA64.GetItemByLabel("Memory Utilization").Value)/100F);
+            instrument12.SetValueWithPID(Convert.ToInt32(AIDA64.GetItemByLabel("CPU Utilization").Value)/100F);
         }
     }
 }

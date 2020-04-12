@@ -21,7 +21,7 @@ namespace AIDA64Ext.Forms
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None;     //设置窗体为无边框样式
-            //this.WindowState = FormWindowState.Maximized;    //最大化窗体 
+            this.WindowState = FormWindowState.Maximized;    //最大化窗体 
         }
 
         private void AIDAParamForm_Load(object sender, EventArgs e)
