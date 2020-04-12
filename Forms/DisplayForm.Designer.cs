@@ -64,7 +64,7 @@
             this.tempControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.tempControl1.Location = new System.Drawing.Point(106, 43);
             this.tempControl1.Name = "tempControl1";
-            this.tempControl1.Size = new System.Drawing.Size(59, 497);
+            this.tempControl1.Size = new System.Drawing.Size(59, 506);
             this.tempControl1.TabIndex = 0;
             this.tempControl1.Text = "tempControl1";
             // 
