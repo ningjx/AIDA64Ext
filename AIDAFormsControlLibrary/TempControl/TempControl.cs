@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Timer = System.Timers.Timer;
 
 namespace AIDAFormsControlLibrary.TempControl
 {
@@ -21,7 +22,6 @@ namespace AIDAFormsControlLibrary.TempControl
             Control.CheckForIllegalCrossThreadCalls = false;
             PID.PIDOutEvent_Float += PID_PIDOutEvent_Float;
         }
-
 
         private void PID_PIDOutEvent_Float(float value)
         {
@@ -38,7 +38,7 @@ namespace AIDAFormsControlLibrary.TempControl
         SolidBrush drawBrush = new SolidBrush(Color.White);
         Point coverPoistion;
         int x, y;
-        double tem;
+        float tem;
         protected override void OnPaint(PaintEventArgs pe)
         {
             //获取控件缩放比
@@ -59,54 +59,18 @@ namespace AIDAFormsControlLibrary.TempControl
             pe.Graphics.DrawImage(topCover, 0, 0, topCover.Width * scale, topCover.Height * scale);
         }
 
-        double tartemp;
-        public void SetTempDelay(double temp)
+        int skip = 0;
+        public void SetTemp(float temp)
         {
-            if (temp == tem)
-                return;
-            tartemp = temp;
-            if (Math.Abs(temp - tem) > 1)
+            skip++;
+            if (skip > 3)
             {
-                if (temp > tem)
-                {
-                    Action action = () =>
-                    {
-                        while (tartemp == temp && tem < temp)
-                        {
-                            tem += 0.1;
-                            Refresh();
-                            Thread.Sleep(10);
-                        }
-                    };
-                    this.Invoke(action);
-                }
-                else
-                {
-                    Action action = () =>
-                    {
-                        while (tartemp == temp && tem > temp)
-                        {
-                            tem -= 0.1;
-                            Refresh();
-                            Thread.Sleep(10);
-                        }
-                    };
-                    this.Invoke(action);
-                }
-            }
-            else
-            {
-                tem = temp;
+                if (this.tem == temp || temp == 0)
+                    return;
+                this.tem = temp;
                 Refresh();
-            }
-        }
-
-        private void SetTemp(double temp)
-        {
-            if (this.tem == temp || temp == 0)
-                return;
-            this.tem = temp;
-            Refresh();
+                skip = 0;
+            } 
         }
 
         float currentTemp;

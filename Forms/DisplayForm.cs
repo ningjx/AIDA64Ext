@@ -20,7 +20,7 @@ namespace AIDA64Ext.Forms
         private void DisplayForm_Load(object sender, EventArgs e)
         {
             FormBorderStyle = FormBorderStyle.None;     //设置窗体为无边框样式
-            WindowState = FormWindowState.Maximized;    //最大化窗体 
+            //WindowState = FormWindowState.Maximized;    //最大化窗体 
             tempControl1.SetLable("CPU温度");
             instrument11.SetLable("内存占用");
             instrument12.SetLable("CPU占用");
@@ -47,6 +47,10 @@ namespace AIDA64Ext.Forms
             tempControl1.SetTempWithPID(Convert.ToInt32(AIDA64.GetItemByLabel("CPU Package").Value));
             instrument11.SetValueWithPID(Convert.ToInt32(AIDA64.GetItemByLabel("Memory Utilization").Value)/100F);
             instrument12.SetValueWithPID(Convert.ToInt32(AIDA64.GetItemByLabel("CPU Utilization").Value)/100F);
+
+            //tempControl1.SetTemp(Convert.ToInt32(AIDA64.GetItemByLabel("CPU Package").Value));
+            //instrument11.SetValue(Convert.ToInt32(AIDA64.GetItemByLabel("Memory Utilization").Value) / 100F);
+            //instrument12.SetValue(Convert.ToInt32(AIDA64.GetItemByLabel("CPU Utilization").Value) / 100F);
         }
     }
 }

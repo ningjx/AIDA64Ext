@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Timer = System.Timers.Timer;
 
 namespace AIDAFormsControlLibrary.Instrument1
 {
     public partial class Instrument1 : BaseControl
     {
-        PID PID = new PID(0.11F, 0.04F, 0.02F);
+        PID PID = new PID(0.2F, 0.05F, 0.02F);
+
         public Instrument1()
         {
             SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
@@ -21,6 +23,7 @@ namespace AIDAFormsControlLibrary.Instrument1
             Control.CheckForIllegalCrossThreadCalls = false;
             PID.PIDOutEvent_Float += PID_PIDOutEvent_Float;
         }
+
 
         float value;
         private void PID_PIDOutEvent_Float(float value)
@@ -50,6 +53,7 @@ namespace AIDAFormsControlLibrary.Instrument1
         int x, y;
         Point spinPosition = new Point(48, 239);
         Point spinRotation = new Point(242,242);
+
 
         protected override void OnPaint(PaintEventArgs pe)
         {
@@ -137,12 +141,22 @@ namespace AIDAFormsControlLibrary.Instrument1
             Refresh();
         }
 
-        private void SetValue(float value)
+        int skip = 0;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        public void SetValue(float value)
         {
-            if (value == this.value || value == 0)
-                return;
-            this.value = value;
-            Refresh();
+            skip++;
+            if (skip > 3)
+            {
+                if (value == this.value || value == 0)
+                    return;
+                this.value = value;
+                Refresh();
+                skip = 0;
+            }
         }
 
         float currentValue;
