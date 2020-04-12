@@ -63,14 +63,14 @@ namespace AIDAFormsControlLibrary.TempControl
         public void SetTemp(float temp)
         {
             skip++;
-            if (skip > 3)
+            if (skip > 10)
             {
+                skip = 0;
                 if (this.tem == temp || temp == 0)
                     return;
                 this.tem = temp;
                 Refresh();
-                skip = 0;
-            } 
+            }
         }
 
         float currentTemp;

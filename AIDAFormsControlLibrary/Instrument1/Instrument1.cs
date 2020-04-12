@@ -52,7 +52,7 @@ namespace AIDAFormsControlLibrary.Instrument1
         float scale;
         int x, y;
         Point spinPosition = new Point(48, 239);
-        Point spinRotation = new Point(242,242);
+        Point spinRotation = new Point(242, 242);
 
 
         protected override void OnPaint(PaintEventArgs pe)
@@ -112,9 +112,9 @@ namespace AIDAFormsControlLibrary.Instrument1
             {
                 drawBrush = new SolidBrush(Color.Red);
             }
-            
+
             //pe.Graphics.DrawString($"{(value*10F).ToString("f2").PadLeft(5,'0')}%\n{lable}", font, drawBrush, 200 * scale, 100 * scale);
-            pe.Graphics.DrawString($"{(value*10).ToString("f0").PadLeft(2,'0')}%\n{lable}", font, drawBrush, 200 * scale, 100 * scale);
+            pe.Graphics.DrawString($"{(value * 10).ToString("f0").PadLeft(2, '0')}%\n{lable}", font, drawBrush, 200 * scale, 100 * scale);
 
             if (value < 8)//绘制绿色指针
             {
@@ -149,13 +149,13 @@ namespace AIDAFormsControlLibrary.Instrument1
         public void SetValue(float value)
         {
             skip++;
-            if (skip > 3)
+            if (skip > 10)
             {
+                skip = 0;
                 if (value == this.value || value == 0)
                     return;
                 this.value = value;
                 Refresh();
-                skip = 0;
             }
         }
 
