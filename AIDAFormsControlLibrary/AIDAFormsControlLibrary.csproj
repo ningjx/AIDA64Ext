@@ -48,15 +48,32 @@
     <Compile Include="BaseControl.Designer.cs">
       <DependentUpon>BaseControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Instrument1.cs">
+    <Compile Include="PID.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TempControl\TempControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Instrument1.Designer.cs">
-      <DependentUpon>Instrument1.cs</DependentUpon>
+    <Compile Include="TempControl\TempControl.Designer.cs">
+      <DependentUpon>TempControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TempControl\TempControlReasource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TempControlReasource.resx</DependentUpon>
+    </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="TempControl\Images\back.png" />
+    <Content Include="TempControl\Images\temBack.png" />
+    <Content Include="TempControl\Images\temCover.png" />
+    <Content Include="TempControl\Images\topCover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TempControl\TempControlReasource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TempControlReasource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

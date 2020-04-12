@@ -85,6 +85,7 @@
       <DependentUpon>StutasForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Handlers\AIDA64.cs" />
+    <Compile Include="Handlers\PID.cs" />
     <Compile Include="Models\AIDA64Data.cs" />
     <Compile Include="Models\AIDAShownItems.cs" />
     <Compile Include="Program.cs" />

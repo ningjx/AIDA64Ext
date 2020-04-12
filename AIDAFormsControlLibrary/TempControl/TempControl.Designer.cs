@@ -1,6 +1,6 @@
-﻿namespace AIDAFormsControlLibrary
+﻿namespace AIDAFormsControlLibrary.TempControl
 {
-    partial class Instrument1
+    partial class TempControl
     {
         /// <summary>
         /// 必需的设计器变量。
