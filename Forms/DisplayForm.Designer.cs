@@ -30,9 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.instrument14 = new AIDAFormsControlLibrary.Instrument1.Instrument1();
+            this.instrument13 = new AIDAFormsControlLibrary.Instrument1.Instrument1();
             this.instrument12 = new AIDAFormsControlLibrary.Instrument1.Instrument1();
             this.instrument11 = new AIDAFormsControlLibrary.Instrument1.Instrument1();
             this.tempControl1 = new AIDAFormsControlLibrary.TempControl.TempControl();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -40,6 +44,24 @@
             this.timer1.Enabled = true;
             this.timer1.Interval = 2000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // instrument14
+            // 
+            this.instrument14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.instrument14.Location = new System.Drawing.Point(539, 348);
+            this.instrument14.Name = "instrument14";
+            this.instrument14.Size = new System.Drawing.Size(278, 148);
+            this.instrument14.TabIndex = 4;
+            this.instrument14.Text = "instrument14";
+            // 
+            // instrument13
+            // 
+            this.instrument13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.instrument13.Location = new System.Drawing.Point(231, 348);
+            this.instrument13.Name = "instrument13";
+            this.instrument13.Size = new System.Drawing.Size(278, 148);
+            this.instrument13.TabIndex = 3;
+            this.instrument13.Text = "instrument13";
             // 
             // instrument12
             // 
@@ -68,12 +90,24 @@
             this.tempControl1.TabIndex = 0;
             this.tempControl1.Text = "tempControl1";
             // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(299, 728);
+            this.trackBar1.Maximum = 100;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(484, 45);
+            this.trackBar1.TabIndex = 5;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
             // DisplayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.instrument14);
+            this.Controls.Add(this.instrument13);
             this.Controls.Add(this.instrument12);
             this.Controls.Add(this.instrument11);
             this.Controls.Add(this.tempControl1);
@@ -82,7 +116,9 @@
             this.Load += new System.EventHandler(this.DisplayForm_Load);
             this.DoubleClick += new System.EventHandler(this.DisplayForm_DoubleClick);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DisplayForm_KeyPress);
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -92,5 +128,8 @@
         private System.Windows.Forms.Timer timer1;
         private AIDAFormsControlLibrary.Instrument1.Instrument1 instrument11;
         private AIDAFormsControlLibrary.Instrument1.Instrument1 instrument12;
+        private AIDAFormsControlLibrary.Instrument1.Instrument1 instrument13;
+        private AIDAFormsControlLibrary.Instrument1.Instrument1 instrument14;
+        private System.Windows.Forms.TrackBar trackBar1;
     }
 }

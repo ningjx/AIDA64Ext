@@ -50,6 +50,7 @@ namespace AIDAFormsControlLibrary.Instrument1
 
         //SolidBrush drawBrush = new SolidBrush(Color.White);
         string lable = "占用";
+        string unit = "";
         float scale;
         int x, y;
         Point spinPosition = new Point(48, 239);
@@ -119,7 +120,7 @@ namespace AIDAFormsControlLibrary.Instrument1
             }
 
             //pe.Graphics.DrawString($"{(value*10F).ToString("f2").PadLeft(5,'0')}%\n{lable}", font, drawBrush, 200 * scale, 100 * scale);
-            pe.Graphics.DrawString($"{(value * 10).ToString("f0").PadLeft(2, '0')}%\n{lable}", font, drawBrush, 200 * scale, 100 * scale);
+            pe.Graphics.DrawString($"{(value * 10).ToString("f2").PadLeft(5, '0')}{unit}\n{lable}", font, drawBrush, 190 * scale, 100 * scale);
 
             if (value < 5)//绘制绿色指针
             {
@@ -137,9 +138,16 @@ namespace AIDAFormsControlLibrary.Instrument1
 
 
 
-        public void SetLable(string lable)
+        public void SetLable(string lable,string unit)
         {
             this.lable = lable;
+            this.unit = unit;
+            Refresh();
+        }
+
+        public void SetUnit(string unit)
+        {
+            this.unit = unit;
             Refresh();
         }
 

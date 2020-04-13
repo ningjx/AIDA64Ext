@@ -24,7 +24,7 @@ namespace AIDA64Ext.Handlers
 
         static AIDA64()
         {
-            Timer timer = new Timer(1000)
+            Timer timer = new Timer(500)
             {
                 AutoReset = true,
                 Enabled = true,
