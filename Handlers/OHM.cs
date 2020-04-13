@@ -114,6 +114,10 @@ namespace AIDA64Ext.Handlers
                             }
 
                         }
+                        else
+                        {
+                            //百分比
+                        }
                     }
                 }
             }
