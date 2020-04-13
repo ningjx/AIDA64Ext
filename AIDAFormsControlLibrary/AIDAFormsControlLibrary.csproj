@@ -89,6 +89,7 @@
     <Content Include="Instrument1\Images\apingreen.png" />
     <Content Include="Instrument1\Images\back.png" />
     <Content Include="Instrument1\Images\spinred.png" />
+    <Content Include="Instrument1\Images\yellowSpin.png" />
     <Content Include="TempControl\Images\back.png" />
     <Content Include="TempControl\Images\temBack.png" />
     <Content Include="TempControl\Images\temCover.png" />

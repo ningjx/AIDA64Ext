@@ -6,6 +6,8 @@ using AIDA64Ext.Handlers;
 using AIDA64Ext.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using OpenHardwareMonitor;
+using OpenHardwareMonitor.Hardware;
 
 namespace AIDA64ExtTest
 {
@@ -18,6 +20,18 @@ namespace AIDA64ExtTest
             //AIDA64.Start();
 
             var test = AIDA64.GetInfos();
+        }
+
+        [TestMethod]
+        public void TestMethod2()
+        {
+            //AIDA64.Start();
+            Computer computer = new Computer(null);
+            computer.CPUEnabled = true;
+            computer.FanControllerEnabled = true;
+            computer.Open();
+            var aa = computer.GetReport();
+            computer.Close();
         }
     }
 }
