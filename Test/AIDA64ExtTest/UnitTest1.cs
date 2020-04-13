@@ -25,13 +25,36 @@ namespace AIDA64ExtTest
         [TestMethod]
         public void TestMethod2()
         {
-            //AIDA64.Start();
-            Computer computer = new Computer(null);
+            UpdateVisitor updateVisitor = new UpdateVisitor();
+            Computer computer = new Computer();
             computer.CPUEnabled = true;
             computer.FanControllerEnabled = true;
+            computer.GPUEnabled = true;
+            computer.HDDEnabled = true;
+            computer.MainboardEnabled = true;
+            computer.RAMEnabled = true;
             computer.Open();
-            var aa = computer.GetReport();
-            computer.Close();
+            computer.Accept(updateVisitor);
+
+
         }
+    }
+    public class UpdateVisitor : IVisitor
+    {
+        public void VisitComputer(IComputer computer)
+        {
+            computer.Traverse(this);
+        }
+
+        public void VisitHardware(IHardware hardware)
+        {
+            hardware.Update();
+            foreach (IHardware subHardware in hardware.SubHardware)
+                subHardware.Accept(this);
+        }
+
+        public void VisitSensor(ISensor sensor) { }
+
+        public void VisitParameter(IParameter parameter) { }
     }
 }

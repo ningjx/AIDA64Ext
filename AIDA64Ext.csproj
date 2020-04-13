@@ -35,6 +35,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Costura, Version=4.1.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>packages\Costura.Fody.4.1.0\lib\net40\Costura.dll</HintPath>
@@ -85,9 +94,11 @@
       <DependentUpon>StutasForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Handlers\AIDA64.cs" />
+    <Compile Include="Handlers\OHM.cs" />
     <Compile Include="Handlers\PID.cs" />
     <Compile Include="Models\AIDA64Data.cs" />
     <Compile Include="Models\AIDAShownItems.cs" />
+    <Compile Include="Models\OHMData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AIDAParamForm.resx">
@@ -112,6 +123,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -129,6 +141,10 @@
     <ProjectReference Include="AIDAFormsControlLibrary\AIDAFormsControlLibrary.csproj">
       <Project>{d52bd6ed-c9b8-4b1c-a5ef-0770ca56e34b}</Project>
       <Name>AIDAFormsControlLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="OpenHardwareMonitor\OpenHardwareMonitorLib.csproj">
+      <Project>{b0397530-545a-471d-bb74-027ae456df1a}</Project>
+      <Name>OpenHardwareMonitorLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
