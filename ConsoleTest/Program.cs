@@ -19,12 +19,18 @@ namespace ConsoleTest
             //var test2 = JsonConvert.SerializeObject(OHM.OHMData.AllItems);
             while (true)
             {
+                
+                
+       
+                
+           
+                
                 Console.Clear();
-                var item1 = OHM.OHMData.GetByName("CPU Total", SensorType.Load);
-                var item2 = OHM.OHMData.GetByName("Memory", SensorType.Load);
-                Console.Write($"{item1.Value}{item1.Unit}");
-                Console.Write($"{item2.Value}{item2.Unit}");
-                //OHM.OHMData.AllItems.ForEach(t => Console.WriteLine($"{t.Name} {t.Type.ToString()} {t.Value.ToString("f2")}{t.Unit}"));
+                //var item1 = OHM.OHMData.GetByName("CPU Total", SensorType.Load);
+                //var item2 = OHM.OHMData.GetByName("Memory", SensorType.Load);
+                //Console.Write($"{item1.Value}{item1.Unit}");
+                //Console.Write($"{item2.Value}{item2.Unit}");
+                OHM.OHMData.AllItems.ForEach(t => Console.WriteLine($"{t.Name} {t.Type.ToString()} {t.Value.ToString("f2")}{t.Unit}"));
                 Thread.Sleep(500);
             }
         }

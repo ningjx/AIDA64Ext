@@ -13,7 +13,7 @@ namespace AIDAFormsControlLibrary.Instrument1
 {
     public partial class Instrument1 : BaseControl
     {
-        PID PID = new PID(0.2F, 0.05F, 0.02F);
+        PID PID = new PID(0.05F, 0.05F, 0.02F);
 
         public Instrument1()
         {
