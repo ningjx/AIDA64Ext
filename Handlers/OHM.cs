@@ -52,40 +52,40 @@ namespace AIDA64Ext.Handlers
                         switch (computer.Hardware[i].Sensors[j].SensorType)
                         {
                             case SensorType.Voltage:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "V");
+                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "V");
                                 break;
                             case SensorType.Clock:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "MHz");
+                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "MHz");
                                 break;
                             case SensorType.Fan:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "RPM");
+                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "RPM");
                                 break;
                             case SensorType.Flow:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "L/h");
+                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "L/h");
                                 break;
                             case SensorType.Power:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "W");
+                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "W");
                                 break;
                             case SensorType.Data:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "GB");
+                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "GB");
                                 break;
                             case SensorType.Factor:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "");
+                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "");
                                 break;
                             case SensorType.SmallData:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "MB");
+                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "MB");
                                 break;
                             case SensorType.Temperature:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "°C");
+                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "°C");
                                 break;
                             case SensorType.Throughput:
                                 if (computer.Hardware[i].Sensors[j].Value < 1)
-                                    OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value * 0x400 ?? 0, "KB/s");
+                                    OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value * 0x400 ?? 0, "KB/s");
                                 else
-                                    OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "MB/s");
+                                    OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "MB/s");
                                 break;
                             default:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "%");
+                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "%");
                                 break;
                         }
                     }

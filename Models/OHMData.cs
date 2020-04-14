@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenHardwareMonitor.Hardware;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,20 +11,26 @@ namespace AIDA64Ext.Models
     {
         public Dictionary<string, OHMItem> Items { get; } = new Dictionary<string, OHMItem>();
 
-        public void ADD(string name, float value, string unit)
+        public void ADD(string name, SensorType type, float value, string unit)
         {
-            if (Items.Keys.Contains(name))
-                Items[name] = new OHMItem(name, value, unit);
+            if (Items.Keys.Contains(name+type))
+                Items[name] = new OHMItem(name, type, value, unit);
             else
-                Items.Add(name,new OHMItem(name, value, unit));
+                Items.Add(name + type, new OHMItem(name,type, value, unit));
         }
 
-        public OHMItem GetByName(string name)
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public OHMItem GetByName(string name, SensorType type)
         {
-            if (Items.TryGetValue(name, out OHMItem item))
+            if (Items.TryGetValue(name+ type, out OHMItem item))
                 return item;
             else
-                return new OHMItem(name, 0, "");
+                return new OHMItem(name+ type, SensorType.Unknown, 0, "");
         }
 
         public List<OHMItem> AllItems { get {
@@ -38,12 +45,14 @@ namespace AIDA64Ext.Models
         public string Unit = string.Empty;
         public float Value;
         public string Name = string.Empty;
+        public SensorType Type;
 
-        public OHMItem(string name, float value, string unit)
+        public OHMItem(string name, SensorType type,float value, string unit)
         {
             Name = name;
             Value = value;
             Unit = unit;
+            Type = type;
         }
     }
 }
