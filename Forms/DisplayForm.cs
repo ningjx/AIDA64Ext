@@ -51,7 +51,7 @@ namespace AIDA64Ext.Forms
             tempControl1.SetTempWithPID("CPU温度",OHM.OHMData.GetByName("CPU Package",SensorType.Temperature).Value);
             var item1 = OHM.OHMData.GetByName("CPU Total", SensorType.Load);
             instrument11.SetValueWithPID("CPU占用", item1.Value, item1.Unit, 100);
-            var item2 = OHM.OHMData.GetByName("Memorye", SensorType.Load);
+            var item2 = OHM.OHMData.GetByName("Memory", SensorType.Load);
             instrument12.SetValueWithPID("内存占用", item2.Value,item2.Unit,100);
             //instrument13.SetValueWithPID(OHM.OHMData.GetByName("CPU Package",SensorType.Temperature).Value);
             //instrument14.SetValueWithPID(OHM.OHMData.GetByName("CPU Package", SensorType.Temperature).Value);
