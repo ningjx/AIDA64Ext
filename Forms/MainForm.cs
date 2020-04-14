@@ -20,7 +20,8 @@ namespace AIDA64Ext
             InitializeComponent();
             //FormBorderStyle = FormBorderStyle.None;     //设置窗体为无边框样式
             //WindowState = FormWindowState.Maximized;    //最大化窗体 
-            Task.Run(() => { AIDA64.Start(); OHM.Start(); });
+            Task.Run(() => { //AIDA64.Start(); 
+                OHM.Start(); });
         }
 
         private void button1_Click(object sender, EventArgs e)
