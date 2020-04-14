@@ -20,7 +20,7 @@ namespace AIDAFormsControlLibrary.Instrument1
             SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             BackColor = Color.FromArgb(0, 0, 0, 0);
-            Control.CheckForIllegalCrossThreadCalls = false;
+            CheckForIllegalCrossThreadCalls = false;
             PID.PIDOutEvent_Float += PID_PIDOutEvent_Float;
         }
         

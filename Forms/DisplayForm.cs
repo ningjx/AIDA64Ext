@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,7 +18,25 @@ namespace AIDA64Ext.Forms
         public DisplayForm()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
         }
+
+        public void Start()
+        {
+            Task.Run(() => {
+                tempControl1.SetTempWithPID("CPU温度", 99);
+                instrument11.SetValueWithPID("CPU占用", 100, "%", 100);
+                instrument12.SetValueWithPID("内存占用", 100, "%", 100);
+                Thread.Sleep(3000);
+                tempControl1.SetTempWithPID("CPU温度", 0);
+                instrument11.SetValueWithPID("CPU占用", 0, "%", 100);
+                instrument12.SetValueWithPID("内存占用", 0, "%", 100);
+                Thread.Sleep(2000);
+                timer1.Enabled = true;
+                timer1.Start();
+            });
+        }
+
         private void DisplayForm_Load(object sender, EventArgs e)
         {
             FormBorderStyle = FormBorderStyle.None;     //设置窗体为无边框样式
