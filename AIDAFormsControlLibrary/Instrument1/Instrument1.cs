@@ -49,10 +49,10 @@ namespace AIDAFormsControlLibrary.Instrument1
         Bitmap p10 = new Bitmap(Instrument1Reasource._10);
 
         //SolidBrush drawBrush = new SolidBrush(Color.White);
-        string lable = "占用";
+        string lable = "";
         string unit = "";
         float scale;
-        int x, y;
+        float max = 10;
         Point spinPosition = new Point(48, 239);
         Point spinRotation = new Point(242, 242);
 
@@ -124,46 +124,20 @@ namespace AIDAFormsControlLibrary.Instrument1
 
             if (value < 5)//绘制绿色指针
             {
-                RotateImage(pe, spinGreen, InterpolPhyToAngle((float)value, 0, 10, 0, 180), spinPosition, spinRotation, scale);
+                RotateImage(pe, spinGreen, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, spinRotation, scale);
             }
             else if (value < 8)
             {
-                RotateImage(pe, spinYellow, InterpolPhyToAngle((float)value, 0, 10, 0, 180), spinPosition, spinRotation, scale);
+                RotateImage(pe, spinYellow, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, spinRotation, scale);
             }
             else//绘制红色指针
             {
-                RotateImage(pe, spinRed, InterpolPhyToAngle((float)value, 0, 10, 0, 180), spinPosition, spinRotation, scale);
+                RotateImage(pe, spinRed, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, spinRotation, scale);
             }
         }
 
-
-
-        public void SetLable(string lable,string unit)
-        {
-            this.lable = lable;
-            this.unit = unit;
-            Refresh();
-        }
-
-        public void SetUnit(string unit)
-        {
-            this.unit = unit;
-            Refresh();
-        }
-
-        public void setXY(int x, int y)
-        {
-            this.x = x;
-            this.y = y;
-            Refresh();
-        }
-
         int skip = 0;
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        public void SetValue(float value)
+        private void SetValue(float value)
         {
             skip++;
             if (skip > 10)
@@ -178,16 +152,21 @@ namespace AIDAFormsControlLibrary.Instrument1
 
         float currentValue;
         /// <summary>
-        /// 
+        /// 赋值（带PID算法）
         /// </summary>
-        /// <param name="value">0-1</param>
-        public void SetValueWithPID(float value)
+        /// <param name="text">显示的lable</param>
+        /// <param name="value">数值</param>
+        /// <param name="unit">单位</param>
+        /// <param name="max">最大值</param>
+        public void SetValueWithPID(string text,float value,string unit,float max)
         {
             value = value > 1 ? 1 : value;
             value = value < 0 ? 0 : value;
             value *= 10;//0-100
             if (value == 0 || value == this.value || currentValue == value)
                 return;
+            lable = text;
+            this.unit = unit;
             PID.SetWithPID(currentValue, value);
             currentValue = value;
         }

@@ -30,6 +30,7 @@ namespace AIDA64Ext.Handlers
             computer.MainboardEnabled = true;
             computer.RAMEnabled = true;
             computer.Open();
+            computer.Accept(updateVisitor);
             //Timer_Elapsed(null, null);
             Timer timer = new Timer(500)
             {
