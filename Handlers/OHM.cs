@@ -1,4 +1,5 @@
-﻿using OpenHardwareMonitor.Hardware;
+﻿using AIDA64Ext.Models;
+using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -18,6 +19,7 @@ namespace AIDA64Ext.Handlers
     public static class OHM
     {
         static Computer computer = new Computer();
+        public static OHMData OHMData = new OHMData();
         static OHM()
         {
             UpdateVisitor updateVisitor = new UpdateVisitor();
@@ -29,84 +31,66 @@ namespace AIDA64Ext.Handlers
             computer.RAMEnabled = true;
             computer.Open();
             computer.Accept(updateVisitor);
-
+            //Timer_Elapsed(null, null);
             Timer timer = new Timer(500)
             {
                 AutoReset = true,
                 Enabled = true,
             };
             timer.Elapsed += Timer_Elapsed;
-            //timer.Start();
+            timer.Enabled = true;
+            timer.Start();
         }
         private static void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             try
             {
-                foreach (var item in computer.Hardware)
+                for(int i=0;i< computer.Hardware.Length; i++)
                 {
-                    foreach (var sensor in item.Sensors)
+                    for(int j=0;j< computer.Hardware[i].Sensors.Length; j++)
                     {
-                        if ((sensor.SensorType != SensorType.Load && sensor.SensorType != SensorType.Control && sensor.SensorType != SensorType.Level) || !sensor.Value.HasValue)
-                        {
-                            string formatted;
-                            if (sensor.Value.HasValue)
+                        //if (computer.Hardware[i].Sensors[j].Value.HasValue)
+                        //{
+                            switch (computer.Hardware[i].Sensors[j].SensorType)
                             {
-                                string format = "";
-                                switch (sensor.SensorType)
-                                {
-                                    case SensorType.Voltage:
-                                        format = "{0:F3} V";
-                                        break;
-                                    case SensorType.Clock:
-                                        format = "{0:F0} MHz";
-                                        break;
-                                    case SensorType.Fan:
-                                        format = "{0:F0} RPM";
-                                        break;
-                                    case SensorType.Flow:
-                                        format = "{0:F0} L/h";
-                                        break;
-                                    case SensorType.Power:
-                                        format = "{0:F1} W";
-                                        break;
-                                    case SensorType.Data:
-                                        format = "{0:F1} GB";
-                                        break;
-                                    case SensorType.Factor:
-                                        format = "{0:F3}";
-                                        break;
-                                    case SensorType.SmallData:
-                                        format = "{0:F1} MB";
-                                        break;
-                                }
-
-                                switch (sensor.SensorType)
-                                {
-                                    case SensorType.Temperature:
-                                        formatted = string.Format("{0:F1} °C", sensor.Value);
-                                        break;
-                                    case SensorType.Throughput:
-                                        if (sensor.Value < 1)
-                                        {
-                                            formatted =
-                                              string.Format("{0:F1} KB/s", sensor.Value * 0x400);
-                                        }
-                                        else
-                                        {
-                                            formatted =
-                                              string.Format("{0:F1} MB/s", sensor.Value);
-                                        }
-                                        break;
-                                    default:
-                                        formatted = string.Format(format, sensor.Value);
-                                        break;
-                                }
+                                case SensorType.Voltage:
+                                    OHMData.ADD(computer.Hardware[i].Sensors[j].Name+ computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "V");
+                                    break;
+                                case SensorType.Clock:
+                                    OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "MHz");
+                                    break;
+                                case SensorType.Fan:
+                                    OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "RPM");
+                                    break;
+                                case SensorType.Flow:
+                                    OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "L/h");
+                                    break;
+                                case SensorType.Power:
+                                    OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "W");
+                                    break;
+                                case SensorType.Data:
+                                    OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "GB");
+                                    break;
+                                case SensorType.Factor:
+                                    OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "");
+                                    break;
+                                case SensorType.SmallData:
+                                    OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "MB");
+                                    break;
+                                case SensorType.Temperature:
+                                    OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "°C");
+                                    break;
+                                case SensorType.Throughput:
+                                    if (computer.Hardware[i].Sensors[j].Value < 1)
+                                        OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value * 0x400 ?? 0, "KB/s");
+                                    else
+                                        OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "MB/s");
+                                    break;
+                                default:
+                                    OHMData.ADD(computer.Hardware[i].Sensors[j].Name + computer.Hardware[i].Sensors[j].SensorType.ToString(), computer.Hardware[i].Sensors[j].Value ?? 0, "%");
+                                    break;
                             }
-                        }
-                        else
-                        {
-                            //百分比
-                        }
+                        //}
                     }
                 }
             }
@@ -114,6 +98,11 @@ namespace AIDA64Ext.Handlers
             {
 
             }
+        }
+
+        public static void Start()
+        {
+
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO.MemoryMappedFiles;
 using System.Text;
+using System.Threading;
 using System.Xml;
 using AIDA64Ext.Handlers;
 using AIDA64Ext.Models;
@@ -36,6 +37,15 @@ namespace AIDA64ExtTest
             computer.Open();
             computer.Accept(updateVisitor);
 
+
+        }
+
+        [TestMethod]
+        public void OHMTest()
+        {
+            OHM.Start(); Thread.Sleep(10000);
+            var test = OHM.OHMData;
+            
 
         }
     }
