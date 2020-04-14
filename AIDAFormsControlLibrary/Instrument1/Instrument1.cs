@@ -23,14 +23,11 @@ namespace AIDAFormsControlLibrary.Instrument1
             Control.CheckForIllegalCrossThreadCalls = false;
             PID.PIDOutEvent_Float += PID_PIDOutEvent_Float;
         }
-
-
-        float value;
+        
         private void PID_PIDOutEvent_Float(float value)
         {
             SetValue(value);
         }
-
 
         Bitmap back = new Bitmap(Instrument1Reasource.back);
         Bitmap spinRed = new Bitmap(Instrument1Reasource.spinred);
@@ -50,20 +47,21 @@ namespace AIDAFormsControlLibrary.Instrument1
 
         //SolidBrush drawBrush = new SolidBrush(Color.White);
         string lable = "";
+        float value;
         string unit = "";
         float scale;
         float max = 10;
         Point spinPosition = new Point(48, 239);
         Point spinRotation = new Point(242, 242);
 
-
         protected override void OnPaint(PaintEventArgs pe)
         {
             //获取控件缩放比
             scale = (float)Width / back.Width;
             pe.Graphics.DrawImage(back, 0, 0, back.Width * scale, back.Height * scale);
+            int buf = (int)(value / max * 10);
             //绘制仪表
-            switch (Math.Round(value))
+            switch (Math.Round(value/max*10))
             {
                 case 0:
                     pe.Graphics.DrawImage(p0, 0, 0, p0.Width * scale, p0.Height * scale);
@@ -106,11 +104,11 @@ namespace AIDAFormsControlLibrary.Instrument1
             Font font = new Font("宋体", 20 * scale, FontStyle.Bold);
 
             SolidBrush drawBrush;
-            if (value < 5)
+            if (buf < 5)
             {
                 drawBrush = new SolidBrush(Color.FromArgb(26, 255, 0));
             }
-            else if(value<8)
+            else if(buf < 8)
             {
                 drawBrush = new SolidBrush(Color.FromArgb(255, 196, 0));
             }
@@ -120,13 +118,13 @@ namespace AIDAFormsControlLibrary.Instrument1
             }
 
             //pe.Graphics.DrawString($"{(value*10F).ToString("f2").PadLeft(5,'0')}%\n{lable}", font, drawBrush, 200 * scale, 100 * scale);
-            pe.Graphics.DrawString($"{(value * 10).ToString("f2").PadLeft(5, '0')}{unit}\n{lable}", font, drawBrush, 190 * scale, 100 * scale);
+            pe.Graphics.DrawString($"{value.ToString("f2").PadLeft(5, '0')}{unit}\n{lable}", font, drawBrush, 190 * scale, 100 * scale);
 
-            if (value < 5)//绘制绿色指针
+            if (buf < 5)//绘制绿色指针
             {
                 RotateImage(pe, spinGreen, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, spinRotation, scale);
             }
-            else if (value < 8)
+            else if (buf < 8)
             {
                 RotateImage(pe, spinYellow, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, spinRotation, scale);
             }
@@ -167,6 +165,7 @@ namespace AIDAFormsControlLibrary.Instrument1
                 return;
             lable = text;
             this.unit = unit;
+            this.max = max;
             PID.SetWithPID(currentValue, value);
             currentValue = value;
         }
