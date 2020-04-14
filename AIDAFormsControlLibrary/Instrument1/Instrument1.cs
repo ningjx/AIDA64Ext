@@ -158,9 +158,9 @@ namespace AIDAFormsControlLibrary.Instrument1
         /// <param name="max">最大值</param>
         public void SetValueWithPID(string text,float value,string unit,float max)
         {
-            value = value > 1 ? 1 : value;
+            value = value > max ? max : value;
             value = value < 0 ? 0 : value;
-            value *= 10;//0-100
+            //value *= 10;//0-100
             if (value == 0 || value == this.value || currentValue == value)
                 return;
             lable = text;
