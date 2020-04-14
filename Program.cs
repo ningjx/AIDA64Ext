@@ -16,7 +16,14 @@ namespace AIDA64Ext
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            using (MainForm form = new MainForm())
+            {
+                form.FormClosed += delegate (Object sender, FormClosedEventArgs e)
+                {
+                    Application.Exit();
+                };
+                Application.Run(form);
+            }
         }
     }
 }

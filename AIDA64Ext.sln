@@ -12,6 +12,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIDA64ExtTest", "Test\AIDA6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIDAFormsControlLibrary", "AIDAFormsControlLibrary\AIDAFormsControlLibrary.csproj", "{D52BD6ED-C9B8-4B1C-A5EF-0770CA56E34B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenHardwareMonitorLib", "OpenHardwareMonitor\OpenHardwareMonitorLib.csproj", "{B0397530-545A-471D-BB74-027AE456DF1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "..\ConsoleTest\ConsoleTest.csproj", "{7384253B-89DA-4649-98FC-586CBEFE1FE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +34,14 @@ Global
 		{D52BD6ED-C9B8-4B1C-A5EF-0770CA56E34B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D52BD6ED-C9B8-4B1C-A5EF-0770CA56E34B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D52BD6ED-C9B8-4B1C-A5EF-0770CA56E34B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0397530-545A-471D-BB74-027AE456DF1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0397530-545A-471D-BB74-027AE456DF1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0397530-545A-471D-BB74-027AE456DF1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0397530-545A-471D-BB74-027AE456DF1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7384253B-89DA-4649-98FC-586CBEFE1FE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7384253B-89DA-4649-98FC-586CBEFE1FE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7384253B-89DA-4649-98FC-586CBEFE1FE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7384253B-89DA-4649-98FC-586CBEFE1FE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
