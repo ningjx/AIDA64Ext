@@ -1,4 +1,5 @@
 ﻿using AIDA64Ext.Handlers;
+using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,16 +18,29 @@ namespace AIDA64Ext.Forms
         public DisplayForm()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
         }
+
+        public void Start()
+        {
+            Task.Run(() => {
+                tempControl1.SetTempWithPID("CPU温度", 99);
+                instrument11.SetValueWithPID("CPU占用", 100, "%", 100);
+                instrument12.SetValueWithPID("内存占用", 100, "%", 100);
+                Thread.Sleep(3000);
+                tempControl1.SetTempWithPID("CPU温度", 0);
+                instrument11.SetValueWithPID("CPU占用", 0, "%", 100);
+                instrument12.SetValueWithPID("内存占用", 0, "%", 100);
+                Thread.Sleep(2000);
+                timer1.Enabled = true;
+                timer1.Start();
+            });
+        }
+
         private void DisplayForm_Load(object sender, EventArgs e)
         {
             FormBorderStyle = FormBorderStyle.None;     //设置窗体为无边框样式
             //WindowState = FormWindowState.Maximized;    //最大化窗体 
-            tempControl1.SetLable("CPU温度");
-            instrument11.SetLable("内存占用","%");
-            instrument12.SetLable("CPU占用","%");
-            instrument13.SetLable("磁盘IO","MB/s");
-            instrument14.SetLable("网络IO","Mb/s");
         }
 
         private void DisplayForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -46,11 +61,22 @@ namespace AIDA64Ext.Forms
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            tempControl1.SetTempWithPID(Convert.ToInt32(AIDA64.GetItemByLabel("CPU Package").Value));
-            instrument11.SetValueWithPID(Convert.ToInt32(AIDA64.GetItemById("SMEMUTI").Value)/100F);
-            instrument12.SetValueWithPID(Convert.ToInt32(AIDA64.GetItemById("SCPUUTI").Value)/100F);
-            instrument13.SetValueWithPID((float)Convert.ToDouble(AIDA64.GetItemById("SDSK1WRITESPD").Value)/100F);
-            instrument14.SetValueWithPID((float)Convert.ToDouble(AIDA64.GetItemById("SNIC5DLRATE").Value)/100F);
+            //tempControl1.SetTempWithPID(Convert.ToInt32(AIDA64.GetItemByLabel("CPU Package").Value));
+            //instrument11.SetValueWithPID(Convert.ToInt32(AIDA64.GetItemById("SMEMUTI").Value)/100F);
+            //instrument12.SetValueWithPID(Convert.ToInt32(AIDA64.GetItemById("SCPUUTI").Value)/100F);
+            //instrument13.SetValueWithPID((float)Convert.ToDouble(AIDA64.GetItemById("SDSK1WRITESPD").Value)/100F);
+            //instrument14.SetValueWithPID((float)Convert.ToDouble(AIDA64.GetItemById("SNIC5DLRATE").Value)/100F);
+            
+            tempControl1.SetTempWithPID("CPU温度",OHM.OHMData.GetByName("CPU Core #1",SensorType.Temperature).Value);
+            var item1 = OHM.OHMData.GetByName("CPU Total", SensorType.Load);
+            instrument11.SetValueWithPID("CPU占用", item1.Value, item1.Unit, 100);
+            var item2 = OHM.OHMData.GetByName("Memory", SensorType.Load);
+            instrument12.SetValueWithPID("内存占用", item2.Value,item2.Unit,100);
+
+            var item3 = OHM.OHMData.GetByName("CPU Package", SensorType.Power);
+            instrument13.SetValueWithPID("CPU功率", item3.Value, item3.Unit, 100);
+            //instrument13.SetValueWithPID(OHM.OHMData.GetByName("CPU Package",SensorType.Temperature).Value);
+            //instrument14.SetValueWithPID(OHM.OHMData.GetByName("CPU Package", SensorType.Temperature).Value);
 
             //tempControl1.SetTemp(Convert.ToInt32(AIDA64.GetItemByLabel("CPU Package").Value));
             //instrument11.SetValue(Convert.ToInt32(AIDA64.GetItemByLabel("Memory Utilization").Value) / 100F);
@@ -59,11 +85,7 @@ namespace AIDA64Ext.Forms
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            tempControl1.SetTempWithPID(trackBar1.Value);
-            instrument11.SetValueWithPID(trackBar1.Value / 100F);
-            instrument12.SetValueWithPID(trackBar1.Value / 100F);
-            instrument13.SetValueWithPID(trackBar1.Value / 100F);
-            instrument14.SetValueWithPID(trackBar1.Value / 100F);
+
         }
     }
 }

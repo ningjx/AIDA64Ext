@@ -13,8 +13,8 @@ namespace AIDA64Ext.Models
 
         public void ADD(string name, SensorType type, float value, string unit)
         {
-            if (Items.Keys.Contains(name+type))
-                Items[name] = new OHMItem(name, type, value, unit);
+            if (Items.Keys.Contains(name+ type))
+                Items[name + type] = new OHMItem(name, type, value, unit);
             else
                 Items.Add(name + type, new OHMItem(name,type, value, unit));
         }

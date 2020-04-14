@@ -29,7 +29,6 @@ namespace AIDAFormsControlLibrary.TempControl
         }
 
         PID PID = new PID(0.11F, 0.04F, 0.02F);
-        //Bitmap back = new Bitmap(TempControlReasource.back);
         Bitmap cover = new Bitmap(TempControlReasource.temCover);
         Bitmap temBack = new Bitmap(TempControlReasource.temBack);
         Bitmap topCover = new Bitmap(TempControlReasource.topCover);
@@ -37,7 +36,6 @@ namespace AIDAFormsControlLibrary.TempControl
         string lable = "温度";
         SolidBrush drawBrush = new SolidBrush(Color.White);
         Point coverPoistion;
-        int x, y;
         float tem;
         protected override void OnPaint(PaintEventArgs pe)
         {
@@ -60,7 +58,7 @@ namespace AIDAFormsControlLibrary.TempControl
         }
 
         int skip = 0;
-        public void SetTemp(float temp)
+        private void SetTemp(float temp)
         {
             skip++;
             if (skip > 10)
@@ -74,20 +72,15 @@ namespace AIDAFormsControlLibrary.TempControl
         }
 
         float currentTemp;
-        public void SetTempWithPID(float temp)
+        public void SetTempWithPID(string text,float temp)
         {
             //temp = temp > 90 ? 90 : temp;
             temp = temp < 0 ? 0 : temp;
             if (this.tem == temp || temp == 0 || currentTemp == temp)
                 return;
+            lable = text;
             PID.SetWithPID(currentTemp, temp);
             currentTemp = temp;
         }
-
-        public void SetLable(string lable)
-        {
-            this.lable = lable;
-        }
-
     }
 }
