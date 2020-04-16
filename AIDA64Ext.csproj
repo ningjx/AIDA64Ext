@@ -65,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\BaseConfig.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Enums\AIDADataType.cs" />
     <Compile Include="Extension\Extensions.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Handlers\AIDA64.cs" />
     <Compile Include="Handlers\OHM.cs" />
     <Compile Include="Handlers\PID.cs" />
+    <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Models\AIDA64Data.cs" />
     <Compile Include="Models\AIDAShownItems.cs" />
     <Compile Include="Models\OHMData.cs" />
