@@ -1,4 +1,5 @@
 ﻿using AIDA64Ext.Handlers;
+using AIDA64Ext.Models;
 using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;
@@ -67,13 +68,13 @@ namespace AIDA64Ext.Forms
             //instrument13.SetValueWithPID((float)Convert.ToDouble(AIDA64.GetItemById("SDSK1WRITESPD").Value)/100F);
             //instrument14.SetValueWithPID((float)Convert.ToDouble(AIDA64.GetItemById("SNIC5DLRATE").Value)/100F);
             
-            tempControl1.SetTempWithPID("CPU温度",OHM.OHMData.GetByName("CPU Core #1",SensorType.Temperature).Value);
-            var item1 = OHM.OHMData.GetByName("CPU Total", SensorType.Load);
+            tempControl1.SetTempWithPID("CPU温度",OHM.OHMData.GetByName("CPU Core #1", CustomType.Temperature).Value);
+            var item1 = OHM.OHMData.GetByName("CPU Total", CustomType.Load);
             instrument11.SetValueWithPID("CPU占用", item1.Value, item1.Unit, 100);
-            var item2 = OHM.OHMData.GetByName("Memory", SensorType.Load);
+            var item2 = OHM.OHMData.GetByName("Memory", CustomType.Load);
             instrument12.SetValueWithPID("内存占用", item2.Value,item2.Unit,100);
 
-            var item3 = OHM.OHMData.GetByName("CPU Package", SensorType.Power);
+            var item3 = OHM.OHMData.GetByName("CPU Package", CustomType.Power);
             instrument13.SetValueWithPID("CPU功率", item3.Value, item3.Unit, 100);
             //instrument13.SetValueWithPID(OHM.OHMData.GetByName("CPU Package",SensorType.Temperature).Value);
             //instrument14.SetValueWithPID(OHM.OHMData.GetByName("CPU Package", SensorType.Temperature).Value);

@@ -95,12 +95,16 @@
       <DependentUpon>StutasForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Handlers\AIDA64.cs" />
+    <Compile Include="Handlers\NetMonitor.cs" />
     <Compile Include="Handlers\OHM.cs" />
+    <Compile Include="Handlers\PCounters.cs" />
+    <Compile Include="Handlers\PerformanceHandler.cs" />
     <Compile Include="Handlers\PID.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Models\AIDA64Data.cs" />
     <Compile Include="Models\AIDAShownItems.cs" />
     <Compile Include="Models\OHMData.cs" />
+    <Compile Include="Models\PerformanceData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\AIDAParamForm.resx">

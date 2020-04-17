@@ -141,5 +141,17 @@ namespace AIDA64Ext.Extension
             }
             return result;
         }
+
+        public static void AddOrUpdate<K,V>(this Dictionary<K, V> dic,K key,V value)
+        {
+            if (dic.Keys.Contains(key))
+            {
+                dic[key] = value;
+            }
+            else
+            {
+                dic.Add(key, value);
+            }
+        }
     }
 }
