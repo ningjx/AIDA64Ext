@@ -83,6 +83,13 @@ namespace NetWorkSpeedMonitor.Tests
             }
 
         }
+
+        [TestMethod()]
+        public void Test()
+        {
+            PerformanceCounterCategory category = new PerformanceCounterCategory("Network Interface");
+            var res = category.GetInstanceNames();
+        }
     }
 
 

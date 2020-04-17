@@ -12,14 +12,11 @@ namespace AIDA64Ext.Handlers
         private static PCounters pCounters;
         static PerformanceHandler()
         {
-            long func(long count, string aa)
-            {
-                return count;
-            }
+            
             List<PCounterInfo> pCounterInfos = new List<PCounterInfo>
             {
-                new PCounterInfo("Network Interface","Bytes Received/sec",CustomType.Download,"KB/s",func),
-                new PCounterInfo("Network Interface","Bytes Sent/sec",CustomType.Download,"KB/s"),
+                new PCounterInfo("Network Interface","Bytes Received/sec",CustomType.Download,"KB/s",NetFunc),
+                new PCounterInfo("Network Interface","Bytes Sent/sec",CustomType.Download,"KB/s",NetFunc),
             };
             pCounters = new PCounters(pCounterInfos);
             pCounters.ReciveData += PCounters_ReciveData;
@@ -30,9 +27,25 @@ namespace AIDA64Ext.Handlers
         {
             for(int i=0;i< datas.Count; i++)
             {
-                PerformanceParams.ADD(datas[i].CounterName, datas[i].Type, datas[i].Count, datas[i].Unit);
+                PerformanceParams.ADD(datas[i].InstanceName+ " "+datas[i].CounterName, datas[i].Type, datas[i].Count, datas[i].Unit);
             }
         }
 
+        private static void NetFunc(long count, out long currCount, out string unit)
+        {
+            if ((currCount = count / 1024) < 1024)
+            {
+                unit = "KB/s";
+                return;
+            }
+            else
+            {
+                currCount /= 1024;
+                unit = "MB/s";
+                return;
+            }
+        }
+
+        public static void Start() { }
     }
 }

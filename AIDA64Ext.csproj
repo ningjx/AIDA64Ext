@@ -103,7 +103,7 @@
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Models\AIDA64Data.cs" />
     <Compile Include="Models\AIDAShownItems.cs" />
-    <Compile Include="Models\OHMData.cs" />
+    <Compile Include="Models\PerformanceParams.cs" />
     <Compile Include="Models\PerformanceData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

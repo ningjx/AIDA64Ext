@@ -21,6 +21,7 @@ namespace AIDA64Ext.Handlers
     {
         static Computer computer = new Computer();
         static UpdateVisitor updateVisitor = new UpdateVisitor();
+        //static NetMonitor netMonitor = new NetMonitor();
         static OHM()
         {
             computer.CPUEnabled = true;
@@ -31,8 +32,6 @@ namespace AIDA64Ext.Handlers
             computer.RAMEnabled = true;
             computer.Open();
             //netMonitor.StartMonitoring();
-            //computer.Accept(updateVisitor);
-            //Timer_Elapsed(null, null);
             Timer timer = new Timer(500)
             {
                 AutoReset = true,

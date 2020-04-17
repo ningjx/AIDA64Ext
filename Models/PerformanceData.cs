@@ -1,4 +1,5 @@
-﻿using OpenHardwareMonitor.Hardware;
+﻿using AIDA64Ext.Extension;
+using OpenHardwareMonitor.Hardware;
 using System.Collections.Generic;
 using System.Linq;
 

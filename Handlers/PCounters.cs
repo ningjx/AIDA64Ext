@@ -16,14 +16,14 @@ namespace AIDA64Ext.Handlers
     public class PCounters
     {
         private Timer timer = new Timer();
-        private List<PCounterData> Counters = new List<PCounterData>();
+        private List<CounterSets> CountersSets = new List<CounterSets>();
         private Dictionary<string, CountersResult> CounterResults = new Dictionary<string, CountersResult>();
-
-        public PCounters(List<PCounterInfo> pCounterInfos, int miSec = 30, string instanceName = null)
+        private bool Lock = false;
+        public PCounters(List<PCounterInfo> pCounterInfos, int miSec = 1000)
         {
             foreach (var item in pCounterInfos)
             {
-                Counters.Add(new PCounterData(item));
+                CountersSets.Add(new CounterSets(item));
             }
             timer.Interval = miSec;
             timer.AutoReset = true;
@@ -43,15 +43,21 @@ namespace AIDA64Ext.Handlers
 
         private void GetData(object sender, ElapsedEventArgs e)
         {
-            foreach (var counter in Counters)
+            if (Lock)
+                return;
+            Lock = true;
+            foreach (var counterSet in CountersSets)
             {
-                counter.Value = counter.Counter.NextSample().RawValue;
-                counter.Count = counter.Value - counter.Value;
-                counter.OldValue = counter.Value;
-
-                CounterResults.AddOrUpdate(counter.CounterName, new CountersResult(counter));
+                foreach (var counter in counterSet.CounterDatas)
+                {
+                    counter.Value = counter.Counter.NextSample().RawValue;
+                    counter.Count = counter.Value - counter.OldValue;
+                    counter.OldValue = counter.Value;
+                    CounterResults.AddOrUpdate(counter.InstanceName + counter.CounterName, new CountersResult(counter));
+                }
             }
             ReciveData?.Invoke(CounterResults.Values.ToList());
+            Lock = false;
         }
 
         public void SetTimerInterval(int miSec)
@@ -73,55 +79,76 @@ namespace AIDA64Ext.Handlers
     {
         public string CategoryName;
         public string CounterName;
+        public string InstanceName;
+
         public CustomType Type;
         public string Unit;
         public DealDataHandler Func;
-        public PCounterInfo(string categoryName, string counterName, CustomType type, string unit, DealDataHandler func = null)
+        public PCounterInfo(string categoryName, string counterName, CustomType type, string unit, DealDataHandler func = null, string instanceName = null)
         {
             CategoryName = categoryName;
             CounterName = counterName;
             Type = type;
             Unit = unit;
             Func = func;
+            InstanceName = instanceName;
         }
     }
 
-    public delegate long DealDataHandler(long count,string unit);
+    public delegate void DealDataHandler(long count, out long currCount, out string currUnit);
 
-    public class PCounterData
+    public class CounterSets
     {
-        public PerformanceCounter Counter;
+        public List<CounterData> CounterDatas = new List<CounterData>();
+        public string CategoryName;
+        public string CounterName;
+        public string InstanceName;
+        public CustomType Type;
+        public string Unit;
+        public DealDataHandler Func;
 
+        public CounterSets(PCounterInfo info)
+        {
+            Type = info.Type;
+            Unit = info.Unit;
+            Func = info.Func;
+            CategoryName = info.CategoryName;
+            CounterName = info.CounterName;
+            InstanceName = info.InstanceName;
+            if (info.InstanceName == null)
+            {
+                PerformanceCounterCategory category = new PerformanceCounterCategory(CategoryName);
+                foreach (string name in category.GetInstanceNames())
+                {
+                    CounterDatas.Add(new CounterData(new PerformanceCounter(CategoryName, CounterName, name), Type, Unit, Func));
+                }
+            }
+            else
+                CounterDatas.Add(new CounterData(new PerformanceCounter(CategoryName, CounterName, InstanceName), Type, Unit, Func));
+        }
+    }
+
+    public class CounterData
+    {
         public long Value;
         public long OldValue;
         public long Count;
         public string CategoryName;
         public string CounterName;
+        public string InstanceName;
+        public PerformanceCounter Counter;
         public CustomType Type;
         public string Unit;
         public DealDataHandler Func;
-        public PCounterData(string categoryName, string counterName, CustomType type, string unit, DealDataHandler func = null)
+        public CounterData(PerformanceCounter counter, CustomType type, string unit, DealDataHandler func)
         {
-            CategoryName = categoryName;
-            CounterName = counterName;
-            Counter = new PerformanceCounter(categoryName, counterName);
+            Counter = counter;
+            InstanceName = counter.InstanceName;
+            CounterName = counter.CounterName;
+            CategoryName = counter.CategoryName;
             Type = type;
             Unit = unit;
             Func = func;
-        }
-
-        public PCounterData(PCounterInfo info)
-        {
-            CategoryName = info.CategoryName;
-            CounterName = info.CounterName;
-            Counter = new PerformanceCounter(info.CategoryName, info.CounterName);
-            Type = info.Type;
-            Unit = info.Unit;
-            Func = info.Func;
-            if (Func != null)
-            {
-                Count = Func.Invoke(Count,Unit);
-            }
         }
     }
 
@@ -129,17 +156,21 @@ namespace AIDA64Ext.Handlers
     {
         public string CategoryName;
         public string CounterName;
+        public string InstanceName;
         public long Count;
         public CustomType Type;
         public string Unit;
-
-        public CountersResult(PCounterData data)
+        public DealDataHandler Func;
+        public CountersResult(CounterData data)
         {
             CategoryName = data.CategoryName;
             CounterName = data.CounterName;
+            InstanceName = data.InstanceName;
             Count = data.Count;
             Type = data.Type;
             Unit = data.Unit;
+            Func = data.Func;
+            Func?.Invoke(Count, out Count, out Unit);
         }
     }
 }
