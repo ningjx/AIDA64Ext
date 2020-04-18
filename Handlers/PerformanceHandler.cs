@@ -27,20 +27,20 @@ namespace AIDA64Ext.Handlers
         {
             for(int i=0;i< datas.Count; i++)
             {
-                PerformanceParams.ADD(datas[i].InstanceName+ " "+datas[i].CounterName, datas[i].Type, datas[i].Count, datas[i].Unit);
+                PerformanceParams.ADD(datas[i].InstanceName+ " "+datas[i].CounterName, datas[i].Type, datas[i].Value, datas[i].Unit);
             }
         }
 
-        private static void NetFunc(long count, out long currCount, out string unit)
+        private static void NetFunc(long count, out float currCount, out string unit)
         {
-            if ((currCount = count / 1024) < 1024)
+            if ((currCount = count / 1024F) < 1024)
             {
                 unit = "KB/s";
                 return;
             }
             else
             {
-                currCount /= 1024;
+                currCount /= 1024F;
                 unit = "MB/s";
                 return;
             }

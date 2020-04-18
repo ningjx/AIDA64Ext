@@ -38,7 +38,7 @@ namespace ConsoleTest
                 //    Console.WriteLine($"{test[i].DownloadSpeedKBps.ToString("f0")}KBps");
                 //
                 //}
-                Thread.Sleep(500);
+                Thread.Sleep(100);
             }
         }
 
