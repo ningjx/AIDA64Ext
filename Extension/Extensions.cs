@@ -8,7 +8,6 @@ using AIDA64Ext.Enums;
 using AIDA64Ext.Models;
 using AIDA64Ext.Handlers;
 using static System.Windows.Forms.CheckedListBox;
-using AIDA64Ext.Config;
 using System.Diagnostics;
 using Microsoft.Win32;
 
@@ -49,7 +48,7 @@ namespace AIDA64Ext.Extension
             }
             items.ForEach(t =>
             {
-                if (SysConfig.ConfigHandle.Config.AIDAShownItems.Contains(t.Label))
+                if (Config.ConfigData.AIDAShownItems.Contains(t.Label))
                     checkedListBox.Items.Add(t.Label, true);
                 else
                     checkedListBox.Items.Add(t.Label, false);
@@ -71,20 +70,20 @@ namespace AIDA64Ext.Extension
             switch (aIDADataType)
             {
                 case AIDADataType.System:
-                    SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.System.Clear();
-                    items.ForEach(t => SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.System.Add(AIDA64.GetItemByLabel(t)));
+                    Config.ConfigData.AIDAShownItems.AIDA64Data.System.Clear();
+                    items.ForEach(t => Config.ConfigData.AIDAShownItems.AIDA64Data.System.Add(AIDA64.GetItemByLabel(t)));
                     break;
                 case AIDADataType.Temperature:
-                    SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Temperature.Clear();
-                    items.ForEach(t => SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Temperature.Add(AIDA64.GetItemByLabel(t)));
+                    Config.ConfigData.AIDAShownItems.AIDA64Data.Temperature.Clear();
+                    items.ForEach(t => Config.ConfigData.AIDAShownItems.AIDA64Data.Temperature.Add(AIDA64.GetItemByLabel(t)));
                     break;
                 case AIDADataType.Volt:
-                    SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Volt.Clear();
-                    items.ForEach(t => SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Volt.Add(AIDA64.GetItemByLabel(t)));
+                    Config.ConfigData.AIDAShownItems.AIDA64Data.Volt.Clear();
+                    items.ForEach(t => Config.ConfigData.AIDAShownItems.AIDA64Data.Volt.Add(AIDA64.GetItemByLabel(t)));
                     break;
                 case AIDADataType.Power:
-                    SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Power.Clear();
-                    items.ForEach(t => SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Power.Add(AIDA64.GetItemByLabel(t)));
+                    Config.ConfigData.AIDAShownItems.AIDA64Data.Power.Clear();
+                    items.ForEach(t => Config.ConfigData.AIDAShownItems.AIDA64Data.Power.Add(AIDA64.GetItemByLabel(t)));
                     break;
             }
         }
@@ -104,20 +103,20 @@ namespace AIDA64Ext.Extension
             switch (aIDADataType)
             {
                 case AIDADataType.System:
-                    SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.System.Clear();
-                    items.ForEach(t => SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.System.Add(AIDA64.GetItemByLabel(t)));
+                    Config.ConfigData.AIDAShownItems.AIDA64Data.System.Clear();
+                    items.ForEach(t => Config.ConfigData.AIDAShownItems.AIDA64Data.System.Add(AIDA64.GetItemByLabel(t)));
                     break;
                 case AIDADataType.Temperature:
-                    SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Temperature.Clear();
-                    items.ForEach(t => SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Temperature.Add(AIDA64.GetItemByLabel(t)));
+                    Config.ConfigData.AIDAShownItems.AIDA64Data.Temperature.Clear();
+                    items.ForEach(t => Config.ConfigData.AIDAShownItems.AIDA64Data.Temperature.Add(AIDA64.GetItemByLabel(t)));
                     break;
                 case AIDADataType.Volt:
-                    SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Volt.Clear();
-                    items.ForEach(t => SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Volt.Add(AIDA64.GetItemByLabel(t)));
+                    Config.ConfigData.AIDAShownItems.AIDA64Data.Volt.Clear();
+                    items.ForEach(t => Config.ConfigData.AIDAShownItems.AIDA64Data.Volt.Add(AIDA64.GetItemByLabel(t)));
                     break;
                 case AIDADataType.Power:
-                    SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Power.Clear();
-                    items.ForEach(t => SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Power.Add(AIDA64.GetItemByLabel(t)));
+                    Config.ConfigData.AIDAShownItems.AIDA64Data.Power.Clear();
+                    items.ForEach(t => Config.ConfigData.AIDAShownItems.AIDA64Data.Power.Add(AIDA64.GetItemByLabel(t)));
                     break;
             }
         }
@@ -144,7 +143,7 @@ namespace AIDA64Ext.Extension
             return result;
         }
 
-        public static void AddOrUpdate<K,V>(this Dictionary<K, V> dic,K key,V value)
+        public static void AddOrUpdate<K, V>(this Dictionary<K, V> dic, K key, V value)
         {
             if (dic.Keys.Contains(key))
             {
@@ -169,6 +168,46 @@ namespace AIDA64Ext.Extension
             string appPath = Process.GetCurrentProcess().MainModule.FileName;
             isOk = SetAutoStart(onOff, appName, appPath);
             return isOk;
+        }
+
+        /// <summary>
+        /// 保存窗体位置
+        /// </summary>
+        /// <param name="form"></param>
+        public static void SaveScreenObject(this Form form)
+        {
+            string CurrentScreenName = Screen.FromControl(form).DeviceName;
+            Config.ConfigData.ScreenPositons.Add(new ScreenPositon { 
+                ScreenName = CurrentScreenName,
+                FormName = form.Name,
+                Top = form.Top,
+                Left = form.Left
+            });
+        }
+
+        /// <summary>
+        /// 设置窗体的位置
+        /// </summary>
+        /// <param name="form"></param>
+        public static void SetFormPosition(this Form form, bool isFullScreen)
+        {
+            var info = Config.ConfigData.ScreenPositons.FirstOrDefault(t => t.FormName == form.Name);
+            if (info == null) return;
+            if (isFullScreen)
+            {
+                var screen = Screen.AllScreens.FirstOrDefault(t => t.DeviceName == info.ScreenName);
+                if (screen != null)
+                {
+                    form.Top = screen.WorkingArea.Top;
+                    form.Left = screen.WorkingArea.Left;
+                }
+                return;
+            }
+            if (Screen.AllScreens.Select(t => t.DeviceName).Contains(info.ScreenName))
+            {
+                form.Top = info.Top;
+                form.Left = info.Left;
+            }
         }
 
         /// <summary>

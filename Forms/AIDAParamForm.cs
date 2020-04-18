@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using AIDA64Ext.Handlers;
 using AIDA64Ext.Models;
-using AIDA64Ext.Config;
 using AIDA64Ext.Extension;
 using AIDA64Ext.Enums;
 
