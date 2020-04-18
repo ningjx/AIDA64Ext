@@ -8,6 +8,7 @@ using AIDA64Ext.Enums;
 using AIDA64Ext.Models;
 using AIDA64Ext.Handlers;
 using static System.Windows.Forms.CheckedListBox;
+using AIDA64Ext.Config;
 
 namespace AIDA64Ext.Extension
 {
@@ -46,7 +47,7 @@ namespace AIDA64Ext.Extension
             }
             items.ForEach(t =>
             {
-                if (Config.Config.AIDAShownItems.Contains(t.Label))
+                if (SysConfig.ConfigHandle.Config.AIDAShownItems.Contains(t.Label))
                     checkedListBox.Items.Add(t.Label, true);
                 else
                     checkedListBox.Items.Add(t.Label, false);
@@ -68,20 +69,20 @@ namespace AIDA64Ext.Extension
             switch (aIDADataType)
             {
                 case AIDADataType.System:
-                    Config.Config.AIDAShownItems.AIDA64Data.System.Clear();
-                    items.ForEach(t => Config.Config.AIDAShownItems.AIDA64Data.System.Add(AIDA64.GetItemByLabel(t)));
+                    SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.System.Clear();
+                    items.ForEach(t => SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.System.Add(AIDA64.GetItemByLabel(t)));
                     break;
                 case AIDADataType.Temperature:
-                    Config.Config.AIDAShownItems.AIDA64Data.Temperature.Clear();
-                    items.ForEach(t => Config.Config.AIDAShownItems.AIDA64Data.Temperature.Add(AIDA64.GetItemByLabel(t)));
+                    SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Temperature.Clear();
+                    items.ForEach(t => SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Temperature.Add(AIDA64.GetItemByLabel(t)));
                     break;
                 case AIDADataType.Volt:
-                    Config.Config.AIDAShownItems.AIDA64Data.Volt.Clear();
-                    items.ForEach(t => Config.Config.AIDAShownItems.AIDA64Data.Volt.Add(AIDA64.GetItemByLabel(t)));
+                    SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Volt.Clear();
+                    items.ForEach(t => SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Volt.Add(AIDA64.GetItemByLabel(t)));
                     break;
                 case AIDADataType.Power:
-                    Config.Config.AIDAShownItems.AIDA64Data.Power.Clear();
-                    items.ForEach(t => Config.Config.AIDAShownItems.AIDA64Data.Power.Add(AIDA64.GetItemByLabel(t)));
+                    SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Power.Clear();
+                    items.ForEach(t => SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Power.Add(AIDA64.GetItemByLabel(t)));
                     break;
             }
         }
@@ -101,20 +102,20 @@ namespace AIDA64Ext.Extension
             switch (aIDADataType)
             {
                 case AIDADataType.System:
-                    Config.Config.AIDAShownItems.AIDA64Data.System.Clear();
-                    items.ForEach(t => Config.Config.AIDAShownItems.AIDA64Data.System.Add(AIDA64.GetItemByLabel(t)));
+                    SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.System.Clear();
+                    items.ForEach(t => SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.System.Add(AIDA64.GetItemByLabel(t)));
                     break;
                 case AIDADataType.Temperature:
-                    Config.Config.AIDAShownItems.AIDA64Data.Temperature.Clear();
-                    items.ForEach(t => Config.Config.AIDAShownItems.AIDA64Data.Temperature.Add(AIDA64.GetItemByLabel(t)));
+                    SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Temperature.Clear();
+                    items.ForEach(t => SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Temperature.Add(AIDA64.GetItemByLabel(t)));
                     break;
                 case AIDADataType.Volt:
-                    Config.Config.AIDAShownItems.AIDA64Data.Volt.Clear();
-                    items.ForEach(t => Config.Config.AIDAShownItems.AIDA64Data.Volt.Add(AIDA64.GetItemByLabel(t)));
+                    SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Volt.Clear();
+                    items.ForEach(t => SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Volt.Add(AIDA64.GetItemByLabel(t)));
                     break;
                 case AIDADataType.Power:
-                    Config.Config.AIDAShownItems.AIDA64Data.Power.Clear();
-                    items.ForEach(t => Config.Config.AIDAShownItems.AIDA64Data.Power.Add(AIDA64.GetItemByLabel(t)));
+                    SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Power.Clear();
+                    items.ForEach(t => SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Power.Add(AIDA64.GetItemByLabel(t)));
                     break;
             }
         }
@@ -128,6 +129,28 @@ namespace AIDA64Ext.Extension
             for (int i = 0; i < checkedListBox.Items.Count; i++)
             {
                 checkedListBox.SetItemCheckState(i, CheckState.Checked);
+            }
+        }
+
+        public static string[] GetByCount(this string[] data, int count)
+        {
+            string[] result = new string[count];
+            for (int i = 0; i < count; i++)
+            {
+                result[i] = data[i];
+            }
+            return result;
+        }
+
+        public static void AddOrUpdate<K,V>(this Dictionary<K, V> dic,K key,V value)
+        {
+            if (dic.Keys.Contains(key))
+            {
+                dic[key] = value;
+            }
+            else
+            {
+                dic.Add(key, value);
             }
         }
     }

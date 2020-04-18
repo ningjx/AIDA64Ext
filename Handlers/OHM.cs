@@ -1,4 +1,5 @@
 ﻿using AIDA64Ext.Models;
+using NetWorkSpeedMonitor;
 using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;
@@ -19,8 +20,8 @@ namespace AIDA64Ext.Handlers
     public static class OHM
     {
         static Computer computer = new Computer();
-        public static OHMData OHMData = new OHMData();
         static UpdateVisitor updateVisitor = new UpdateVisitor();
+        //static NetMonitor netMonitor = new NetMonitor();
         static OHM()
         {
             computer.CPUEnabled = true;
@@ -30,8 +31,7 @@ namespace AIDA64Ext.Handlers
             computer.MainboardEnabled = true;
             computer.RAMEnabled = true;
             computer.Open();
-            computer.Accept(updateVisitor);
-            //Timer_Elapsed(null, null);
+            //netMonitor.StartMonitoring();
             Timer timer = new Timer(500)
             {
                 AutoReset = true,
@@ -53,44 +53,49 @@ namespace AIDA64Ext.Handlers
                         switch (computer.Hardware[i].Sensors[j].SensorType)
                         {
                             case SensorType.Voltage:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "V");
+                                PerformanceParams.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "V");
                                 break;
                             case SensorType.Clock:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "MHz");
+                                PerformanceParams.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "MHz");
                                 break;
                             case SensorType.Fan:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "RPM");
+                                PerformanceParams.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "RPM");
                                 break;
                             case SensorType.Flow:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "L/h");
+                                PerformanceParams.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "L/h");
                                 break;
                             case SensorType.Power:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "W");
+                                PerformanceParams.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "W");
                                 break;
                             case SensorType.Data:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "GB");
+                                PerformanceParams.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "GB");
                                 break;
                             case SensorType.Factor:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "");
+                                PerformanceParams.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "");
                                 break;
                             case SensorType.SmallData:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "MB");
+                                PerformanceParams.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "MB");
                                 break;
                             case SensorType.Temperature:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "°C");
+                                PerformanceParams.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "°C");
                                 break;
                             case SensorType.Throughput:
                                 if (computer.Hardware[i].Sensors[j].Value < 1)
-                                    OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value * 0x400 ?? 0, "KB/s");
+                                    PerformanceParams.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value * 0x400 ?? 0, "KB/s");
                                 else
-                                    OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "MB/s");
+                                    PerformanceParams.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "MB/s");
                                 break;
                             default:
-                                OHMData.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "%");
+                                PerformanceParams.ADD(computer.Hardware[i].Sensors[j].Name, computer.Hardware[i].Sensors[j].SensorType, computer.Hardware[i].Sensors[j].Value ?? 0, "%");
                                 break;
                         }
                     }
                 }
+                //for (int i = 0; i < netMonitor.Adapters.Length; i++)
+                //{
+                //    PerformanceParams.ADD(netMonitor.Adapters[i].Name, CustomType.Download, (float)netMonitor.Adapters[i].DownloadSpeedKBps, "KB/s");
+                //    PerformanceParams.ADD(netMonitor.Adapters[i].Name, CustomType.Upload, (float)netMonitor.Adapters[i].UploadSpeedKBps, "KB/s");
+                //}
             }
             catch (Exception ex)
             {

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AIDA64Ext.Config;
 using AIDA64Ext.Handlers;
 
 namespace AIDA64Ext.Forms
@@ -26,7 +27,7 @@ namespace AIDA64Ext.Forms
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            var items = Config.Config.AIDAShownItems.AIDA64Data.Items;
+            var items = SysConfig.ConfigHandle.Config.AIDAShownItems.AIDA64Data.Items;
             string infos = string.Empty;
             items?.ForEach(t =>
             {
