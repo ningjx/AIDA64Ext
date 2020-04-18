@@ -13,10 +13,10 @@ namespace AIDA64Ext.Handlers
         static PerformanceHandler()
         {
             
-            List<PCounterInfo> pCounterInfos = new List<PCounterInfo>
+            List<CounterConfig> pCounterInfos = new List<CounterConfig>
             {
-                new PCounterInfo("Network Interface","Bytes Received/sec",CustomType.Download,"KB/s",NetFunc),
-                new PCounterInfo("Network Interface","Bytes Sent/sec",CustomType.Download,"KB/s",NetFunc),
+                new CounterConfig("Network Interface","Bytes Received/sec",CustomType.Download,"KB/s",NetFunc),
+                new CounterConfig("Network Interface","Bytes Sent/sec",CustomType.Download,"KB/s",NetFunc),
             };
             pCounters = new PCounters(pCounterInfos);
             pCounters.ReciveData += PCounters_ReciveData;

@@ -1,8 +1,10 @@
 ﻿using AIDA64Ext.Extension;
 using AIDA64Ext.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +28,7 @@ namespace AIDA64Ext.Handlers
         /// </summary>
         /// <param name="pCounterInfos">需要使用的计数器的列表</param>
         /// <param name="miSec">刷新间隔时间（ms）</param>
-        public PCounters(List<PCounterInfo> pCounterInfos, int miSec = 50)
+        public PCounters(List<CounterConfig> pCounterInfos, int miSec = 50)
         {
             foreach (var item in pCounterInfos)
             {
@@ -70,6 +72,106 @@ namespace AIDA64Ext.Handlers
             }
         }
 
+        /// <summary>
+        /// 获取本机所有计数器类型
+        /// </summary>
+        public static List<string> GetAllCategorys()
+        {
+            List < PerformanceCounterCategory> pcc = PerformanceCounterCategory.GetCategories().ToList();
+            List<string> result = pcc.Select(t => t.CategoryName).Distinct().ToList();
+            return result;
+        }
+
+        /// <summary>
+        /// 获取指定类型下的所有计数器
+        /// </summary>
+        /// <param name="CategoryName">计数器类型</param>
+        /// <returns></returns>
+        public static List<string> GetAllCountersWithCategory(string CategoryName)
+        {
+            List<string> result = new List<string>();
+            PerformanceCounterCategory Category = new PerformanceCounterCategory(CategoryName);
+            var instanceNames = Category.GetInstanceNames();
+            List<PerformanceCounter> counters = new List<PerformanceCounter>();
+            for(int i = 0; i < instanceNames.Length; i++)
+            {
+                List<PerformanceCounter> thisCounters = new List<PerformanceCounter>();
+                try
+                {
+                    thisCounters = Category.GetCounters(instanceNames[i]).ToList();
+                }
+                catch { }
+                counters.AddRange(thisCounters);
+            }
+            result = counters.Select(t => t.CounterName).Distinct().ToList();
+            return result;
+        }
+
+        /// <summary>
+        /// 获取指定类型下的所有可被计数的实例
+        /// </summary>
+        /// <param name="CategoryName">计数器类型</param>
+        /// <returns></returns>
+        public static List<string> GetAllInstanceWithCategory(string CategoryName)
+        {
+            PerformanceCounterCategory Category = new PerformanceCounterCategory(CategoryName);
+            return Category.GetInstanceNames().Distinct().ToList();
+        }
+
+        /// <summary>
+        /// 获取本机所有计数器以及它们关联的实例名和包含的计数器名称
+        /// 警告!!!:很慢，慎用。(i7-8565U用时1分40秒)，建议使用异步写入到文件查看。
+        /// 异步写入文件时，返回值为空
+        /// </summary>
+        /// <param name="fileName">提供文件名时可以写入到文件</param>
+        /// <param name="isSync">当文件名不存在时，异步不生效</param>
+        /// <returns></returns>
+        public static Dictionary<string, CategoryInfo> GetAllCategorysInfo(string fileName=null,bool isSync = true)
+        {
+            Dictionary<string, CategoryInfo> GetAllCategorysInfoFunc()
+            {
+                Dictionary<string, CategoryInfo> result = new Dictionary<string, CategoryInfo>();
+                List<string> categorys = GetAllCategorys();
+                foreach (string category in categorys)
+                {
+                    CategoryInfo info = new CategoryInfo
+                    {
+                        InstanceNames = GetAllInstanceWithCategory(category),
+                        CounterNames = GetAllCountersWithCategory(category)
+                    };
+                    result.AddOrUpdate(category, info);
+                }
+                return result;
+            }
+            
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return GetAllCategorysInfoFunc();
+            }
+            else if (isSync)
+            {
+                Dictionary<string, CategoryInfo> datas = GetAllCategorysInfoFunc();
+                using (FileStream fileStream = new FileStream(fileName, FileMode.OpenOrCreate))
+                {
+                    byte[] bytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(datas));
+                    fileStream.Write(bytes, 0, bytes.Length);
+                };
+                return datas;
+            }
+            else
+            {
+                Task.Run(() => {
+                    Dictionary<string, CategoryInfo> datas = GetAllCategorysInfoFunc();
+                    using (FileStream fileStream = new FileStream(fileName, FileMode.OpenOrCreate))
+                    {
+                        byte[] bytes = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(datas));
+                        fileStream.Write(bytes, 0, bytes.Length);
+                    };
+                });
+                return new Dictionary<string, CategoryInfo>();
+            }
+        }
+
         private void GetData(object sender, ElapsedEventArgs e)
         {
             if (Lock)
@@ -97,7 +199,7 @@ namespace AIDA64Ext.Handlers
         public event RefreshHandler ReciveData;
     }
 
-    public class PCounterInfo
+    public class CounterConfig
     {
         /// <summary>
         /// 计数器类型
@@ -129,7 +231,7 @@ namespace AIDA64Ext.Handlers
         /// </summary>
         public DealDataHandler Func;
 
-        public PCounterInfo(string categoryName, string counterName, CustomType type, string unit, DealDataHandler func = null, string instanceName = null)
+        public CounterConfig(string categoryName, string counterName, CustomType type, string unit, DealDataHandler func = null, string instanceName = null)
         {
             CategoryName = categoryName;
             CounterName = counterName;
@@ -179,7 +281,7 @@ namespace AIDA64Ext.Handlers
         /// </summary>
         public DealDataHandler Func;
 
-        public CounterSets(PCounterInfo info)
+        public CounterSets(CounterConfig info)
         {
             Type = info.Type;
             Unit = info.Unit;
@@ -330,5 +432,11 @@ namespace AIDA64Ext.Handlers
             Func = data.Func;
             Func?.Invoke(Count, out Value, out Unit);
         }
+    }
+
+    public class CategoryInfo
+    {
+        public List<string> InstanceNames = new List<string>();
+        public List<string> CounterNames = new List<string>();
     }
 }

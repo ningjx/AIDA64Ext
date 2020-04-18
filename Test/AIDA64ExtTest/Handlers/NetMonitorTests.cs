@@ -1,4 +1,5 @@
-﻿using AIDA64Ext.Helper;
+﻿using AIDA64Ext.Handlers;
+using AIDA64Ext.Helper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NetWorkSpeedMonitor;
 using Newtonsoft.Json;
@@ -24,28 +25,6 @@ namespace NetWorkSpeedMonitor.Tests
         public void NetMonitorTest()
         {
             PerformanceCounterCategory[] pcc = PerformanceCounterCategory.GetCategories();
-            PerformanceCounterCategory memory = new PerformanceCounterCategory();
-            List<string> test = new List<string>();
-            for (int i = 0; i < pcc.Length; i++)
-            {
-                test.Add(pcc[i].CategoryName);
-                if(pcc[i].CategoryName== "Memory")
-                {
-                    memory = pcc[i];
-                }
-            }
-            string a = JsonConvert.SerializeObject(test);
-
-            //var instancenames = memory.GetInstanceNames();
-            var memorycounters = memory.GetCounters();
-
-            List<TestData> datas = new List<TestData>();
-            foreach(var item in memorycounters)
-            {
-                datas.Add(new TestData {Name = item.CounterName,Help= item.CategoryName, Value = item.RawValue });
-            }
-            FileHelper.Write(new string[] { "ssss.txt" }, JsonConvert.SerializeObject(datas));
-
             StringBuilder sb = new StringBuilder();
             string cn = null;
             for (int i = 0; i < pcc.Length; i++)
@@ -87,8 +66,7 @@ namespace NetWorkSpeedMonitor.Tests
         [TestMethod()]
         public void Test()
         {
-            PerformanceCounterCategory category = new PerformanceCounterCategory("Network Interface");
-            var res = category.GetInstanceNames();
+            PCounters.GetAllCategorysInfo("safasf.txt");
         }
     }
 
