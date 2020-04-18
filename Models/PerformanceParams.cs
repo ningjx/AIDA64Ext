@@ -1,4 +1,5 @@
 ﻿using AIDA64Ext.Extension;
+using AIDA64Ext.Handlers;
 using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;
@@ -84,25 +85,5 @@ namespace AIDA64Ext.Models
             Unit = unit;
             Type = dataType;
         }
-    }
-
-    public enum CustomType
-    {
-        Voltage, // V
-        Clock, // MHz
-        Temperature, // °C
-        Load, // %
-        Fan, // RPM
-        Flow, // L/h
-        Control, // %
-        Level, // %
-        Factor, // 1
-        Power, // W
-        Data, // GB = 2^30 Bytes    
-        SmallData, // MB = 2^20 Bytes
-        Throughput, // MB/s = 2^20 Bytes/s
-        Download,
-        Upload,
-        Unknown = 99
     }
 }

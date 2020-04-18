@@ -1,7 +1,4 @@
-﻿using AIDA64Ext.Extension;
-using AIDA64Ext.Models;
-using Newtonsoft.Json;
-using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -13,7 +10,7 @@ using System.Timers;
 namespace AIDA64Ext.Handlers
 {
     /// <summary>
-    /// 一堆性能计数器
+    /// 性能计数器封装
     /// </summary>
     public class PCounters
     {
@@ -139,7 +136,7 @@ namespace AIDA64Ext.Handlers
                         InstanceNames = GetAllInstanceWithCategory(category),
                         CounterNames = GetAllCountersWithCategory(category)
                     };
-                    result.AddOrUpdate(category, info);
+                    result.ExtensionAdde(category, info);
                 }
                 return result;
             }
@@ -184,7 +181,7 @@ namespace AIDA64Ext.Handlers
                     counter.Value = counter.Counter.NextSample().RawValue;
                     counter.Count = (counter.Value - counter.OldValue) * 1000 / Interval;
                     counter.OldValue = counter.Value;
-                    CounterResults.AddOrUpdate(counter.InstanceName + counter.CounterName, new CountersResult(counter));
+                    CounterResults.ExtensionAdde(counter.InstanceName + counter.CounterName, new CountersResult(counter));
                 }
             }
             ReciveData?.Invoke(CounterResults.Values.ToList());
@@ -197,6 +194,24 @@ namespace AIDA64Ext.Handlers
         /// 每次刷新后的事件
         /// </summary>
         public event RefreshHandler ReciveData;
+    }
+
+    /// <summary>
+    /// 扩展方法
+    /// </summary>
+    static class Extensions
+    {
+        public static void ExtensionAdde<K, V>(this Dictionary<K, V> dic, K key, V value)
+        {
+            if (dic.Keys.Contains(key))
+            {
+                dic[key] = value;
+            }
+            else
+            {
+                dic.Add(key, value);
+            }
+        }
     }
 
     public class CounterConfig
@@ -432,6 +447,26 @@ namespace AIDA64Ext.Handlers
             Func = data.Func;
             Func?.Invoke(Count, out Value, out Unit);
         }
+    }
+
+    public enum CustomType
+    {
+        Voltage, // V
+        Clock, // MHz
+        Temperature, // °C
+        Load, // %
+        Fan, // RPM
+        Flow, // L/h
+        Control, // %
+        Level, // %
+        Factor, // 1
+        Power, // W
+        Data, // GB = 2^30 Bytes    
+        SmallData, // MB = 2^20 Bytes
+        Throughput, // MB/s = 2^20 Bytes/s
+        Download,
+        Upload,
+        Unknown = 99
     }
 
     public class CategoryInfo
