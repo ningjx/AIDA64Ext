@@ -201,6 +201,8 @@ namespace AIDA64Ext.Extension
                     form.Top = screen.WorkingArea.Top;
                     form.Left = screen.WorkingArea.Left;
                 }
+                form.FormBorderStyle = FormBorderStyle.None;
+                form.WindowState = FormWindowState.Maximized;
                 return;
             }
             if (Screen.AllScreens.Select(t => t.DeviceName).Contains(info.ScreenName))

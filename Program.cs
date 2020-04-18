@@ -16,10 +16,12 @@ namespace AIDA64Ext
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Config.ReadConfig();
             using (MainForm form = new MainForm())
             {
                 form.FormClosed += delegate (Object sender, FormClosedEventArgs e)
                 {
+                    Config.SaveConfig();
                     Application.Exit();
                 };
                 Application.Run(form);
