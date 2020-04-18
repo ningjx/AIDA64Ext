@@ -19,6 +19,7 @@ namespace AIDA64Ext.Handlers
         private readonly Dictionary<string, CountersResult> CounterResults = new Dictionary<string, CountersResult>();
         private bool Lock = false;
         private int Interval;
+        private float Ratio;
 
         /// <summary>
         /// 初始化计数器
@@ -32,6 +33,7 @@ namespace AIDA64Ext.Handlers
                 CountersSets.Add(new CounterSets(item));
             }
             Interval = miSec;
+            Ratio = 1000F / miSec;
             Timer.Interval = miSec;
             Timer.AutoReset = true;
             Timer.Elapsed += GetData;
@@ -179,7 +181,7 @@ namespace AIDA64Ext.Handlers
                 foreach (var counter in counterSet.CounterDatas)
                 {
                     counter.Value = counter.Counter.NextSample().RawValue;
-                    counter.Count = (counter.Value - counter.OldValue) * 1000 / Interval;
+                    counter.Count = (long)((counter.Value - counter.OldValue) * Ratio);
                     counter.OldValue = counter.Value;
                     CounterResults.ExtensionAdde(counter.InstanceName + counter.CounterName, new CountersResult(counter));
                 }
@@ -237,21 +239,15 @@ namespace AIDA64Ext.Handlers
         public CustomType Type;
 
         /// <summary>
-        /// 数据单位
-        /// </summary>
-        public string Unit;
-
-        /// <summary>
         /// 处理数据方法
         /// </summary>
         public DealDataHandler Func;
 
-        public CounterConfig(string categoryName, string counterName, CustomType type, string unit, DealDataHandler func = null, string instanceName = null)
+        public CounterConfig(string categoryName, string counterName, CustomType type, DealDataHandler func = null, string instanceName = null)
         {
             CategoryName = categoryName;
             CounterName = counterName;
             Type = type;
-            Unit = unit;
             Func = func;
             InstanceName = instanceName;
         }
@@ -287,11 +283,6 @@ namespace AIDA64Ext.Handlers
         public CustomType Type;
 
         /// <summary>
-        /// 数据单位
-        /// </summary>
-        public string Unit;
-
-        /// <summary>
         /// 处理数据方法
         /// </summary>
         public DealDataHandler Func;
@@ -299,7 +290,6 @@ namespace AIDA64Ext.Handlers
         public CounterSets(CounterConfig info)
         {
             Type = info.Type;
-            Unit = info.Unit;
             Func = info.Func;
             CategoryName = info.CategoryName;
             CounterName = info.CounterName;
@@ -309,11 +299,11 @@ namespace AIDA64Ext.Handlers
                 PerformanceCounterCategory category = new PerformanceCounterCategory(CategoryName);
                 foreach (string name in category.GetInstanceNames())
                 {
-                    CounterDatas.Add(new CounterData(new PerformanceCounter(CategoryName, CounterName, name), Type, Unit, Func));
+                    CounterDatas.Add(new CounterData(new PerformanceCounter(CategoryName, CounterName, name), Type, Func));
                 }
             }
             else
-                CounterDatas.Add(new CounterData(new PerformanceCounter(CategoryName, CounterName, InstanceName), Type, Unit, Func));
+                CounterDatas.Add(new CounterData(new PerformanceCounter(CategoryName, CounterName, InstanceName), Type, Func));
         }
     }
 
@@ -360,23 +350,17 @@ namespace AIDA64Ext.Handlers
         public CustomType Type;
 
         /// <summary>
-        /// 数据单位
-        /// </summary>
-        public string Unit;
-
-        /// <summary>
         /// 处理数据方法
         /// </summary>
         public DealDataHandler Func;
 
-        public CounterData(PerformanceCounter counter, CustomType type, string unit, DealDataHandler func)
+        public CounterData(PerformanceCounter counter, CustomType type, DealDataHandler func)
         {
             Counter = counter;
             InstanceName = counter.InstanceName;
             CounterName = counter.CounterName;
             CategoryName = counter.CategoryName;
             Type = type;
-            Unit = unit;
             Func = func;
         }
     }
@@ -443,9 +427,10 @@ namespace AIDA64Ext.Handlers
             Count = data.Count;
             Value = Count;
             Type = data.Type;
-            Unit = data.Unit;
             Func = data.Func;
             Func?.Invoke(Count, out Value, out Unit);
+            if(string.IsNullOrEmpty(Unit))
+                Unit = data.Counter.CounterName.Split(' ')[0];
         }
     }
 
