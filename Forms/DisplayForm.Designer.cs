@@ -104,7 +104,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1064, 1421);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.instrument14);
             this.Controls.Add(this.instrument13);

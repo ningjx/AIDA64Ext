@@ -42,6 +42,9 @@ namespace AIDA64Ext.Forms
         {
             FormBorderStyle = FormBorderStyle.None;     //设置窗体为无边框样式
             //WindowState = FormWindowState.Maximized;    //最大化窗体 
+
+            this.Width = 1080;
+            this.Height = 1920;
         }
 
         private void DisplayForm_KeyPress(object sender, KeyPressEventArgs e)

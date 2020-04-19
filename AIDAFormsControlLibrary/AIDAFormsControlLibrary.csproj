@@ -59,6 +59,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Instrument1Reasource.resx</DependentUpon>
     </Compile>
+    <Compile Include="Instrument2\Instrument2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Instrument2\Instrument2.Designer.cs">
+      <DependentUpon>Instrument2.cs</DependentUpon>
+    </Compile>
     <Compile Include="PID.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TempControl\TempControl.cs">
