@@ -25,10 +25,10 @@ namespace AIDAFormsControlLibrary.TempControl
 
         private void PID_PIDOutEvent_Float(float value)
         {
-            SetTemp(value);
+            SetTempForPID(value);
         }
 
-        PID PID = new PID(0.11F, 0.04F, 0.02F);
+        PID PID = new PID(0.5F, 0.08F, 0.05F);
         Bitmap cover = new Bitmap(TempControlReasource.temCover);
         Bitmap temBack = new Bitmap(TempControlReasource.temBack);
         Bitmap topCover = new Bitmap(TempControlReasource.topCover);
@@ -58,10 +58,17 @@ namespace AIDAFormsControlLibrary.TempControl
         }
 
         int skip = 0;
-        private void SetTemp(float temp)
+        private void SetTempForPID(float temp)
         {
+           //if (this.tem == temp || temp == 0)
+           //    return;
+           //this.tem = temp;
+           //Refresh();
+           //return;
+
+
             skip++;
-            if (skip > 10)
+            if (skip > 4)
             {
                 skip = 0;
                 if (this.tem == temp || temp == 0)
@@ -71,8 +78,22 @@ namespace AIDAFormsControlLibrary.TempControl
             }
         }
 
+        public void SetTemp(string text, float temp)
+        {
+            if (this.tem == temp || temp == 0)
+                return;
+            lable = text;
+            this.tem = temp;
+            Refresh();
+        }
+
         float currentTemp;
-        public void SetTempWithPID(string text,float temp)
+        /// <summary>
+        /// CUP占用有点高
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="temp"></param>
+        public void SetTempWithPID(string text, float temp)
         {
             //temp = temp > 90 ? 90 : temp;
             temp = temp < 0 ? 0 : temp;

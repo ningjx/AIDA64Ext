@@ -177,14 +177,15 @@ namespace AIDA64Ext.Extension
         public static void SaveScreenObject(this Form form)
         {
             string CurrentScreenName = Screen.FromControl(form).DeviceName.Replace("\\", "").Replace(".", "");
-            Config.ConfigData.ScreenPositons.AddOrUpdate(CurrentScreenName,new ScreenPositon { 
+            Config.ConfigData.ScreenPositons.AddOrUpdate(CurrentScreenName, new ScreenPositon
+            {
                 ScreenName = CurrentScreenName,
                 FormName = form.Name,
                 Top = form.Top,
                 Left = form.Left,
                 Width = form.Width,
                 Height = form.Height
-        });
+            });
         }
 
         /// <summary>

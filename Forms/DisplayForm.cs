@@ -24,7 +24,7 @@ namespace AIDA64Ext.Forms
 
         private void DisplayForm_Load(object sender, EventArgs e)
         {
-             //设置窗体为无边框样式
+            //设置窗体为无边框样式
             //WindowState = FormWindowState.Maximized;    //最大化窗体 
 
             this.Width = 1080;
@@ -64,12 +64,12 @@ namespace AIDA64Ext.Forms
             //instrument12.SetValueWithPID(Convert.ToInt32(AIDA64.GetItemById("SCPUUTI").Value)/100F);
             //instrument13.SetValueWithPID((float)Convert.ToDouble(AIDA64.GetItemById("SDSK1WRITESPD").Value)/100F);
             //instrument14.SetValueWithPID((float)Convert.ToDouble(AIDA64.GetItemById("SNIC5DLRATE").Value)/100F);
-            
+
             tempControl1.SetTempWithPID("CPU温度", PerformanceParams.GetByName("CPU Core #1", CustomType.Temperature).Value);
             var item1 = PerformanceParams.GetByName("CPU Total", CustomType.Load);
             instrument11.SetValueWithPID("CPU占用", item1.Value, item1.Unit, 100);
             var item2 = PerformanceParams.GetByName("Memory", CustomType.Load);
-            instrument12.SetValueWithPID("内存占用", item2.Value,item2.Unit,100);
+            instrument12.SetValueWithPID("内存占用", item2.Value, item2.Unit, 100);
 
             var item3 = PerformanceParams.GetByName("CPU Package", CustomType.Power);
             instrument13.SetValueWithPID("CPU功率", item3.Value, item3.Unit, 100);

@@ -105,7 +105,7 @@ namespace AIDAFormsControlLibrary
 
         private float PIDCaculate(float target)
         {
-            //Thread.Sleep(20);
+            Thread.Sleep(5);
             SetSpeed = target;
             err = SetSpeed - ActualSpeed;
             var incrementSpeed = Kp * (err - err_next + Ki * err + Kd * (err - 2 * err_next + err_last));

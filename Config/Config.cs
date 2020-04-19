@@ -46,6 +46,7 @@ namespace AIDA64Ext
     {
         public AIDAShownItems AIDAShownItems = new AIDAShownItems();
         public Dictionary<string,ScreenPositon> ScreenPositons = new Dictionary<string, ScreenPositon>();
+        public bool IsAutoShowDisplayForm = false;
     }
 
     public class ScreenPositon

@@ -21,9 +21,12 @@ namespace AIDA64Ext
             InitializeComponent();
             //FormBorderStyle = FormBorderStyle.None;     //设置窗体为无边框样式
             //WindowState = FormWindowState.Maximized;    //最大化窗体 
-            Task.Run(() => { AIDA64.Start(); 
-                OHM.Start(); });
-            
+            Task.Run(() =>
+            {
+                AIDA64.Start();
+                OHM.Start();
+            });
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,6 +40,11 @@ namespace AIDA64Ext
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.SetFormPosition(false);
+            if (Config.ConfigData.IsAutoShowDisplayForm)
+            {
+                button4_Click(sender, e);
+                button2.Text = "不自动显示参数屏幕";
+            }
         }
 
         private bool displayShown = false;
@@ -66,9 +74,18 @@ namespace AIDA64Ext
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click_1(object sender, EventArgs e)
         {
-
+            if (Config.ConfigData.IsAutoShowDisplayForm)
+            {
+                Config.ConfigData.IsAutoShowDisplayForm = false;
+                button2.Text = "自动显示参数屏幕";
+            }
+            else
+            {
+                Config.ConfigData.IsAutoShowDisplayForm = true;
+                button2.Text = "不自动显示参数屏幕";
+            }
         }
     }
 }

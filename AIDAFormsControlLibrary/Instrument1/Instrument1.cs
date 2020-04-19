@@ -13,7 +13,7 @@ namespace AIDAFormsControlLibrary.Instrument1
 {
     public partial class Instrument1 : BaseControl
     {
-        PID PID = new PID(0.05F, 0.05F, 0.02F);
+        PID PID = new PID(0.5F, 0.08F, 0.05F);
 
         public Instrument1()
         {
@@ -26,7 +26,7 @@ namespace AIDAFormsControlLibrary.Instrument1
         
         private void PID_PIDOutEvent_Float(float value)
         {
-            SetValue(value);
+            SetValueForPID(value);
         }
 
         Bitmap back = new Bitmap(Instrument1Reasource.back);
@@ -135,10 +135,10 @@ namespace AIDAFormsControlLibrary.Instrument1
         }
 
         int skip = 0;
-        private void SetValue(float value)
+        private void SetValueForPID(float value)
         {
             skip++;
-            if (skip > 10)
+            if (skip > 4)
             {
                 skip = 0;
                 if (value == this.value || value == 0)
@@ -148,9 +148,20 @@ namespace AIDAFormsControlLibrary.Instrument1
             }
         }
 
+        public void SetValue(string text, float value, string unit, float max)
+        {
+            if (value == this.value || value == 0)
+                return;
+            lable = text;
+            this.unit = unit;
+            this.max = max;
+            this.value = value;
+            Refresh();
+        }
+
         float currentValue;
         /// <summary>
-        /// 赋值（带PID算法）
+        /// 赋值（带PID算法）CPU占用有点高
         /// </summary>
         /// <param name="text">显示的lable</param>
         /// <param name="value">数值</param>
