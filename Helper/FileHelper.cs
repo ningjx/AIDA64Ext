@@ -19,7 +19,7 @@ namespace AIDA64Ext.Helper
                 dicPath = Path.Combine(path.GetByCount(path.Length - 1));
             if(!string.IsNullOrEmpty(dicPath)&& !Directory.Exists(dicPath))
                 Directory.CreateDirectory(dicPath);
-            using (FileStream fileStream = new FileStream(pathStr, FileMode.OpenOrCreate))
+            using (FileStream fileStream = new FileStream(pathStr, FileMode.Create))
             {
                 byte[] bytes = Encoding.UTF8.GetBytes(data);
                 fileStream.Write(bytes,0, bytes.Length);

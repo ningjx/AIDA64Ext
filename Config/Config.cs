@@ -45,13 +45,15 @@ namespace AIDA64Ext
     public class ConfigData
     {
         public AIDAShownItems AIDAShownItems = new AIDAShownItems();
-        public List<ScreenPositon> ScreenPositons = new List<ScreenPositon>();
+        public Dictionary<string,ScreenPositon> ScreenPositons = new Dictionary<string, ScreenPositon>();
     }
 
     public class ScreenPositon
     {
         public int Top;
         public int Left;
+        public int Width = 800;
+        public int Height = 600;
         public string FormName;
         public string ScreenName;
     }

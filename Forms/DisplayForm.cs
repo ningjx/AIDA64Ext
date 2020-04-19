@@ -22,25 +22,9 @@ namespace AIDA64Ext.Forms
             CheckForIllegalCrossThreadCalls = false;
         }
 
-        public void Start()
-        {
-            Task.Run(() => {
-                tempControl1.SetTempWithPID("CPU温度", 99);
-                instrument11.SetValueWithPID("CPU占用", 100, "%", 100);
-                instrument12.SetValueWithPID("内存占用", 100, "%", 100);
-                Thread.Sleep(3000);
-                tempControl1.SetTempWithPID("CPU温度", 0);
-                instrument11.SetValueWithPID("CPU占用", 0, "%", 100);
-                instrument12.SetValueWithPID("内存占用", 0, "%", 100);
-                Thread.Sleep(2000);
-                timer1.Enabled = true;
-                timer1.Start();
-            });
-        }
-
         private void DisplayForm_Load(object sender, EventArgs e)
         {
-            FormBorderStyle = FormBorderStyle.None;     //设置窗体为无边框样式
+             //设置窗体为无边框样式
             //WindowState = FormWindowState.Maximized;    //最大化窗体 
 
             this.Width = 1080;
@@ -49,17 +33,27 @@ namespace AIDA64Ext.Forms
 
         private void DisplayForm_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(e.KeyChar == (char)Keys.Escape)
-            {
-                Dispose();
-                StaticForms.Forms["MainForm"].Show();
-            }
+            //if(e.KeyChar == (char)Keys.Escape)
+            //{
+            //    this.Hide();
+            //}
         }
 
+        private bool formBorderStyle = false;
         private void DisplayForm_DoubleClick(object sender, EventArgs e)
         {
-            Dispose();
-            StaticForms.Forms["MainForm"].Show();
+            if (formBorderStyle)
+            {
+                FormBorderStyle = FormBorderStyle.Sizable;
+                formBorderStyle = false;
+            }
+            else
+            {
+                FormBorderStyle = FormBorderStyle.None;
+                formBorderStyle = true;
+            }
+            //Dispose();
+            //StaticForms.Forms["MainForm"].Show();
         }
 
 
@@ -88,6 +82,17 @@ namespace AIDA64Ext.Forms
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DisplayForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            //StaticForms.Forms["MainForm"].Show();
+        }
+
+        private void instrument12_Click(object sender, EventArgs e)
         {
 
         }

@@ -176,13 +176,15 @@ namespace AIDA64Ext.Extension
         /// <param name="form"></param>
         public static void SaveScreenObject(this Form form)
         {
-            string CurrentScreenName = Screen.FromControl(form).DeviceName;
-            Config.ConfigData.ScreenPositons.Add(new ScreenPositon { 
+            string CurrentScreenName = Screen.FromControl(form).DeviceName.Replace("\\", "").Replace(".", "");
+            Config.ConfigData.ScreenPositons.AddOrUpdate(CurrentScreenName,new ScreenPositon { 
                 ScreenName = CurrentScreenName,
                 FormName = form.Name,
                 Top = form.Top,
-                Left = form.Left
-            });
+                Left = form.Left,
+                Width = form.Width,
+                Height = form.Height
+        });
         }
 
         /// <summary>
@@ -191,11 +193,13 @@ namespace AIDA64Ext.Extension
         /// <param name="form"></param>
         public static void SetFormPosition(this Form form, bool isFullScreen)
         {
-            var info = Config.ConfigData.ScreenPositons.FirstOrDefault(t => t.FormName == form.Name);
-            if (info == null) return;
+            if (!Config.ConfigData.ScreenPositons.TryGetValue(form.Name, out ScreenPositon info))
+            {
+                return;
+            }
             if (isFullScreen)
             {
-                var screen = Screen.AllScreens.FirstOrDefault(t => t.DeviceName == info.ScreenName);
+                var screen = Screen.AllScreens.FirstOrDefault(t => t.DeviceName.Replace("\\", "").Replace(".", "") == info.ScreenName);
                 if (screen != null)
                 {
                     form.Top = screen.WorkingArea.Top;
@@ -205,10 +209,12 @@ namespace AIDA64Ext.Extension
                 form.WindowState = FormWindowState.Maximized;
                 return;
             }
-            if (Screen.AllScreens.Select(t => t.DeviceName).Contains(info.ScreenName))
+            if (Screen.AllScreens.Select(t => t.DeviceName.Replace("\\", "").Replace(".", "")).Contains(info.ScreenName))
             {
                 form.Top = info.Top;
                 form.Left = info.Left;
+                form.Width = info.Width;
+                form.Height = info.Height;
             }
         }
 

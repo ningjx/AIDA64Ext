@@ -19,8 +19,8 @@ namespace AIDA64Ext.Forms
         public AIDAParamForm()
         {
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.None;     //设置窗体为无边框样式
-            this.WindowState = FormWindowState.Maximized;    //最大化窗体 
+            //this.FormBorderStyle = FormBorderStyle.None;     //设置窗体为无边框样式
+            //this.WindowState = FormWindowState.Maximized;    //最大化窗体 
         }
 
         private void AIDAParamForm_Load(object sender, EventArgs e)
@@ -98,6 +98,11 @@ namespace AIDA64Ext.Forms
         private void tabControl1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void AIDAParamForm_FormClosing_1(object sender, FormClosingEventArgs e)
+        {
+            StaticForms.Forms["MainForm"].Show();
         }
     }
 }

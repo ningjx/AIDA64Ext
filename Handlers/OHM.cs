@@ -97,7 +97,7 @@ namespace AIDA64Ext.Handlers
                 //    PerformanceParams.ADD(netMonitor.Adapters[i].Name, CustomType.Upload, (float)netMonitor.Adapters[i].UploadSpeedKBps, "KB/s");
                 //}
             }
-            catch (Exception ex)
+            catch
             {
 
             }
