@@ -1,5 +1,6 @@
 ﻿using AIDA64Ext.Extension;
 using AIDA64Ext.Handlers;
+using AIDA64Ext.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,32 +17,39 @@ namespace AIDA64Ext
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Config.ReadConfig();
-            Task.Run(() => { OHMHandler.Start(); });
-            using (MainForm form = new MainForm())
+            try
             {
-                form.FormClosed += delegate (object sender, FormClosedEventArgs e)
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Config.ReadConfig();
+                Task.Run(() => { OHMHandler.Start(); });
+                using (MainForm form = new MainForm())
                 {
-                    //记忆窗体位置
-                    foreach (var item in StaticForms.Forms.Values)
+                    form.FormClosed += delegate (object sender, FormClosedEventArgs e)
                     {
-                        Config.ConfigData.ScreenPositons.AddOrUpdate(item.Name, new ScreenPositon
+                        //记忆窗体位置
+                        foreach (var item in StaticForms.Forms.Values)
                         {
-                            FormName = item.Name,
-                            Top = item.Top,
-                            Left = item.Left,
-                            Width = item.Width,
-                            Height = item.Height,
-                            ScreenName = Screen.FromControl(item).DeviceName.Replace("\\", "").Replace(".", "")
-                        });
-                    }
-
-                    Config.SaveConfig();
-                    Application.Exit();
-                };
-                Application.Run(form);
+                            Config.ConfigData.ScreenPositons.AddOrUpdate(item.Name, new ScreenPositon
+                            {
+                                FormName = item.Name,
+                                Top = item.Top,
+                                Left = item.Left,
+                                Width = item.Width,
+                                Height = item.Height,
+                                ScreenName = Screen.FromControl(item).DeviceName.Replace("\\", "").Replace(".", "")
+                            });
+                        }
+                        Config.SaveConfig();
+                        Application.Exit();
+                    };
+                    Application.Run(form);
+                }
+            }
+            catch (Exception ex)
+            {
+                Config.SaveConfig();
+                FileHelper.Write(new string[] { "ErrorLog.txt" }, ex.ToString());
             }
         }
     }
