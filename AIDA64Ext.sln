@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonitorControlsLibrary", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenHardwareMonitorLib", "OpenHardwareMonitor\OpenHardwareMonitorLib.csproj", "{B0397530-545A-471D-BB74-027AE456DF1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{7384253B-89DA-4649-98FC-586CBEFE1FE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NingMonitorConsoleTest", "ConsoleTest\NingMonitorConsoleTest.csproj", "{7384253B-89DA-4649-98FC-586CBEFE1FE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
