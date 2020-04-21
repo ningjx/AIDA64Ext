@@ -133,12 +133,16 @@ namespace AIDA64Ext.Handlers
                 List<string> categorys = GetAllCategorys();
                 foreach (string category in categorys)
                 {
-                    CategoryInfo info = new CategoryInfo
+                    try
                     {
-                        InstanceNames = GetAllInstanceWithCategory(category),
-                        CounterNames = GetAllCountersWithCategory(category)
-                    };
-                    result.ExtensionAdde(category, info);
+                        CategoryInfo info = new CategoryInfo
+                        {
+                            InstanceNames = GetAllInstanceWithCategory(category),
+                            CounterNames = GetAllCountersWithCategory(category)
+                        };
+                        result.ExtensionAdd(category, info);
+                    }
+                    catch { }
                 }
                 return result;
             }
@@ -183,7 +187,7 @@ namespace AIDA64Ext.Handlers
                     counter.Value = counter.Counter.NextSample().RawValue;
                     counter.Count = (long)((counter.Value - counter.OldValue) * Ratio);
                     counter.OldValue = counter.Value;
-                    CounterResults.ExtensionAdde(counter.InstanceName + counter.CounterName, new CountersResult(counter));
+                    CounterResults.ExtensionAdd(counter.InstanceName + counter.CounterName, new CountersResult(counter));
                 }
             }
             ReciveData?.Invoke(CounterResults.Values.ToList());
@@ -203,7 +207,7 @@ namespace AIDA64Ext.Handlers
     /// </summary>
     static class Extensions
     {
-        public static void ExtensionAdde<K, V>(this Dictionary<K, V> dic, K key, V value)
+        public static void ExtensionAdd<K, V>(this Dictionary<K, V> dic, K key, V value)
         {
             if (dic.Keys.Contains(key))
             {

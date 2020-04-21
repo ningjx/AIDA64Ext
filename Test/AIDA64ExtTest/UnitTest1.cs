@@ -43,8 +43,8 @@ namespace AIDA64ExtTest
         [TestMethod]
         public void OHMTest()
         {
-            OHM.Start(); Thread.Sleep(2000);
-            var test =JsonConvert.SerializeObject(PerformanceParams.AllItems);
+            //OHM.Start(); Thread.Sleep(2000);
+            //var test =JsonConvert.SerializeObject(PerformanceParams.AllItems);
             
 
         }

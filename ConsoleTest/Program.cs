@@ -18,7 +18,10 @@ namespace ConsoleTest
     {
         static void Main(string[] args)
         {
-            OHM.Start();
+            //PCounters.GetAllCategorysInfo("safasf.txt");
+            //Console.WriteLine("计数器输出完成，按任意键退出");
+            //Console.ReadKey();
+            OHMHandler.Start();
             PerformanceHandler.Start();
             //NetMonitor netMonitor = new NetMonitor();
             //var test = netMonitor.Adapters;

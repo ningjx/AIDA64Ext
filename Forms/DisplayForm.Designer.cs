@@ -28,20 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.instrument14 = new AIDAFormsControlLibrary.Instrument1.Instrument1();
             this.instrument13 = new AIDAFormsControlLibrary.Instrument1.Instrument1();
             this.instrument12 = new AIDAFormsControlLibrary.Instrument1.Instrument1();
             this.instrument11 = new AIDAFormsControlLibrary.Instrument1.Instrument1();
             this.tempControl1 = new AIDAFormsControlLibrary.TempControl.TempControl();
             this.SuspendLayout();
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 3000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // instrument14
             // 
@@ -69,7 +61,6 @@
             this.instrument12.Size = new System.Drawing.Size(278, 148);
             this.instrument12.TabIndex = 2;
             this.instrument12.Text = "instrument12";
-            this.instrument12.Click += new System.EventHandler(this.instrument12_Click);
             // 
             // instrument11
             // 
@@ -94,7 +85,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1080, 1421);
+            this.ClientSize = new System.Drawing.Size(1080, 1061);
             this.Controls.Add(this.instrument14);
             this.Controls.Add(this.instrument13);
             this.Controls.Add(this.instrument12);
@@ -104,6 +95,7 @@
             this.Text = "DisplayForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DisplayForm_FormClosing);
             this.Load += new System.EventHandler(this.DisplayForm_Load);
+            this.Shown += new System.EventHandler(this.DisplayForm_Shown);
             this.DoubleClick += new System.EventHandler(this.DisplayForm_DoubleClick);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DisplayForm_KeyPress);
             this.ResumeLayout(false);
@@ -113,7 +105,6 @@
         #endregion
 
         private AIDAFormsControlLibrary.TempControl.TempControl tempControl1;
-        private System.Windows.Forms.Timer timer1;
         private AIDAFormsControlLibrary.Instrument1.Instrument1 instrument11;
         private AIDAFormsControlLibrary.Instrument1.Instrument1 instrument12;
         private AIDAFormsControlLibrary.Instrument1.Instrument1 instrument13;

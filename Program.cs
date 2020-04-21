@@ -1,4 +1,5 @@
 ﻿using AIDA64Ext.Extension;
+using AIDA64Ext.Handlers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +19,13 @@ namespace AIDA64Ext
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Config.ReadConfig();
+            Task.Run(() => { OHMHandler.Start(); });
             using (MainForm form = new MainForm())
             {
-                form.FormClosed += delegate (Object sender, FormClosedEventArgs e)
+                form.FormClosed += delegate (object sender, FormClosedEventArgs e)
                 {
                     //记忆窗体位置
-                    foreach(var item in StaticForms.Forms.Values)
+                    foreach (var item in StaticForms.Forms.Values)
                     {
                         Config.ConfigData.ScreenPositons.AddOrUpdate(item.Name, new ScreenPositon
                         {

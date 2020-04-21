@@ -9,7 +9,7 @@ namespace AIDA64Ext.Handlers
 {
     public static class PerformanceHandler
     {
-        private static PCounters pCounters;
+        private static readonly PCounters pCounters;
         static PerformanceHandler()
         {
             
@@ -18,7 +18,7 @@ namespace AIDA64Ext.Handlers
                 new CounterConfig("Network Interface","Bytes Received/sec",CustomType.Download,NetFunc),
                 new CounterConfig("Network Interface","Bytes Sent/sec",CustomType.Download,NetFunc),
             };
-            pCounters = new PCounters(pCounterInfos);
+            pCounters = new PCounters(pCounterInfos,1000);
             pCounters.ReciveData += PCounters_ReciveData;
             pCounters.Start();
         }

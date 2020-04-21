@@ -24,7 +24,7 @@ namespace AIDA64Ext
             Task.Run(() =>
             {
                 AIDA64.Start();
-                OHM.Start();
+                OHMHandler.Start();
             });
 
         }

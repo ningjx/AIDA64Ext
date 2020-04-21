@@ -17,13 +17,13 @@ namespace AIDA64Ext.Handlers
     /// <summary>
     /// OpenHardwareMonitor
     /// </summary>
-    public static class OHM
+    public static class OHMHandler
     {
-        static Computer computer = new Computer();
-        static UpdateVisitor updateVisitor = new UpdateVisitor();
-        //static NetMonitor netMonitor = new NetMonitor();
-        static OHM()
+        static readonly Computer computer = new Computer();
+        static readonly UpdateVisitor updateVisitor = new UpdateVisitor();
+        static OHMHandler()
         {
+            PerformanceHandler.Start();
             computer.CPUEnabled = true;
             computer.FanControllerEnabled = true;
             computer.GPUEnabled = true;
@@ -31,8 +31,7 @@ namespace AIDA64Ext.Handlers
             computer.MainboardEnabled = true;
             computer.RAMEnabled = true;
             computer.Open();
-            //netMonitor.StartMonitoring();
-            Timer timer = new Timer(500)
+            Timer timer = new Timer(1000)
             {
                 AutoReset = true,
                 Enabled = true,
@@ -91,22 +90,19 @@ namespace AIDA64Ext.Handlers
                         }
                     }
                 }
-                //for (int i = 0; i < netMonitor.Adapters.Length; i++)
-                //{
-                //    PerformanceParams.ADD(netMonitor.Adapters[i].Name, CustomType.Download, (float)netMonitor.Adapters[i].DownloadSpeedKBps, "KB/s");
-                //    PerformanceParams.ADD(netMonitor.Adapters[i].Name, CustomType.Upload, (float)netMonitor.Adapters[i].UploadSpeedKBps, "KB/s");
-                //}
+                GotData?.Invoke();
             }
-            catch
-            {
-
-            }
+            catch{}
         }
 
         public static void Start()
         {
 
         }
+
+        public delegate void GotDataHandler();
+
+        public static event GotDataHandler GotData;
     }
 
     class UpdateVisitor : IVisitor
