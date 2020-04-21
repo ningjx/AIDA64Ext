@@ -10,56 +10,50 @@ namespace AIDA64Ext
 {
     public class BaseConfig
     {
-        public BaseConfig()
-        {
-            //InitConfig();
-        }
-        private object Buffer;
-        public IConfig Config
-        {
-            get
-            {
-                if (Buffer == null)
-                    InitConfig();
-                return Buffer as IConfig;
-            }
-            set
-            {
-                //this.Type = value.GetType();
-                SetValue(value);
-            }
-        }
-        public string[] path = new string[] { "Config" };
+        public IConfig Config;
+        public string[] Path = new string[] { "Config" };
         public virtual Type Type { get; set; }
 
-        private void SetValue(object value)
+        public virtual bool ReadConfig()
         {
-            if (Buffer == null)
-                return;
-            Buffer = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(value), Type);
-            SaveConfig();
-        }
-
-
-        private void InitConfig()
-        {
-            string configStr = FileHelper.Read(path);
-            if (!string.IsNullOrEmpty(configStr))
+            var str = FileHelper.Read(Path);
+            if (!string.IsNullOrEmpty(str))
             {
-                Buffer = JsonConvert.DeserializeObject(configStr, Type);
+                try
+                {
+                    Config = (IConfig)JsonConvert.DeserializeObject(str, Type);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    FileHelper.Write_Append(new string[] { "Log.txt" }, ex.ToString());
+                    Config = (IConfig)Activator.CreateInstance(this.Type);
+                    return false;
+                }
             }
             else
-                Buffer =  Activator.CreateInstance(this.Type);
+            {
+                Config = (IConfig)Activator.CreateInstance(this.Type);
+                return false;
+            }
         }
-
-        private void SaveConfig()
+        public virtual bool SaveConfig()
         {
-            path.Write(JsonConvert.SerializeObject(Buffer));
+            try
+            {
+                FileHelper.Write(Path, JsonConvert.SerializeObject(Config));
+                return true;
+            }
+            catch (Exception ex)
+            {
+                FileHelper.Write_Append(new string[] { "Log.txt" }, ex.ToString());
+                return false;
+            }
         }
     }
 
     public interface IConfig
     {
-        
+
     }
 }

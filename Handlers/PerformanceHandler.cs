@@ -16,7 +16,7 @@ namespace AIDA64Ext.Handlers
             List<CounterConfig> pCounterInfos = new List<CounterConfig>
             {
                 new CounterConfig("Network Interface","Bytes Received/sec",CustomType.Download,NetFunc),
-                new CounterConfig("Network Interface","Bytes Sent/sec",CustomType.Download,NetFunc),
+                new CounterConfig("Network Interface","Bytes Sent/sec",CustomType.Upload,NetFunc),
             };
             pCounters = new PCounters(pCounterInfos,1000);
             pCounters.ReciveData += PCounters_ReciveData;

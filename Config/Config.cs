@@ -9,18 +9,7 @@ using Newtonsoft.Json;
 
 namespace AIDA64Ext
 {
-    //ublic class ConfigHandle:BaseConfig
-    //
-    //   public new ConfigData Config = new ConfigData();
-    //
-    //
-    //ublic static class SysConfig
-    //
-    //   //public static ConfigHandle ConfigHandle = new ConfigHandle();
-    //   public static ConfigData Config = new ConfigData();
-    //
-    
-    public static class Config//: IConfig
+    public static class Config
     {
         public static ConfigData ConfigData = new ConfigData();
 
@@ -42,6 +31,9 @@ namespace AIDA64Ext
         }
     }
 
+    /// <summary>
+    /// 配置信息类
+    /// </summary>
     public class ConfigData
     {
         public AIDAShownItems AIDAShownItems = new AIDAShownItems();

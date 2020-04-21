@@ -23,25 +23,11 @@ namespace ConsoleTest
             //Console.ReadKey();
             OHMHandler.Start();
             PerformanceHandler.Start();
-            //NetMonitor netMonitor = new NetMonitor();
-            //var test = netMonitor.Adapters;
-            //netMonitor.StartMonitoring();
-            //Thread.Sleep(2000);
-            //var test2 = JsonConvert.SerializeObject(OHM.OHMData.AllItems);
             while (true)
             {
                 Console.Clear();
-                //var item1 = OHM.OHMData.GetByName("CPU Total", SensorType.Load);
-                //var item2 = OHM.OHMData.GetByName("Memory", SensorType.Load);
-                //Console.Write($"{item1.Value}{item1.Unit}");
-                //Console.Write($"{item2.Value}{item2.Unit}");
                 PerformanceParams.AllItems.ForEach(t => Console.WriteLine($"{t.Name} {t.Type.ToString()} {t.Value.ToString("f2")}{t.Unit}"));
-                //for(int i = 0; i < test.Length; i++)
-                //{
-                //    Console.WriteLine($"{test[i].DownloadSpeedKBps.ToString("f0")}KBps");
-                //
-                //}
-                Thread.Sleep(100);
+                Thread.Sleep(1000);
             }
         }
 
