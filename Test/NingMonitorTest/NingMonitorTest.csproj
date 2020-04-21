@@ -62,7 +62,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\NingMonitor.csproj">
+    <ProjectReference Include="..\..\NingMonitor\NingMonitor.csproj">
       <Project>{99E1FD96-942C-4F60-94ED-85458B3B6F60}</Project>
       <Name>NingMonitor</Name>
     </ProjectReference>

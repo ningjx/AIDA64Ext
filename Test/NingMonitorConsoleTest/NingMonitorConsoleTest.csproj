@@ -65,11 +65,11 @@
     <None Include="Properties\app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NingMonitor.csproj">
+    <ProjectReference Include="..\..\NingMonitor\NingMonitor.csproj">
       <Project>{99e1fd96-942c-4f60-94ed-85458b3b6f60}</Project>
       <Name>NingMonitor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OpenHardwareMonitor\OpenHardwareMonitorLib.csproj">
+    <ProjectReference Include="..\..\OpenHardwareMonitor\OpenHardwareMonitorLib.csproj">
       <Project>{B0397530-545A-471D-BB74-027AE456DF1A}</Project>
       <Name>OpenHardwareMonitorLib</Name>
     </ProjectReference>

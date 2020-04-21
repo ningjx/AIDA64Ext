@@ -3,8 +3,6 @@ using System.IO.MemoryMappedFiles;
 using System.Text;
 using System.Threading;
 using System.Xml;
-using AIDA64Ext.Handlers;
-using AIDA64Ext.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using OpenHardwareMonitor;
@@ -19,8 +17,6 @@ namespace AIDA64ExtTest
         public void TestMethod1()
         {
             //AIDA64.Start();
-
-            var test = AIDA64Handler.GetInfos();
         }
 
         [TestMethod]
