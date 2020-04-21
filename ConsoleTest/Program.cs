@@ -17,7 +17,7 @@ namespace ConsoleTest
             while (true)
             {
                 Console.Clear();
-                PerformanceParams.AllItems.ForEach(t => Console.WriteLine($"{t.Name} {t.Type.ToString()} {t.Value.ToString("f2")}{t.Unit}"));
+                PerformanceDatas.AllItems.ForEach(t => Console.WriteLine($"{t.Name} {t.Type.ToString()} {t.Value.ToString("f2")}{t.Unit}"));
                 Thread.Sleep(1000);
             }
         }

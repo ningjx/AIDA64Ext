@@ -27,7 +27,7 @@ namespace AIDA64Ext.Handlers
         {
             for(int i=0;i< datas.Count; i++)
             {
-                PerformanceParams.ADD(datas[i].InstanceName+ " "+datas[i].CounterName, datas[i].Type, datas[i].Value, datas[i].Unit);
+                PerformanceDatas.ADD(datas[i].InstanceName+ " "+datas[i].CounterName, datas[i].Type, datas[i].Value, datas[i].Unit);
             }
         }
 

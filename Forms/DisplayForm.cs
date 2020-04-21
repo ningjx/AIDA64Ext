@@ -73,13 +73,13 @@ namespace AIDA64Ext.Forms
 
         private void OHMHandler_GotData()
         {
-            tempControl1.SetTempWithPID("CPU温度", PerformanceParams.GetByName("CPU Core #1", CustomType.Temperature).Value);
-            var item1 = PerformanceParams.GetByName("CPU Total", CustomType.Load);
+            tempControl1.SetTempWithPID("CPU温度", PerformanceDatas.GetByName("CPU Core #1", CustomType.Temperature).Value);
+            var item1 = PerformanceDatas.GetByName("CPU Total", CustomType.Load);
             instrument11.SetValueWithPID("CPU占用", item1.Value, item1.Unit, 100);
-            var item2 = PerformanceParams.GetByName("Memory", CustomType.Load);
+            var item2 = PerformanceDatas.GetByName("Memory", CustomType.Load);
             instrument12.SetValueWithPID("内存占用", item2.Value, item2.Unit, 100);
 
-            var item3 = PerformanceParams.GetByName("CPU Package", CustomType.Power);
+            var item3 = PerformanceDatas.GetByName("CPU Package", CustomType.Power);
             instrument13.SetValueWithPID("CPU功率", item3.Value, item3.Unit, 100);
         }
     }

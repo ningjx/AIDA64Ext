@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace AIDA64Ext.Models
 {
-    public static class PerformanceParams
+    public static class PerformanceDatas
     {
-        public static Dictionary<string, OHMItem> Items { get; } = new Dictionary<string, OHMItem>();
+        public static Dictionary<string, PerformanceItem> Items { get; } = new Dictionary<string, PerformanceItem>();
 
         public static void ADD(string name, SensorType sensorType, float value, string unit)
         {
-            Items.AddOrUpdate(name + sensorType, new OHMItem(name, sensorType, value, unit));
+            Items.AddOrUpdate(name + sensorType, new PerformanceItem(name, sensorType, value, unit));
         }
 
         public static void ADD(string name, CustomType dataType, float value, string unit)
         {
-            Items.AddOrUpdate(name + dataType, new OHMItem(name, dataType, value, unit));
+            Items.AddOrUpdate(name + dataType, new PerformanceItem(name, dataType, value, unit));
         }
 
         /// <summary>
@@ -29,26 +29,26 @@ namespace AIDA64Ext.Models
         /// <param name="name"></param>
         /// <param name="dataType"></param>
         /// <returns></returns>
-        public static OHMItem GetByName(string name, CustomType dataType)
+        public static PerformanceItem GetByName(string name, CustomType dataType)
         {
-            if (Items.TryGetValue(name + dataType, out OHMItem item))
+            if (Items.TryGetValue(name + dataType, out PerformanceItem item))
                 return item;
             else
-                return new OHMItem(name + dataType, SensorType.Unknown, 0, "");
+                return new PerformanceItem(name + dataType, SensorType.Unknown, 0, "");
         }
 
-        public static List<OHMItem> AllItems
+        public static List<PerformanceItem> AllItems
         {
             get
             {
-                OHMItem[] items = new OHMItem[Items.Values.Count];
+                PerformanceItem[] items = new PerformanceItem[Items.Values.Count];
                 Items.Values.CopyTo(items, 0);
                 return items.ToList();
             }
         }
     }
 
-    public class OHMItem
+    public class PerformanceItem
     {
         /// <summary>
         /// 单位
@@ -70,7 +70,7 @@ namespace AIDA64Ext.Models
         /// </summary>
         public CustomType Type;
 
-        public OHMItem(string name, SensorType sensorType, float value, string unit)
+        public PerformanceItem(string name, SensorType sensorType, float value, string unit)
         {
             Name = name;
             Value = value;
@@ -78,7 +78,7 @@ namespace AIDA64Ext.Models
             Type = (CustomType)Enum.Parse(typeof(CustomType), sensorType.GetHashCode().ToString());
         }
 
-        public OHMItem(string name, CustomType dataType, float value, string unit)
+        public PerformanceItem(string name, CustomType dataType, float value, string unit)
         {
             Name = name;
             Value = value;
