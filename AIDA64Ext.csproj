@@ -94,11 +94,11 @@
     <Compile Include="Forms\StutasForm.Designer.cs">
       <DependentUpon>StutasForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Handlers\AIDA64.cs" />
+    <Compile Include="Handlers\AIDA64Handler.cs" />
     <Compile Include="Handlers\OHMHandler.cs" />
     <Compile Include="Handlers\PerformanceCounters.cs" />
     <Compile Include="Handlers\PerformanceHandler.cs" />
-    <Compile Include="Handlers\PID.cs" />
+    <Compile Include="Helper\PID.cs" />
     <Compile Include="Helper\FileHelper.cs" />
     <Compile Include="Models\AIDA64Data.cs" />
     <Compile Include="Models\AIDAShownItems.cs" />

@@ -30,10 +30,10 @@ namespace AIDA64Ext.Forms
             checkedListBox3.CheckOnClick = true;
             checkedListBox4.CheckOnClick = true;
 
-            tabPage1.Text += $"({AIDA64.AIDA64Infos.AIDA64Info.System?.Count ?? 0})";
-            tabPage2.Text += $"({AIDA64.AIDA64Infos.AIDA64Info.Temperature?.Count ?? 0})";
-            tabPage3.Text += $"({AIDA64.AIDA64Infos.AIDA64Info.Volt?.Count ?? 0})";
-            tabPage4.Text += $"({AIDA64.AIDA64Infos.AIDA64Info.Power?.Count ?? 0})";
+            tabPage1.Text += $"({AIDA64Handler.AIDA64Infos.AIDA64Info.System?.Count ?? 0})";
+            tabPage2.Text += $"({AIDA64Handler.AIDA64Infos.AIDA64Info.Temperature?.Count ?? 0})";
+            tabPage3.Text += $"({AIDA64Handler.AIDA64Infos.AIDA64Info.Volt?.Count ?? 0})";
+            tabPage4.Text += $"({AIDA64Handler.AIDA64Infos.AIDA64Info.Power?.Count ?? 0})";
 
             checkedListBox1.Items.Clear();
             checkedListBox2.Items.Clear();

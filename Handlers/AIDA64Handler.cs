@@ -14,7 +14,7 @@ using Timer = System.Timers.Timer;
 namespace AIDA64Ext.Handlers
 {
     [Obsolete]
-    public static class AIDA64
+    public static class AIDA64Handler
     {
         public static AIDA64Infos AIDA64Infos = new AIDA64Infos();
 
@@ -23,7 +23,7 @@ namespace AIDA64Ext.Handlers
 
         }
 
-        static AIDA64()
+        static AIDA64Handler()
         {
             Timer timer = new Timer(500)
             {

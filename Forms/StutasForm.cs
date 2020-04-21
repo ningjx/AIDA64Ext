@@ -30,7 +30,7 @@ namespace AIDA64Ext.Forms
             string infos = string.Empty;
             items?.ForEach(t =>
             {
-                var item = AIDA64.GetItemByLabel(t.Label);
+                var item = AIDA64Handler.GetItemByLabel(t.Label);
                 infos += $"{item.Label}:{item.Value}\n";
             });
             richTextBox1.Text = infos;

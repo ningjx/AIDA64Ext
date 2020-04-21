@@ -23,7 +23,7 @@ namespace AIDA64Ext
             //WindowState = FormWindowState.Maximized;    //最大化窗体 
             Task.Run(() =>
             {
-                AIDA64.Start();
+                AIDA64Handler.Start();
                 OHMHandler.Start();
             });
 
