@@ -1,8 +1,8 @@
-﻿using AIDA64Ext.Extension;
+﻿using NingMonitor.Extension;
 using System.IO;
 using System.Text;
 
-namespace AIDA64Ext.Helper
+namespace NingMonitor.Helper
 {
     public static class FileHelper
     {

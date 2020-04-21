@@ -1,4 +1,4 @@
-﻿namespace AIDAFormsControlLibrary.TempControl
+﻿namespace MonitorControlsLibrary.TempControl
 {
     partial class TempControl
     {

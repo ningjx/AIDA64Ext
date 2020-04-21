@@ -1,5 +1,5 @@
-﻿using AIDA64Ext.Extension;
-using AIDA64Ext.Handlers;
+﻿using NingMonitor.Extension;
+using NingMonitor.Handlers;
 using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AIDA64Ext.Models
+namespace NingMonitor.Models
 {
     public static class PerformanceDatas
     {

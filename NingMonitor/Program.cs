@@ -1,13 +1,13 @@
-﻿using AIDA64Ext.Extension;
-using AIDA64Ext.Handlers;
-using AIDA64Ext.Helper;
+﻿using NingMonitor.Extension;
+using NingMonitor.Handlers;
+using NingMonitor.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AIDA64Ext
+namespace NingMonitor
 {
     static class Program
     {

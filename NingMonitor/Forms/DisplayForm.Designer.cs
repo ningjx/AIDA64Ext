@@ -1,4 +1,4 @@
-﻿namespace AIDA64Ext.Forms
+﻿namespace NingMonitor.Forms
 {
     partial class DisplayForm
     {
@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.instrument14 = new AIDAFormsControlLibrary.Instrument1.Instrument1();
-            this.instrument13 = new AIDAFormsControlLibrary.Instrument1.Instrument1();
-            this.instrument12 = new AIDAFormsControlLibrary.Instrument1.Instrument1();
-            this.instrument11 = new AIDAFormsControlLibrary.Instrument1.Instrument1();
-            this.tempControl1 = new AIDAFormsControlLibrary.TempControl.TempControl();
+            this.instrument14 = new MonitorControlsLibrary.Instrument1.Instrument1();
+            this.instrument13 = new MonitorControlsLibrary.Instrument1.Instrument1();
+            this.instrument12 = new MonitorControlsLibrary.Instrument1.Instrument1();
+            this.instrument11 = new MonitorControlsLibrary.Instrument1.Instrument1();
+            this.tempControl1 = new MonitorControlsLibrary.TempControl.TempControl();
             this.SuspendLayout();
             // 
             // instrument14
@@ -104,10 +104,10 @@
 
         #endregion
 
-        private AIDAFormsControlLibrary.TempControl.TempControl tempControl1;
-        private AIDAFormsControlLibrary.Instrument1.Instrument1 instrument11;
-        private AIDAFormsControlLibrary.Instrument1.Instrument1 instrument12;
-        private AIDAFormsControlLibrary.Instrument1.Instrument1 instrument13;
-        private AIDAFormsControlLibrary.Instrument1.Instrument1 instrument14;
+        private MonitorControlsLibrary.TempControl.TempControl tempControl1;
+        private MonitorControlsLibrary.Instrument1.Instrument1 instrument11;
+        private MonitorControlsLibrary.Instrument1.Instrument1 instrument12;
+        private MonitorControlsLibrary.Instrument1.Instrument1 instrument13;
+        private MonitorControlsLibrary.Instrument1.Instrument1 instrument14;
     }
 }

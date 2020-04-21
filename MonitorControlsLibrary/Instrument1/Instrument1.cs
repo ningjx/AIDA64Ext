@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Timer = System.Timers.Timer;
 
-namespace AIDAFormsControlLibrary.Instrument1
+namespace MonitorControlsLibrary.Instrument1
 {
     public partial class Instrument1 : BaseControl
     {

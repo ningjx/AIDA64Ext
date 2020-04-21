@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Timer = System.Timers.Timer;
 
-namespace AIDAFormsControlLibrary.TempControl
+namespace MonitorControlsLibrary.TempControl
 {
     public partial class TempControl : BaseControl
     {

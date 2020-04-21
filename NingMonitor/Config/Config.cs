@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AIDA64Ext.Helper;
-using AIDA64Ext.Models;
+using NingMonitor.Helper;
+using NingMonitor.Models;
 using Newtonsoft.Json;
 
-namespace AIDA64Ext
+namespace NingMonitor
 {
     public static class Config
     {

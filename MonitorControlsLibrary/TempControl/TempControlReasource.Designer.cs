@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AIDAFormsControlLibrary.TempControl {
+namespace MonitorControlsLibrary.TempControl {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace AIDAFormsControlLibrary.TempControl {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AIDAFormsControlLibrary.TempControl.TempControlReasource", typeof(TempControlReasource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MonitorControlsLibrary.TempControl.TempControlReasource", typeof(TempControlReasource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

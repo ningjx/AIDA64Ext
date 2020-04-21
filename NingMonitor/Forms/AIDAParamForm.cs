@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AIDA64Ext.Handlers;
-using AIDA64Ext.Models;
-using AIDA64Ext.Extension;
-using AIDA64Ext.Enums;
+using NingMonitor.Handlers;
+using NingMonitor.Models;
+using NingMonitor.Extension;
+using NingMonitor.Enums;
 
-namespace AIDA64Ext.Forms
+namespace NingMonitor.Forms
 {
     public partial class AIDAParamForm : Form
     {

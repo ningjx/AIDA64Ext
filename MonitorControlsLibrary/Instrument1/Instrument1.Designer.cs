@@ -1,4 +1,4 @@
-﻿namespace AIDAFormsControlLibrary.Instrument1
+﻿namespace MonitorControlsLibrary.Instrument1
 {
     partial class Instrument1
     {

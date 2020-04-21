@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using OpenHardwareMonitor;
 using OpenHardwareMonitor.Hardware;
 
-namespace AIDA64ExtTest
+namespace NingMonitorTest
 {
     [TestClass]
     public class UnitTest1

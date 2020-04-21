@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AIDAFormsControlLibrary.Instrument2
+namespace MonitorControlsLibrary.Instrument2
 {
     public partial class Instrument2 : BaseControl
     {

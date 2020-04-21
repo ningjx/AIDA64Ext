@@ -1,4 +1,4 @@
-﻿namespace AIDA64Ext.Forms
+﻿namespace NingMonitor.Forms
 {
     partial class AIDAParamForm
     {

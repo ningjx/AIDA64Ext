@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace AIDA64Ext.Models
+namespace NingMonitor.Models
 {
     public class AIDA64Infos
     {

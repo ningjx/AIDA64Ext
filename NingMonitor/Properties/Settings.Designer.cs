@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AIDA64Ext.Properties
+namespace NingMonitor.Properties
 {
 
 

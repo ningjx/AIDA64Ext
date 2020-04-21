@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 
-namespace AIDA64Ext.Handlers
+namespace NingMonitor.Handlers
 {
     /// <summary>
     /// 性能计数器封装

@@ -1,5 +1,5 @@
-﻿using AIDA64Ext.Handlers;
-using AIDA64Ext.Models;
+﻿using NingMonitor.Handlers;
+using NingMonitor.Models;
 using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Timer = System.Timers.Timer;
 
-namespace AIDA64Ext.Forms
+namespace NingMonitor.Forms
 {
     public partial class DisplayForm : Form
     {

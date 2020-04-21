@@ -1,9 +1,9 @@
-﻿using AIDA64Ext.Handlers;
-using AIDA64Ext.Models;
+﻿using NingMonitor.Handlers;
+using NingMonitor.Models;
 using System;
 using System.Threading;
 
-namespace ConsoleTest
+namespace NingMonitorConsoleTest
 {
     class Program
     {

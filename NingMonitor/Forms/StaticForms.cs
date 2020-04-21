@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AIDA64Ext
+namespace NingMonitor
 {
     public static class StaticForms
     {

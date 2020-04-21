@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AIDA64Ext.Extension;
-using AIDA64Ext.Forms;
-using AIDA64Ext.Handlers;
+using NingMonitor.Extension;
+using NingMonitor.Forms;
+using NingMonitor.Handlers;
 
-namespace AIDA64Ext
+namespace NingMonitor
 {
     public partial class MainForm : Form
     {

@@ -1,6 +1,6 @@
-﻿using AIDA64Ext.Forms;
+﻿using NingMonitor.Forms;
 
-namespace AIDA64Ext
+namespace NingMonitor
 {
     partial class MainForm
     {

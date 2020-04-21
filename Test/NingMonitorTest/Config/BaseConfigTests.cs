@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AIDA64Ext.Config.Tests
+namespace NingMonitor.Config.Tests
 {
     [TestClass()]
     public class BaseConfigTests

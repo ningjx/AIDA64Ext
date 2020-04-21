@@ -1,4 +1,4 @@
-﻿using AIDA64Ext.Models;
+﻿using NingMonitor.Models;
 using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Xml;
 
-namespace AIDA64Ext.Handlers
+namespace NingMonitor.Handlers
 {
     /// <summary>
     /// OpenHardwareMonitor

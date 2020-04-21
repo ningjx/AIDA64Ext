@@ -7,11 +7,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Xml;
-using AIDA64Ext.Models;
+using NingMonitor.Models;
 using Newtonsoft.Json;
 using Timer = System.Timers.Timer;
 
-namespace AIDA64Ext.Handlers
+namespace NingMonitor.Handlers
 {
     [Obsolete]
     public static class AIDA64Handler

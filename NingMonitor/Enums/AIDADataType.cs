@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AIDA64Ext.Enums
+namespace NingMonitor.Enums
 {
     public enum AIDADataType
     {

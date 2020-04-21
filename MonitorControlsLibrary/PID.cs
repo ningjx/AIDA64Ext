@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AIDAFormsControlLibrary
+namespace MonitorControlsLibrary
 {
     /// <summary>
     /// 一个整数粒度的PID控制器，支持正反输出，

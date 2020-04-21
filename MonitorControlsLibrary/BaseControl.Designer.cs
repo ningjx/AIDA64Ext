@@ -1,4 +1,4 @@
-﻿namespace AIDAFormsControlLibrary
+﻿namespace MonitorControlsLibrary
 {
     partial class BaseControl
     {

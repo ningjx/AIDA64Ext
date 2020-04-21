@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AIDAFormsControlLibrary.Instrument1 {
+namespace MonitorControlsLibrary.Instrument1 {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace AIDAFormsControlLibrary.Instrument1 {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AIDAFormsControlLibrary.Instrument1.Instrument1Reasource", typeof(Instrument1Reasource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MonitorControlsLibrary.Instrument1.Instrument1Reasource", typeof(Instrument1Reasource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AIDA64Ext.Handlers;
+using NingMonitor.Handlers;
 
-namespace AIDA64Ext.Forms
+namespace NingMonitor.Forms
 {
     public partial class StutasForm : Form
     {

@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AIDA64Ext.Enums;
-using AIDA64Ext.Models;
-using AIDA64Ext.Handlers;
+using NingMonitor.Enums;
+using NingMonitor.Models;
+using NingMonitor.Handlers;
 using static System.Windows.Forms.CheckedListBox;
 using System.Diagnostics;
 using Microsoft.Win32;
 
-namespace AIDA64Ext.Extension
+namespace NingMonitor.Extension
 {
     public static class Extensions
     {
