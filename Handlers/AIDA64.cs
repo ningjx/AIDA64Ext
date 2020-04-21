@@ -13,6 +13,7 @@ using Timer = System.Timers.Timer;
 
 namespace AIDA64Ext.Handlers
 {
+    [Obsolete]
     public static class AIDA64
     {
         public static AIDA64Infos AIDA64Infos = new AIDA64Infos();

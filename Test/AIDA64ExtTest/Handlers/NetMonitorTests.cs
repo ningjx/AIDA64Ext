@@ -66,7 +66,7 @@ namespace NetWorkSpeedMonitor.Tests
         [TestMethod()]
         public void Test()
         {
-            var aa = PCounters.GetAllCategorysInfo("safasf.txt");
+            var aa = PerformanceCounters.GetAllCategorysInfo("safasf.txt");
         }
     }
 

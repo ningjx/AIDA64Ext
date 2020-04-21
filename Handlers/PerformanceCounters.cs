@@ -12,7 +12,7 @@ namespace AIDA64Ext.Handlers
     /// <summary>
     /// 性能计数器封装
     /// </summary>
-    public class PCounters
+    public class PerformanceCounters
     {
         private readonly Timer Timer = new Timer();
         private readonly List<CounterSets> CountersSets = new List<CounterSets>();
@@ -26,7 +26,7 @@ namespace AIDA64Ext.Handlers
         /// </summary>
         /// <param name="pCounterInfos">需要使用的计数器的列表</param>
         /// <param name="miSec">刷新间隔时间（ms）</param>
-        public PCounters(List<CounterConfig> pCounterInfos, int miSec = 50)
+        public PerformanceCounters(List<CounterConfig> pCounterInfos, int miSec = 50)
         {
             foreach (var item in pCounterInfos)
             {
@@ -76,7 +76,7 @@ namespace AIDA64Ext.Handlers
         /// </summary>
         public static List<string> GetAllCategorys()
         {
-            List < PerformanceCounterCategory> pcc = PerformanceCounterCategory.GetCategories().ToList();
+            List<PerformanceCounterCategory> pcc = PerformanceCounterCategory.GetCategories().ToList();
             List<string> result = pcc.Select(t => t.CategoryName).Distinct().ToList();
             return result;
         }
@@ -92,7 +92,7 @@ namespace AIDA64Ext.Handlers
             PerformanceCounterCategory Category = new PerformanceCounterCategory(CategoryName);
             var instanceNames = Category.GetInstanceNames();
             List<PerformanceCounter> counters = new List<PerformanceCounter>();
-            for(int i = 0; i < instanceNames.Length; i++)
+            for (int i = 0; i < instanceNames.Length; i++)
             {
                 List<PerformanceCounter> thisCounters = new List<PerformanceCounter>();
                 try
@@ -125,7 +125,7 @@ namespace AIDA64Ext.Handlers
         /// <param name="fileName">提供文件名时可以写入到文件</param>
         /// <param name="isSync">当文件名不存在时，异步不生效</param>
         /// <returns></returns>
-        public static Dictionary<string, CategoryInfo> GetAllCategorysInfo(string fileName=null,bool isSync = true)
+        public static Dictionary<string, CategoryInfo> GetAllCategorysInfo(string fileName = null, bool isSync = true)
         {
             Dictionary<string, CategoryInfo> GetAllCategorysInfoFunc()
             {
@@ -146,7 +146,7 @@ namespace AIDA64Ext.Handlers
                 }
                 return result;
             }
-            
+
             if (string.IsNullOrEmpty(fileName))
             {
                 return GetAllCategorysInfoFunc();
@@ -163,7 +163,8 @@ namespace AIDA64Ext.Handlers
             }
             else
             {
-                Task.Run(() => {
+                Task.Run(() =>
+                {
                     Dictionary<string, CategoryInfo> datas = GetAllCategorysInfoFunc();
                     using (FileStream fileStream = new FileStream(fileName, FileMode.OpenOrCreate))
                     {
@@ -433,7 +434,7 @@ namespace AIDA64Ext.Handlers
             Type = data.Type;
             Func = data.Func;
             Func?.Invoke(Count, out Value, out Unit);
-            if(string.IsNullOrEmpty(Unit))
+            if (string.IsNullOrEmpty(Unit))
                 Unit = data.Counter.CounterName.Split(' ')[0];
         }
     }
