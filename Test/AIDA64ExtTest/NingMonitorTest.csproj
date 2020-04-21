@@ -62,9 +62,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\AIDA64Ext.csproj">
+    <ProjectReference Include="..\..\NingMonitor.csproj">
       <Project>{99E1FD96-942C-4F60-94ED-85458B3B6F60}</Project>
-      <Name>AIDA64Ext</Name>
+      <Name>NingMonitor</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\OpenHardwareMonitor\OpenHardwareMonitorLib.csproj">
       <Project>{b0397530-545a-471d-bb74-027ae456df1a}</Project>
