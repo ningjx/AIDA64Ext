@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NingMonitor", "NingMonitor\NingMonitor.csproj", "{99E1FD96-942C-4F60-94ED-85458B3B6F60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NingMonitorTest", "Test\NingMonitorTest\NingMonitorTest.csproj", "{2361B6A5-E945-4F47-827C-331247CCA713}"
+	ProjectSection(ProjectDependencies) = postProject
+		{99E1FD96-942C-4F60-94ED-85458B3B6F60} = {99E1FD96-942C-4F60-94ED-85458B3B6F60}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonitorControlsLibrary", "MonitorControlsLibrary\MonitorControlsLibrary.csproj", "{D52BD6ED-C9B8-4B1C-A5EF-0770CA56E34B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenHardwareMonitorLib", "OpenHardwareMonitor\OpenHardwareMonitorLib.csproj", "{B0397530-545A-471D-BB74-027AE456DF1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NingMonitorConsoleTest", "Test\NingMonitorConsoleTest\NingMonitorConsoleTest.csproj", "{7384253B-89DA-4649-98FC-586CBEFE1FE5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99E1FD96-942C-4F60-94ED-85458B3B6F60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99E1FD96-942C-4F60-94ED-85458B3B6F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99E1FD96-942C-4F60-94ED-85458B3B6F60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99E1FD96-942C-4F60-94ED-85458B3B6F60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2361B6A5-E945-4F47-827C-331247CCA713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2361B6A5-E945-4F47-827C-331247CCA713}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2361B6A5-E945-4F47-827C-331247CCA713}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2361B6A5-E945-4F47-827C-331247CCA713}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D52BD6ED-C9B8-4B1C-A5EF-0770CA56E34B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D52BD6ED-C9B8-4B1C-A5EF-0770CA56E34B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D52BD6ED-C9B8-4B1C-A5EF-0770CA56E34B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D52BD6ED-C9B8-4B1C-A5EF-0770CA56E34B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0397530-545A-471D-BB74-027AE456DF1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0397530-545A-471D-BB74-027AE456DF1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0397530-545A-471D-BB74-027AE456DF1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0397530-545A-471D-BB74-027AE456DF1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7384253B-89DA-4649-98FC-586CBEFE1FE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7384253B-89DA-4649-98FC-586CBEFE1FE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7384253B-89DA-4649-98FC-586CBEFE1FE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7384253B-89DA-4649-98FC-586CBEFE1FE5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {84ABF7CB-1DD4-4FEB-8419-93253B56B321}
+	EndGlobalSection
+EndGlobal
