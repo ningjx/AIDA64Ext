@@ -219,6 +219,18 @@ namespace NingMonitor.Extension
             }
         }
 
+        public static void ShowWithInfo(this Form form)
+        {
+            if (Config.ConfigData.ScreenPositons.TryGetValue(form.Name, out ScreenPositon position))
+            {
+                form.Top = position.Top;
+                form.Left = position.Left;
+                form.Width = position.Width;
+                form.Height = position.Height;
+            }
+            form.Show();
+        }
+
         /// <summary>
         /// 将应用程序设为，或不设为开机启动
         /// </summary>

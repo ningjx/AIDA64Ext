@@ -30,6 +30,8 @@ namespace NingMonitor
                         //记忆窗体位置
                         foreach (var item in StaticForms.Forms.Values)
                         {
+                            if (item == null || item.IsDisposed == true)
+                                continue;
                             Config.ConfigData.ScreenPositons.AddOrUpdate(item.Name, new ScreenPositon
                             {
                                 FormName = item.Name,
