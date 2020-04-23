@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D52BD6ED-C9B8-4B1C-A5EF-0770CA56E34B}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>AIDAFormsControlLibrary</RootNamespace>
-    <AssemblyName>AIDAFormsControlLibrary</AssemblyName>
+    <RootNamespace>MonitorControlsLibrary</RootNamespace>
+    <AssemblyName>MonitorControlsLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
