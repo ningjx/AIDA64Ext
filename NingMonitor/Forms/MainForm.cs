@@ -45,7 +45,6 @@ namespace NingMonitor
             Hide();
         }
 
-
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.SetFormPosition(false);
