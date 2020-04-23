@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AIDA64Ext.Forms;
 using NingMonitor.Extension;
 using NingMonitor.Forms;
 using NingMonitor.Handlers;
@@ -94,6 +95,12 @@ namespace NingMonitor
                 Config.ConfigData.IsAutoShowDisplayForm = true;
                 button2.Text = "不自动显示参数屏幕";
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            TestForm form = new TestForm();
+            form.Show();
         }
     }
 }
