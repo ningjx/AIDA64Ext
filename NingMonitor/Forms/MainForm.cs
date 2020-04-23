@@ -23,16 +23,25 @@ namespace NingMonitor
             //WindowState = FormWindowState.Maximized;    //最大化窗体 
             Task.Run(() =>
             {
-                AIDA64Handler.Start();
+                //AIDA64Handler.Start();
                 OHMHandler.Start();
+                PerformanceHandler.Start();
             });
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AIDAParamForm form = new AIDAParamForm();
-            form.Show();
+            if (StaticForms.Forms.ContainsKey("AIDAParamForm"))
+            {
+                StaticForms.Forms["AIDAParamForm"].Show();
+            }
+            else
+            {
+                AIDAParamForm form = new AIDAParamForm();
+                form.ShowWithInfo();
+                StaticForms.Forms.Add("AIDAParamForm", form);
+            }
             Hide();
         }
 
@@ -59,7 +68,7 @@ namespace NingMonitor
             else
             {
                 button4.Text = "隐藏参数屏幕";
-                if (StaticForms.Forms.Keys.Contains("DisplayForm"))
+                if (StaticForms.Forms.ContainsKey("DisplayForm"))
                 {
                     StaticForms.Forms["DisplayForm"].Show();
                     displayShown = true;
@@ -67,7 +76,7 @@ namespace NingMonitor
                 else
                 {
                     DisplayForm DisplayForm = new DisplayForm();
-                    DisplayForm.Show();
+                    DisplayForm.ShowWithInfo();
                     displayShown = true;
                     StaticForms.Forms.AddOrUpdate("DisplayForm", DisplayForm);
                 }
