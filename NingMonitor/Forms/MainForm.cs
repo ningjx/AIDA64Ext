@@ -23,8 +23,9 @@ namespace NingMonitor
             //WindowState = FormWindowState.Maximized;    //最大化窗体 
             Task.Run(() =>
             {
-                AIDA64Handler.Start();
+                //AIDA64Handler.Start();
                 OHMHandler.Start();
+                PerformanceHandler.Start();
             });
 
         }
