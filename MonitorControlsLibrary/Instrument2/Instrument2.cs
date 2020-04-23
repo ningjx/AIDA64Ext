@@ -82,16 +82,18 @@ namespace MonitorControlsLibrary.Instrument2
             //pe.Graphics.DrawCurve()
             //pe.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             //HashSet<Point> set = new HashSet<Point>();
-            //int i = 0;
-            //for (i = 0; i< points.Length; i++)
-            //{
-            //    if (points[i].Y == 0)
-            //        break;
-            //    set.Add(points[i]);
-            //}
+            int i = 0;
+            for (i = 0; i< points.Length; i++)
+            {
+                if (points[i].Y == 0)
+                    break;
+                //set.Add(points[i]);
+            }
             //if(set.Count>0)
             //    pe.Graphics.DrawCurve(maskPen, set.ToArray());
-            pe.Graphics.DrawCurve(maskPen, points);
+            Point[] currPoints = points.Take(i).ToArray();
+            if (currPoints.Length > 1)
+                pe.Graphics.DrawCurve(maskPen, currPoints);
             //pe.Graphics.DrawLines(maskPen, points);
             //pe.Graphics.DrawString($"{points.First().X}  {points.First().Y}", new Font("宋体", 20), new SolidBrush(Color.White), 10, 10);
         }
