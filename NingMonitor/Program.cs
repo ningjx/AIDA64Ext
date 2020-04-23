@@ -32,7 +32,7 @@ namespace NingMonitor
                         {
                             if (item == null || item.IsDisposed == true)
                                 continue;
-                            Config.ConfigData.ScreenPositons.AddOrUpdate(item.Name, new ScreenPositon
+                            Config.ConfigData.FormsInfo.AddOrUpdate(item.Name, new ScreenPositon
                             {
                                 FormName = item.Name,
                                 Top = item.Top,

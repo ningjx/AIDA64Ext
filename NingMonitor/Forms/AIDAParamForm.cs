@@ -102,7 +102,7 @@ namespace NingMonitor.Forms
 
         private void AIDAParamForm_FormClosing_1(object sender, FormClosingEventArgs e)
         {
-            Config.ConfigData.ScreenPositons.AddOrUpdate(Name, new ScreenPositon
+            Config.ConfigData.FormsInfo.AddOrUpdate(Name, new ScreenPositon
             {
                 FormName = Name,
                 Top = Top,

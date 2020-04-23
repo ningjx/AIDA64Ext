@@ -177,7 +177,7 @@ namespace NingMonitor.Extension
         public static void SaveScreenObject(this Form form)
         {
             string CurrentScreenName = Screen.FromControl(form).DeviceName.Replace("\\", "").Replace(".", "");
-            Config.ConfigData.ScreenPositons.AddOrUpdate(CurrentScreenName, new ScreenPositon
+            Config.ConfigData.FormsInfo.AddOrUpdate(CurrentScreenName, new ScreenPositon
             {
                 ScreenName = CurrentScreenName,
                 FormName = form.Name,
@@ -194,7 +194,7 @@ namespace NingMonitor.Extension
         /// <param name="form"></param>
         public static void SetFormPosition(this Form form, bool isFullScreen)
         {
-            if (!Config.ConfigData.ScreenPositons.TryGetValue(form.Name, out ScreenPositon info))
+            if (!Config.ConfigData.FormsInfo.TryGetValue(form.Name, out ScreenPositon info))
             {
                 return;
             }
@@ -221,7 +221,7 @@ namespace NingMonitor.Extension
 
         public static void ShowWithInfo(this Form form)
         {
-            if (Config.ConfigData.ScreenPositons.TryGetValue(form.Name, out ScreenPositon position))
+            if (Config.ConfigData.FormsInfo.TryGetValue(form.Name, out ScreenPositon position))
             {
                 form.Top = position.Top;
                 form.Left = position.Left;
