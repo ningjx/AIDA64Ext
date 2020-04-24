@@ -38,6 +38,7 @@ namespace NingMonitor.Forms
         {
             this.Width = 1080;
             this.Height = 1920;
+            instrument21.SetFreq(500);
         }
 
         private void DisplayForm_KeyPress(object sender, KeyPressEventArgs e)
@@ -76,6 +77,9 @@ namespace NingMonitor.Forms
             tempControl1.SetTempWithPID("CPU温度", PerformanceDatas.GetByName("CPU Core #1", CustomType.Temperature).Value);
             var item1 = PerformanceDatas.GetByName("CPU Total", CustomType.Load);
             instrument11.SetValueWithPID("CPU占用", item1.Value, item1.Unit, 100);
+
+            instrument21.SetValue(item1.Value);
+
             var item2 = PerformanceDatas.GetByName("Memory", CustomType.Load);
             instrument12.SetValueWithPID("内存占用", item2.Value, item2.Unit, 100);
 
