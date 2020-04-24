@@ -24,7 +24,7 @@ namespace AIDA64Ext.Forms
 
         private void TestForm_Load(object sender, EventArgs e)
         {
-            instrument21.SetFreq(50);
+            instrument21.刷新间隔 = 500;
         }
     }
 }
