@@ -21,5 +21,10 @@ namespace AIDA64Ext.Forms
         {
             instrument21.SetValue(trackBar1.Value / 10F);
         }
+
+        private void TestForm_Load(object sender, EventArgs e)
+        {
+            instrument21.SetFreq(50);
+        }
     }
 }

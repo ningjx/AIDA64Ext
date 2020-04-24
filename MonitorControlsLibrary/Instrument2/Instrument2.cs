@@ -13,19 +13,29 @@ namespace MonitorControlsLibrary.Instrument2
     public partial class Instrument2 : BaseControl
     {
         float scale;
-        PID PID = new PID(0.05F, 0.05F, 0.02F);
-        Timer Timer = new Timer(30);
+        Timer Timer = new Timer(1000);
         public Instrument2()
         {
             SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             BackColor = Color.Black;
             CheckForIllegalCrossThreadCalls = false;
-            PID.PIDOutEvent_Float += PID_PIDOutEvent_Float;
+
+            pixPerTime = 90 / (1000 / micSec);
 
             Timer.Elapsed += Timer_Elapsed;
             Timer.Enabled = true;
             Timer.AutoReset = true;
+        }
+        public void SetFreq(int micSec)
+        {
+            this.micSec = micSec;
+            Timer.Interval = micSec;
+            pixPerTime = 90 / (1000 / micSec);
+        }
+
+        public void Start()
+        {
             Timer.Start();
         }
 
@@ -35,39 +45,38 @@ namespace MonitorControlsLibrary.Instrument2
                 return;
             lockValue = true;
             value = value < 1 ? 1 : value;
+            points = new Point[900];
 
-            for (int i = 300; i > 0; i--)
+            //向右位移
+            for (int i = 900; i > 0; i--)
             {
                 if (i < buffer.Length)
                     buffer[i] = buffer[i - 1];
             }
-
-
+            //插入0
             buffer[0] = (int)((400 - (int)(value * 4))* scale);
 
-
-            for (int i = 0; i < buffer.Length; i++)
+            int count = 10000 / micSec;
+            for (int i = 0; i < count; i++)
             {
                 if (buffer[i] >= 1)
-                    points[i] = new Point((int)((900 - i * 3 + 90) * scale), (int)(buffer[i]+50*scale));
+                    points[i] = new Point((int)((900 - i * pixPerTime + 90) * scale), (int)(buffer[i]+50*scale));
             }
-            //this.value = value;
             Refresh();
             lockValue = false;
         }
 
         Bitmap back = new Bitmap(Instrument2Resource.back);
-        //每三个像素绘制一个点，每秒绘制30个点，十秒钟300个点，900像素
+        //横向900像素
         //纵向400像素
-        int[] buffer = new int[300];
-        Point[] points = new Point[300];
+        int[] buffer = new int[900];
+        Point[] points = new Point[900];
         bool lockValue = false;
         Pen maskPen = new Pen(Color.LightGreen, 2);
         float value;
-        private void PID_PIDOutEvent_Float(float value)
-        {
-            SetValue(value);
-        }
+
+        int micSec = 1000;
+        int pixPerTime;
 
         //0-100
         public void SetValue(float value)
