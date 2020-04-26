@@ -39,6 +39,8 @@
             this.instrument21.Size = new System.Drawing.Size(953, 464);
             this.instrument21.TabIndex = 0;
             this.instrument21.Text = "instrument21";
+            this.instrument21.Value = 1F;
+            this.instrument21.刷新间隔 = 1000;
             // 
             // TestForm
             // 
@@ -48,6 +50,7 @@
             this.Controls.Add(this.instrument21);
             this.Name = "TestForm";
             this.Text = "TestForm";
+            this.Load += new System.EventHandler(this.TestForm_Load);
             this.ResumeLayout(false);
 
         }

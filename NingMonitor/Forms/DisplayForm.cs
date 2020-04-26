@@ -38,7 +38,7 @@ namespace NingMonitor.Forms
         {
             this.Width = 1080;
             this.Height = 1920;
-            instrument21.刷新间隔 = 500;
+            //instrument21.刷新间隔 = 500;
         }
 
         private void DisplayForm_KeyPress(object sender, KeyPressEventArgs e)

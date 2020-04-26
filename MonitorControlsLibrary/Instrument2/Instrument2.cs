@@ -19,8 +19,9 @@ namespace MonitorControlsLibrary.Instrument2
         private int[] buffer = new int[900];
         private Point[] points = new Point[900];
         private bool lockValue = false;
-        private Pen maskPen = new Pen(Color.LightGreen, 2);
+        private Pen maskPen = new Pen(Color.FromArgb(26, 255, 0), 2);
         private int micSec = 1000;
+        private int pointCount;
         private int pixPerTime;//每次刷新间隔的像素数量，横向每秒钟90个像素
         public Instrument2()
         {
@@ -34,6 +35,7 @@ namespace MonitorControlsLibrary.Instrument2
             Timer.Elapsed += Timer_Elapsed;
             Timer.Enabled = true;
             Timer.AutoReset = true;
+            pointCount = 10000 / micSec + 1;
         }
 
         /// <summary>
@@ -50,7 +52,8 @@ namespace MonitorControlsLibrary.Instrument2
                 this.micSec = value < 12 ? 12 : value;
                 this.micSec = value < 10000 ? value : 10000;
                 Timer.Interval = micSec;
-                pixPerTime = 90 / (1000 / micSec);
+                pointCount = 10000 / micSec + 1;
+                pixPerTime = (int)(90 * (micSec / 1000.0));
             }
         }
 
@@ -60,10 +63,10 @@ namespace MonitorControlsLibrary.Instrument2
                 return;
             lockValue = true;
             Value = Value < 1 ? 1 : Value;
-            Value = Value > 99 ? 99 : Value;
+            Value = Value > 100 ? 100 : Value;
             points = new Point[900];
             //向右位移
-            for (int i = 900; i > 0; i--)
+            for (int i = pointCount; i > 0; i--)
             {
                 if (i < buffer.Length)
                     buffer[i] = buffer[i - 1];
@@ -71,8 +74,8 @@ namespace MonitorControlsLibrary.Instrument2
             //插入0
             buffer[0] = (int)((400 - (int)(Value * 4)) * scale);
 
-            int count = 10000 / micSec;
-            for (int i = 0; i < count; i++)
+
+            for (int i = 0; i < pointCount; i++)
             {
                 if (buffer[i] >= 1)
                     points[i] = new Point((int)((900 - i * pixPerTime + 90) * scale), (int)(buffer[i] + 50 * scale));
@@ -86,25 +89,36 @@ namespace MonitorControlsLibrary.Instrument2
         /// </summary>
         public float Value { get; set; }
 
+        private int currDrawPosition;
         protected override void OnPaint(PaintEventArgs pe)
         {
             scale = (float)Width / back.Width;
             pe.Graphics.DrawImage(back, 0, 0, back.Width * scale, back.Height * scale);
-            //pe.Graphics.DrawCurve()
             //pe.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            //HashSet<Point> set = new HashSet<Point>();
-            int i = 0;
-            for (i = 0; i < points.Length; i++)
+            //int i = 0;
+            //for (i = 0; i < points.Length; i++)
+            //{
+            //    if (points[i].Y == 0)
+            //        break;
+            //}
+            //Point[] currPoints = points.Take(i).ToArray();
+            //if (currPoints.Length > 1)
+            //    pe.Graphics.DrawCurve(maskPen, currPoints);
+            if (currDrawPosition < pointCount)
             {
-                if (points[i].Y == 0)
-                    break;
-                //set.Add(points[i]);
+                currDrawPosition++;
+                if (currDrawPosition > 1)
+                {
+                    Point[] currPoints = points.Take(currDrawPosition - 1).ToArray();
+                    if (currPoints.Length > 1)
+                        pe.Graphics.DrawCurve(maskPen, currPoints);
+                }
             }
-            //if(set.Count>0)
-            //    pe.Graphics.DrawCurve(maskPen, set.ToArray());
-            Point[] currPoints = points.Take(i).ToArray();
-            if (currPoints.Length > 1)
+            else
+            {
+                Point[] currPoints = points.Take(pointCount).ToArray();
                 pe.Graphics.DrawCurve(maskPen, currPoints);
+            }
             //pe.Graphics.DrawLines(maskPen, points);
             //pe.Graphics.DrawString($"{points.First().X}  {points.First().Y}", new Font("宋体", 20), new SolidBrush(Color.White), 10, 10);
         }
