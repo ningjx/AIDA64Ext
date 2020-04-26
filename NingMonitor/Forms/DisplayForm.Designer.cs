@@ -55,12 +55,12 @@
             // tempControl4
             // 
             this.tempControl4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.tempControl4.Location = new System.Drawing.Point(303, 13);
+            this.tempControl4.Location = new System.Drawing.Point(178, 3);
             this.tempControl4.Margin = new System.Windows.Forms.Padding(4);
             this.tempControl4.Max = 100F;
             this.tempControl4.Min = 0F;
             this.tempControl4.Name = "tempControl4";
-            this.tempControl4.Size = new System.Drawing.Size(65, 548);
+            this.tempControl4.Size = new System.Drawing.Size(45, 394);
             this.tempControl4.TabIndex = 11;
             this.tempControl4.Text = "tempControl4";
             this.tempControl4.Value = 0F;
@@ -73,12 +73,12 @@
             // tempControl3
             // 
             this.tempControl3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.tempControl3.Location = new System.Drawing.Point(210, 13);
+            this.tempControl3.Location = new System.Drawing.Point(121, 3);
             this.tempControl3.Margin = new System.Windows.Forms.Padding(4);
             this.tempControl3.Max = 100F;
             this.tempControl3.Min = 0F;
             this.tempControl3.Name = "tempControl3";
-            this.tempControl3.Size = new System.Drawing.Size(65, 548);
+            this.tempControl3.Size = new System.Drawing.Size(45, 394);
             this.tempControl3.TabIndex = 10;
             this.tempControl3.Text = "tempControl3";
             this.tempControl3.Value = 0F;
@@ -91,12 +91,12 @@
             // tempControl2
             // 
             this.tempControl2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.tempControl2.Location = new System.Drawing.Point(116, 13);
+            this.tempControl2.Location = new System.Drawing.Point(64, 3);
             this.tempControl2.Margin = new System.Windows.Forms.Padding(4);
             this.tempControl2.Max = 100F;
             this.tempControl2.Min = 0F;
             this.tempControl2.Name = "tempControl2";
-            this.tempControl2.Size = new System.Drawing.Size(65, 548);
+            this.tempControl2.Size = new System.Drawing.Size(45, 394);
             this.tempControl2.TabIndex = 9;
             this.tempControl2.Text = "tempControl2";
             this.tempControl2.Value = 0F;
@@ -109,10 +109,10 @@
             // instrument14
             // 
             this.instrument14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.instrument14.Location = new System.Drawing.Point(1201, 601);
+            this.instrument14.Location = new System.Drawing.Point(791, 401);
             this.instrument14.Margin = new System.Windows.Forms.Padding(4);
             this.instrument14.Name = "instrument14";
-            this.instrument14.Size = new System.Drawing.Size(380, 220);
+            this.instrument14.Size = new System.Drawing.Size(254, 129);
             this.instrument14.TabIndex = 4;
             this.instrument14.Text = "instrument14";
             this.instrument14.刷新系数 = 4;
@@ -121,10 +121,10 @@
             // instrument13
             // 
             this.instrument13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.instrument13.Location = new System.Drawing.Point(806, 601);
+            this.instrument13.Location = new System.Drawing.Point(533, 401);
             this.instrument13.Margin = new System.Windows.Forms.Padding(4);
             this.instrument13.Name = "instrument13";
-            this.instrument13.Size = new System.Drawing.Size(380, 220);
+            this.instrument13.Size = new System.Drawing.Size(254, 129);
             this.instrument13.TabIndex = 3;
             this.instrument13.Text = "instrument13";
             this.instrument13.刷新系数 = 4;
@@ -133,10 +133,10 @@
             // instrument12
             // 
             this.instrument12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.instrument12.Location = new System.Drawing.Point(411, 601);
+            this.instrument12.Location = new System.Drawing.Point(273, 401);
             this.instrument12.Margin = new System.Windows.Forms.Padding(4);
             this.instrument12.Name = "instrument12";
-            this.instrument12.Size = new System.Drawing.Size(380, 220);
+            this.instrument12.Size = new System.Drawing.Size(254, 129);
             this.instrument12.TabIndex = 2;
             this.instrument12.Text = "instrument12";
             this.instrument12.刷新系数 = 4;
@@ -145,10 +145,10 @@
             // instrument11
             // 
             this.instrument11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.instrument11.Location = new System.Drawing.Point(15, 601);
+            this.instrument11.Location = new System.Drawing.Point(14, 401);
             this.instrument11.Margin = new System.Windows.Forms.Padding(4);
             this.instrument11.Name = "instrument11";
-            this.instrument11.Size = new System.Drawing.Size(380, 220);
+            this.instrument11.Size = new System.Drawing.Size(254, 129);
             this.instrument11.TabIndex = 1;
             this.instrument11.Text = "instrument11";
             this.instrument11.刷新系数 = 4;
@@ -157,12 +157,12 @@
             // tempControl1
             // 
             this.tempControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.tempControl1.Location = new System.Drawing.Point(22, 13);
+            this.tempControl1.Location = new System.Drawing.Point(8, 3);
             this.tempControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tempControl1.Max = 100F;
             this.tempControl1.Min = 0F;
             this.tempControl1.Name = "tempControl1";
-            this.tempControl1.Size = new System.Drawing.Size(65, 548);
+            this.tempControl1.Size = new System.Drawing.Size(45, 394);
             this.tempControl1.TabIndex = 0;
             this.tempControl1.Text = "tempControl1";
             this.tempControl1.Value = 0F;
@@ -175,9 +175,9 @@
             // instrument21
             // 
             this.instrument21.BackColor = System.Drawing.Color.Black;
-            this.instrument21.Location = new System.Drawing.Point(310, -33);
+            this.instrument21.Location = new System.Drawing.Point(231, 6);
             this.instrument21.Name = "instrument21";
-            this.instrument21.Size = new System.Drawing.Size(1342, 618);
+            this.instrument21.Size = new System.Drawing.Size(822, 385);
             this.instrument21.TabIndex = 5;
             this.instrument21.Text = "instrument21";
             this.instrument21.Value = 1F;
@@ -185,10 +185,9 @@
             // 
             // DisplayForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1595, 1410);
+            this.ClientSize = new System.Drawing.Size(1058, 1410);
             this.Controls.Add(this.tempControl4);
             this.Controls.Add(this.tempControl3);
             this.Controls.Add(this.tempControl2);
