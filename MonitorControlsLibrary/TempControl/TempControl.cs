@@ -56,12 +56,12 @@ namespace MonitorControlsLibrary.TempControl
             pe.Graphics.DrawString(显示文字, font, drawBrush, 5 * scale, 382 * scale);
             //pe.Graphics.DrawString(tem.ToString("f2").PadLeft(5,'0')+ "℃", font, drawBrush,  3 * scale, 360 * scale);
 
-            if (temperature < 20)
+            if (temperature < Min)
                 coverPoistion = new Point(0, 0);
-            else if (temperature > 90)
+            else if (temperature > Max)
                 coverPoistion = new Point(0, -348);
             else
-                coverPoistion = new Point(0, -(int)((temperature - 20) * (348 / 70D)));
+                coverPoistion = new Point(0, -(int)((temperature - Min) * (348 / (Max-Min))));
             TranslateImage(pe, cover, 0, 0, coverPoistion, scale);
             pe.Graphics.DrawString(temperature.ToString("f2").PadLeft(5, '0') + "℃", font, drawBrush, 3 * scale, (360 + coverPoistion.Y) * scale);
             pe.Graphics.DrawImage(topCover, 0, 0, topCover.Width * scale, topCover.Height * scale);
@@ -75,6 +75,9 @@ namespace MonitorControlsLibrary.TempControl
         public float 积分 { get { return this.PID.Ki; } set { this.PID.Ki = value; } }
         public float 微分 { get { return this.PID.Kd; } set { this.PID.Kd = value; } }
 
+        public float Max { get; set; } = 100;
+
+        public float Min { get; set; } = 0;
 
         public float Value
         {

@@ -32,6 +32,8 @@ namespace NingMonitor.Forms
         private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             OHMHandler_GotData();
+            label1.ForeColor = Color.White;
+            label1.Text = this.Width.ToString();
         }
 
         private void DisplayForm_Load(object sender, EventArgs e)
@@ -85,6 +87,11 @@ namespace NingMonitor.Forms
 
             var item3 = PerformanceDatas.GetByName("CPU Package", CustomType.Power);
             instrument13.SetValueWithPID(item3.Value, item3.Unit, 100, "CPU功率");
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            this.Width = trackBar1.Value;
         }
     }
 }
