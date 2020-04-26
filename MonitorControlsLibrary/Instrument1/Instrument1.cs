@@ -115,7 +115,7 @@ namespace MonitorControlsLibrary.Instrument1
             }
 
             //pe.Graphics.DrawString($"{(value*10F).ToString("f2").PadLeft(5,'0')}%\n{lable}", font, drawBrush, 200 * scale, 100 * scale);
-            pe.Graphics.DrawString($"{value.ToString("f2").PadLeft(5, '0')}{unit}\n{显示文字}", font, drawBrush, 150 * scale, 100 * scale);
+            pe.Graphics.DrawString($"{value.ToString("f2").PadLeft(7, ' ')}{unit}\n{显示文字}", font, drawBrush, 150 * scale, 100 * scale);
 
             if (buf < 5)//绘制绿色指针
             {
