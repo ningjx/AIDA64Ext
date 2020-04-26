@@ -55,6 +55,25 @@ namespace MonitorControlsLibrary
 
         }
 
+        protected void RotateImage(PaintEventArgs pe, Image img, Double alpha, Point ptImg, double beta, double d, float scaleFactor)
+        {
+            float deltaX = (float)(d * (Math.Cos(alpha - beta) - Math.Cos(alpha) * Math.Cos(alpha + beta) - Math.Sin(alpha) * Math.Sin(alpha + beta)));
+            float deltaY = (float)(d * (Math.Sin(beta - alpha) + Math.Sin(alpha) * Math.Cos(alpha + beta) - Math.Cos(alpha) * Math.Sin(alpha + beta)));
+            // Rotate image support
+            pe.Graphics.RotateTransform((float)(alpha * 180 / Math.PI));
+            // Dispay image
+            pe.Graphics.DrawImage(img, (ptImg.X + deltaX) * scaleFactor, (ptImg.Y + deltaY) * scaleFactor, img.Width * scaleFactor, img.Height * scaleFactor);
+            // Put image support as found
+            pe.Graphics.RotateTransform((float)(-alpha * 180 / Math.PI));
+        }
+
+        public static void CaclulateBetaNd(Point ptImg, Point ptRot, out double beta, out double d)
+        {
+            beta = 0;
+            if (ptRot.X != 0)
+                beta = Math.Atan((double)ptRot.Y / (double)ptRot.X);
+            d = Math.Sqrt((ptRot.X * ptRot.X) + (ptRot.Y * ptRot.Y));
+        }
 
         /// <summary>
         /// Translate an image on line with a specified distance and a spcified angle
