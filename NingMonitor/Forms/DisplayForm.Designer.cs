@@ -168,7 +168,7 @@
             this.tempControl1.Value = 0F;
             this.tempControl1.刷新系数 = 4;
             this.tempControl1.微分 = 0.05F;
-            this.tempControl1.显示文字 = "CPU温度";
+            this.tempControl1.显示文字 = "CPU";
             this.tempControl1.比例 = 0.5F;
             this.tempControl1.积分 = 0.08F;
             // 

@@ -52,7 +52,7 @@ namespace MonitorControlsLibrary.TempControl
             //获取控件缩放比
             scale = (float)Width / temBack.Width;
             pe.Graphics.DrawImage(temBack, 0, 0, temBack.Width * scale, temBack.Height * scale);
-            Font font = new Font("宋体", 8 * scale);
+            Font font = new Font("Consloas", 8 * scale);
             pe.Graphics.DrawString(显示文字, font, drawBrush, 5 * scale, 382 * scale);
             //pe.Graphics.DrawString(tem.ToString("f2").PadLeft(5,'0')+ "℃", font, drawBrush,  3 * scale, 360 * scale);
 
