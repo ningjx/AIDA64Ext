@@ -30,7 +30,6 @@ namespace MonitorControlsLibrary.Instrument1
         private Bitmap p10 = new Bitmap(Instrument1Reasource._10);
 
         private PID PID = new PID(0.5F, 0.08F, 0.05F);
-        private string lable = "";//显示的text
         private float value;
         private string unit = "";//显示的单位
         private float scale;//控件缩放比例
@@ -116,7 +115,7 @@ namespace MonitorControlsLibrary.Instrument1
             }
 
             //pe.Graphics.DrawString($"{(value*10F).ToString("f2").PadLeft(5,'0')}%\n{lable}", font, drawBrush, 200 * scale, 100 * scale);
-            pe.Graphics.DrawString($"{value.ToString("f2").PadLeft(5, '0')}{unit}\n{lable}", font, drawBrush, 190 * scale, 100 * scale);
+            pe.Graphics.DrawString($"{value.ToString("f2").PadLeft(5, '0')}{unit}\n{显示文字}", font, drawBrush, 190 * scale, 100 * scale);
 
             if (buf < 5)//绘制绿色指针
             {
@@ -148,11 +147,12 @@ namespace MonitorControlsLibrary.Instrument1
 
         public int 刷新系数 { get; set; } = 4;
 
-        public void SetValue(string text, float value, string unit, float max)
+        public string 显示文字 { get; set; }
+
+        public void SetValue(float value, string unit, float max)
         {
             if (value == this.value || value == 0)
                 return;
-            lable = text;
             this.unit = unit;
             this.max = max;
             this.value = value;
@@ -167,14 +167,15 @@ namespace MonitorControlsLibrary.Instrument1
         /// <param name="value">数值</param>
         /// <param name="unit">单位</param>
         /// <param name="max">最大值</param>
-        public void SetValueWithPID(string text,float value,string unit,float max)
+        public void SetValueWithPID(float value,string unit,float max,string text = null)
         {
             value = value > max ? max : value;
             value = value < 0 ? 0 : value;
             //value *= 10;//0-100
             if (value == 0 || value == this.value || currentValue == value)
                 return;
-            lable = text;
+            if (text != null)
+                显示文字 = text;
             this.unit = unit;
             this.max = max;
             PID.SetWithPID(currentValue, value);

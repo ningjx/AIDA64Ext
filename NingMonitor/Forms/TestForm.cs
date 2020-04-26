@@ -19,7 +19,7 @@ namespace AIDA64Ext.Forms
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            instrument21.SetValue(trackBar1.Value / 10F);
+            instrument21.Value = trackBar1.Value / 10F;
         }
 
         private void TestForm_Load(object sender, EventArgs e)
