@@ -13,7 +13,29 @@ namespace MonitorControlsLibrary.Instrument1
 {
     public partial class Instrument1 : BaseControl
     {
-        PID PID = new PID(0.5F, 0.08F, 0.05F);
+        private Bitmap back = new Bitmap(Instrument1Reasource.back);
+        private Bitmap spinRed = new Bitmap(Instrument1Reasource.spinred);
+        private Bitmap spinGreen = new Bitmap(Instrument1Reasource.apingreen);
+        private Bitmap spinYellow = new Bitmap(Instrument1Reasource.yellowSpin);
+        private Bitmap p0 = new Bitmap(Instrument1Reasource._0);
+        private Bitmap p1 = new Bitmap(Instrument1Reasource._1);
+        private Bitmap p2 = new Bitmap(Instrument1Reasource._2);
+        private Bitmap p3 = new Bitmap(Instrument1Reasource._3);
+        private Bitmap p4 = new Bitmap(Instrument1Reasource._4);
+        private Bitmap p5 = new Bitmap(Instrument1Reasource._5);
+        private Bitmap p6 = new Bitmap(Instrument1Reasource._6);
+        private Bitmap p7 = new Bitmap(Instrument1Reasource._7);
+        private Bitmap p8 = new Bitmap(Instrument1Reasource._8);
+        private Bitmap p9 = new Bitmap(Instrument1Reasource._9);
+        private Bitmap p10 = new Bitmap(Instrument1Reasource._10);
+
+        private PID PID = new PID(0.5F, 0.08F, 0.05F);
+        private float value;
+        private string unit = "";//显示的单位
+        private float scale;//控件缩放比例
+        private float max = 10;//最大数值
+        private Point spinPosition = new Point(48, 239);
+        private Point spinRotation = new Point(242, 242);
 
         public Instrument1()
         {
@@ -28,31 +50,6 @@ namespace MonitorControlsLibrary.Instrument1
         {
             SetValueForPID(value);
         }
-
-        Bitmap back = new Bitmap(Instrument1Reasource.back);
-        Bitmap spinRed = new Bitmap(Instrument1Reasource.spinred);
-        Bitmap spinGreen = new Bitmap(Instrument1Reasource.apingreen);
-        Bitmap spinYellow = new Bitmap(Instrument1Reasource.yellowSpin);
-        Bitmap p0 = new Bitmap(Instrument1Reasource._0);
-        Bitmap p1 = new Bitmap(Instrument1Reasource._1);
-        Bitmap p2 = new Bitmap(Instrument1Reasource._2);
-        Bitmap p3 = new Bitmap(Instrument1Reasource._3);
-        Bitmap p4 = new Bitmap(Instrument1Reasource._4);
-        Bitmap p5 = new Bitmap(Instrument1Reasource._5);
-        Bitmap p6 = new Bitmap(Instrument1Reasource._6);
-        Bitmap p7 = new Bitmap(Instrument1Reasource._7);
-        Bitmap p8 = new Bitmap(Instrument1Reasource._8);
-        Bitmap p9 = new Bitmap(Instrument1Reasource._9);
-        Bitmap p10 = new Bitmap(Instrument1Reasource._10);
-
-        //SolidBrush drawBrush = new SolidBrush(Color.White);
-        string lable = "";
-        float value;
-        string unit = "";
-        float scale;
-        float max = 10;
-        Point spinPosition = new Point(48, 239);
-        Point spinRotation = new Point(242, 242);
 
         protected override void OnPaint(PaintEventArgs pe)
         {
@@ -118,7 +115,7 @@ namespace MonitorControlsLibrary.Instrument1
             }
 
             //pe.Graphics.DrawString($"{(value*10F).ToString("f2").PadLeft(5,'0')}%\n{lable}", font, drawBrush, 200 * scale, 100 * scale);
-            pe.Graphics.DrawString($"{value.ToString("f2").PadLeft(5, '0')}{unit}\n{lable}", font, drawBrush, 190 * scale, 100 * scale);
+            pe.Graphics.DrawString($"{value.ToString("f2").PadLeft(5, '0')}{unit}\n{显示文字}", font, drawBrush, 190 * scale, 100 * scale);
 
             if (buf < 5)//绘制绿色指针
             {
@@ -134,11 +131,11 @@ namespace MonitorControlsLibrary.Instrument1
             }
         }
 
-        int skip = 0;
+        private int skip = 0;
         private void SetValueForPID(float value)
         {
             skip++;
-            if (skip > 4)
+            if (skip > 刷新系数)
             {
                 skip = 0;
                 if (value == this.value || value == 0)
@@ -148,18 +145,21 @@ namespace MonitorControlsLibrary.Instrument1
             }
         }
 
-        public void SetValue(string text, float value, string unit, float max)
+        public int 刷新系数 { get; set; } = 4;
+
+        public string 显示文字 { get; set; }
+
+        public void SetValue(float value, string unit, float max)
         {
             if (value == this.value || value == 0)
                 return;
-            lable = text;
             this.unit = unit;
             this.max = max;
             this.value = value;
             Refresh();
         }
 
-        float currentValue;
+        private float currentValue;
         /// <summary>
         /// 赋值（带PID算法）CPU占用有点高
         /// </summary>
@@ -167,14 +167,15 @@ namespace MonitorControlsLibrary.Instrument1
         /// <param name="value">数值</param>
         /// <param name="unit">单位</param>
         /// <param name="max">最大值</param>
-        public void SetValueWithPID(string text,float value,string unit,float max)
+        public void SetValueWithPID(float value,string unit,float max,string text = null)
         {
             value = value > max ? max : value;
             value = value < 0 ? 0 : value;
             //value *= 10;//0-100
             if (value == 0 || value == this.value || currentValue == value)
                 return;
-            lable = text;
+            if (text != null)
+                显示文字 = text;
             this.unit = unit;
             this.max = max;
             PID.SetWithPID(currentValue, value);

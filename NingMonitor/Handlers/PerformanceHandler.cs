@@ -18,7 +18,7 @@ namespace NingMonitor.Handlers
                 new CounterConfig("Network Interface","Bytes Received/sec",CustomType.Download,NetFunc),
                 new CounterConfig("Network Interface","Bytes Sent/sec",CustomType.Upload,NetFunc),
             };
-            pCounters = new PerformanceCounters(pCounterInfos,1000);
+            pCounters = new PerformanceCounters(pCounterInfos,500);
             pCounters.ReciveData += PCounters_ReciveData;
             pCounters.Start();
         }

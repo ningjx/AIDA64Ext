@@ -65,6 +65,11 @@
     <Compile Include="Instrument2\Instrument2.Designer.cs">
       <DependentUpon>Instrument2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Instrument2\Instrument2Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Instrument2Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="PID.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TempControl\TempControl.cs">
@@ -77,6 +82,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TempControlReasource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
@@ -96,6 +107,7 @@
     <Content Include="Instrument1\Images\back.png" />
     <Content Include="Instrument1\Images\spinred.png" />
     <Content Include="Instrument1\Images\yellowSpin.png" />
+    <Content Include="Instrument2\Images\back.png" />
     <Content Include="TempControl\Images\back.png" />
     <Content Include="TempControl\Images\temBack.png" />
     <Content Include="TempControl\Images\temCover.png" />
@@ -106,9 +118,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Instrument1Reasource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Instrument2\Instrument2Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Instrument2Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="TempControl\TempControlReasource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TempControlReasource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

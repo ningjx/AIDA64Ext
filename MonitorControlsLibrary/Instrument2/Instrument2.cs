@@ -7,66 +7,120 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using Timer = System.Timers.Timer;
 namespace MonitorControlsLibrary.Instrument2
 {
     public partial class Instrument2 : BaseControl
     {
-        PID PID = new PID(0.05F, 0.05F, 0.02F);
+        private float scale;
+        private Timer Timer = new Timer(1000);
+        private Bitmap back = new Bitmap(Instrument2Resource.back);
+        //横向900像素，纵向400像素
+        private int[] buffer = new int[900];
+        private Point[] points = new Point[900];
+        private bool lockValue = false;
+        private Pen maskPen = new Pen(Color.FromArgb(26, 255, 0), 2);
+        private int micSec = 1000;
+        private int pointCount;
+        private int pixPerTime;//每次刷新间隔的像素数量，横向每秒钟90个像素
         public Instrument2()
         {
             SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             BackColor = Color.Black;
             CheckForIllegalCrossThreadCalls = false;
-            PID.PIDOutEvent_Float += PID_PIDOutEvent_Float;
-        }
-        //每三个像素绘制一个点，每秒绘制30个点，十秒钟300个点，900像素
-        //纵向400像素
-        int[] buffer = new int[300];
-        Point[] points = new Point[300];
-        bool lockValue = false;
-        Pen maskPen = new Pen(Color.LightGreen, 2);
-        private void PID_PIDOutEvent_Float(float value)
-        {
-            SetValue(value);
+
+            pixPerTime = 90 / (1000 / micSec);
+
+            Timer.Elapsed += Timer_Elapsed;
+            Timer.Enabled = true;
+            Timer.AutoReset = true;
+            pointCount = 10000 / micSec + 1;
         }
 
-        //0-100
-        public void SetValue(float value)
+        /// <summary>
+        /// 设置刷新间隔时间(毫秒)
+        /// </summary>
+        public int 刷新间隔
+        {
+            get
+            {
+                return micSec;
+            }
+            set
+            {
+                this.micSec = value < 12 ? 12 : value;
+                this.micSec = value < 10000 ? value : 10000;
+                Timer.Interval = micSec;
+                pointCount = 10000 / micSec + 1;
+                pixPerTime = (int)(90 * (micSec / 1000.0));
+            }
+        }
+
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (lockValue)
                 return;
             lockValue = true;
-            value = value < 1 ? 1 : value;
-
-            for (int i = 300; i > 0; i--)
+            Value = Value < 1 ? 1 : Value;
+            Value = Value > 100 ? 100 : Value;
+            points = new Point[900];
+            //向右位移
+            for (int i = pointCount; i > 0; i--)
             {
                 if (i < buffer.Length)
                     buffer[i] = buffer[i - 1];
             }
+            //插入0
+            buffer[0] = (int)((400 - (int)(Value * 4)) * scale);
 
 
-            buffer[0] = 400 - (int)(value * 4);
-
-
-            for (int i = 0; i < buffer.Length; i++)
+            for (int i = 0; i < pointCount; i++)
             {
                 if (buffer[i] >= 1)
-                    points[i] = new Point(900 - i * 3, buffer[i]);
+                    points[i] = new Point((int)((900 - i * pixPerTime + 90) * scale), (int)(buffer[i] + 50 * scale));
             }
-            //this.value = value;
             Refresh();
             lockValue = false;
         }
 
+        /// <summary>
+        /// 0-100
+        /// </summary>
+        public float Value { get; set; }
+
+        private int currDrawPosition;
         protected override void OnPaint(PaintEventArgs pe)
         {
-            //pe.Graphics.DrawCurve()
+            scale = (float)Width / back.Width;
+            pe.Graphics.DrawImage(back, 0, 0, back.Width * scale, back.Height * scale);
             //pe.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            pe.Graphics.DrawCurve(maskPen, points);
+            //int i = 0;
+            //for (i = 0; i < points.Length; i++)
+            //{
+            //    if (points[i].Y == 0)
+            //        break;
+            //}
+            //Point[] currPoints = points.Take(i).ToArray();
+            //if (currPoints.Length > 1)
+            //    pe.Graphics.DrawCurve(maskPen, currPoints);
+            if (currDrawPosition < pointCount)
+            {
+                currDrawPosition++;
+                if (currDrawPosition > 1)
+                {
+                    Point[] currPoints = points.Take(currDrawPosition - 1).ToArray();
+                    if (currPoints.Length > 1)
+                        pe.Graphics.DrawCurve(maskPen, currPoints);
+                }
+            }
+            else
+            {
+                Point[] currPoints = points.Take(pointCount).ToArray();
+                pe.Graphics.DrawCurve(maskPen, currPoints);
+            }
             //pe.Graphics.DrawLines(maskPen, points);
-            pe.Graphics.DrawString($"{points.First().X}  {points.First().Y}", new Font("宋体", 20), new SolidBrush(Color.White), 10, 10);
+            //pe.Graphics.DrawString($"{points.First().X}  {points.First().Y}", new Font("宋体", 20), new SolidBrush(Color.White), 10, 10);
         }
     }
 }

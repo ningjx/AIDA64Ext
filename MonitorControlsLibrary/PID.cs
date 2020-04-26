@@ -16,7 +16,7 @@ namespace MonitorControlsLibrary
         private float err; //定义偏差值   
         private float err_next; //定义上一个偏差值     
         private float err_last;  //定义最上前的偏差值      
-        private float Kp, Ki, Kd; //定义比例、积分、微分系数 
+        public float Kp, Ki, Kd; //定义比例、积分、微分系数 
         private float currentTar = -1;
         private float currentResultBuffer;
         /// <summary>
@@ -32,13 +32,6 @@ namespace MonitorControlsLibrary
             err = 0;
             err_last = 0;
             err_next = 0;
-            Kp = kp;
-            Ki = ki;
-            Kd = kd;
-        }
-
-        public void SetPID(float kp, float ki, float kd)
-        {
             Kp = kp;
             Ki = ki;
             Kd = kd;
