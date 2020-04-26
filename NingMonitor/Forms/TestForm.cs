@@ -26,5 +26,10 @@ namespace AIDA64Ext.Forms
         {
             instrument21.刷新间隔 = 500;
         }
+
+        private void instrument21_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

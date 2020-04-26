@@ -41,6 +41,9 @@
             this.instrument21.Size = new System.Drawing.Size(795, 441);
             this.instrument21.TabIndex = 0;
             this.instrument21.Text = "instrument21";
+            this.instrument21.Value = 1F;
+            this.instrument21.刷新间隔 = 1000;
+            this.instrument21.Click += new System.EventHandler(this.instrument21_Click);
             // 
             // trackBar1
             // 

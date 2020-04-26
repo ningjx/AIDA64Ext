@@ -47,7 +47,8 @@ namespace MonitorControlsLibrary.Instrument2
             }
             set
             {
-                this.micSec = value;
+                this.micSec = value < 12 ? 12 : value;
+                this.micSec = value < 10000 ? value : 10000;
                 Timer.Interval = micSec;
                 pixPerTime = 90 / (1000 / micSec);
             }
