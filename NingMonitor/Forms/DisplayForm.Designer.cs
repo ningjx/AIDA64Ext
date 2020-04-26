@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.tempControl4 = new MonitorControlsLibrary.TempControl.TempControl();
             this.tempControl3 = new MonitorControlsLibrary.TempControl.TempControl();
             this.tempControl2 = new MonitorControlsLibrary.TempControl.TempControl();
@@ -38,19 +37,7 @@
             this.instrument11 = new MonitorControlsLibrary.Instrument1.Instrument1();
             this.tempControl1 = new MonitorControlsLibrary.TempControl.TempControl();
             this.instrument21 = new MonitorControlsLibrary.Instrument2.Instrument2();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.Location = new System.Drawing.Point(191, 986);
-            this.trackBar1.Maximum = 1500;
-            this.trackBar1.Minimum = 800;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(667, 69);
-            this.trackBar1.TabIndex = 8;
-            this.trackBar1.Value = 1000;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // tempControl4
             // 
@@ -191,7 +178,6 @@
             this.Controls.Add(this.tempControl4);
             this.Controls.Add(this.tempControl3);
             this.Controls.Add(this.tempControl2);
-            this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.instrument14);
             this.Controls.Add(this.instrument13);
             this.Controls.Add(this.instrument12);
@@ -206,9 +192,7 @@
             this.Shown += new System.EventHandler(this.DisplayForm_Shown);
             this.DoubleClick += new System.EventHandler(this.DisplayForm_DoubleClick);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DisplayForm_KeyPress);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -220,7 +204,6 @@
         private MonitorControlsLibrary.Instrument1.Instrument1 instrument13;
         private MonitorControlsLibrary.Instrument1.Instrument1 instrument14;
         private MonitorControlsLibrary.Instrument2.Instrument2 instrument21;
-        private System.Windows.Forms.TrackBar trackBar1;
         private MonitorControlsLibrary.TempControl.TempControl tempControl2;
         private MonitorControlsLibrary.TempControl.TempControl tempControl3;
         private MonitorControlsLibrary.TempControl.TempControl tempControl4;

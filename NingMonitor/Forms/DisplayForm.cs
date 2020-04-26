@@ -92,10 +92,5 @@ namespace NingMonitor.Forms
 
             instrument21.Value = item1.Value;
         }
-
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-            this.Width = trackBar1.Value;
-        }
     }
 }
