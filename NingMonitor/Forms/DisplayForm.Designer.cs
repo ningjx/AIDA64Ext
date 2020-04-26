@@ -175,9 +175,9 @@
             // instrument21
             // 
             this.instrument21.BackColor = System.Drawing.Color.Black;
-            this.instrument21.Location = new System.Drawing.Point(231, 6);
+            this.instrument21.Location = new System.Drawing.Point(200, -19);
             this.instrument21.Name = "instrument21";
-            this.instrument21.Size = new System.Drawing.Size(822, 385);
+            this.instrument21.Size = new System.Drawing.Size(883, 434);
             this.instrument21.TabIndex = 5;
             this.instrument21.Text = "instrument21";
             this.instrument21.Value = 1F;
