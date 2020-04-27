@@ -252,6 +252,43 @@ namespace MonitorControlsLibrary
             }
         }
 
+        private float lastValue = -1;
+        protected void ScrollCounter(PaintEventArgs pe, Image imgBand, Point originPosition, float minValue,float maxValue, float currValue, float scaleFactor)
+        {
+            float currPos = currValue * (maxValue - minValue);
+            originPosition.Y += (int)(imgBand.Height * currPos);
+            bool up = lastValue <= currValue ? true : false;
+            if(up&& currPos > 0.5)//向上滚动并超过一半长度
+            {
+
+            }
+
+            //绘制三条
+            pe.Graphics.DrawImage(imgBand, originPosition);
+            originPosition.Y += originPosition.Y;
+            pe.Graphics.DrawImage(imgBand, originPosition);
+            originPosition.Y -= originPosition.Y*2;
+            pe.Graphics.DrawImage(imgBand, originPosition);
+        }
+
+        /// <summary>
+        /// 单条
+        /// </summary>
+        /// <param name="pe"></param>
+        /// <param name="imgBand"></param>
+        /// <param name="originPosition"></param>
+        /// <param name="minValue"></param>
+        /// <param name="maxValue"></param>
+        /// <param name="currValue"></param>
+        /// <param name="scaleFactor"></param>
+        protected void DrawScrollCounter(PaintEventArgs pe, Image imgBand, Point originPosition, float minValue, float maxValue, float currValue, float scaleFactor)
+        {
+            //int sigleHeight = imgBand.Height / 3;
+            float currPos = currValue * (maxValue - minValue);
+            originPosition.Y += (int)((imgBand.Height / 3) * currPos);
+            pe.Graphics.DrawImage(imgBand, originPosition.X * scaleFactor, originPosition.Y * scaleFactor, imgBand.Width * scaleFactor, imgBand.Height * scaleFactor); ;
+        }
+
 
         /// <summary>
         /// Convert a physical value in an rad angle used by the rotate function
