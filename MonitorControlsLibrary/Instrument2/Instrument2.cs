@@ -94,16 +94,6 @@ namespace MonitorControlsLibrary.Instrument2
         {
             scale = (float)Width / back.Width;
             pe.Graphics.DrawImage(back, 0, 0, back.Width * scale, back.Height * scale);
-            //pe.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            //int i = 0;
-            //for (i = 0; i < points.Length; i++)
-            //{
-            //    if (points[i].Y == 0)
-            //        break;
-            //}
-            //Point[] currPoints = points.Take(i).ToArray();
-            //if (currPoints.Length > 1)
-            //    pe.Graphics.DrawCurve(maskPen, currPoints);
             if (currDrawPosition < pointCount)
             {
                 currDrawPosition++;
@@ -119,8 +109,6 @@ namespace MonitorControlsLibrary.Instrument2
                 Point[] currPoints = points.Take(pointCount).ToArray();
                 pe.Graphics.DrawCurve(maskPen, currPoints);
             }
-            //pe.Graphics.DrawLines(maskPen, points);
-            //pe.Graphics.DrawString($"{points.First().X}  {points.First().Y}", new Font("宋体", 20), new SolidBrush(Color.White), 10, 10);
         }
     }
 }

@@ -55,6 +55,25 @@ namespace MonitorControlsLibrary
 
         }
 
+        protected void RotateImage(PaintEventArgs pe, Image img, Double alpha, Point ptImg, double beta, double d, float scaleFactor)
+        {
+            float deltaX = (float)(d * (Math.Cos(alpha - beta) - Math.Cos(alpha) * Math.Cos(alpha + beta) - Math.Sin(alpha) * Math.Sin(alpha + beta)));
+            float deltaY = (float)(d * (Math.Sin(beta - alpha) + Math.Sin(alpha) * Math.Cos(alpha + beta) - Math.Cos(alpha) * Math.Sin(alpha + beta)));
+            // Rotate image support
+            pe.Graphics.RotateTransform((float)(alpha * 180 / Math.PI));
+            // Dispay image
+            pe.Graphics.DrawImage(img, (ptImg.X + deltaX) * scaleFactor, (ptImg.Y + deltaY) * scaleFactor, img.Width * scaleFactor, img.Height * scaleFactor);
+            // Put image support as found
+            pe.Graphics.RotateTransform((float)(-alpha * 180 / Math.PI));
+        }
+
+        public static void CaclulateBetaNd(Point ptImg, Point ptRot, out double beta, out double d)
+        {
+            beta = 0;
+            if (ptRot.X != 0)
+                beta = Math.Atan((double)ptRot.Y / (double)ptRot.X);
+            d = Math.Sqrt((ptRot.X * ptRot.X) + (ptRot.Y * ptRot.Y));
+        }
 
         /// <summary>
         /// Translate an image on line with a specified distance and a spcified angle
@@ -231,6 +250,43 @@ namespace MonitorControlsLibrary
                     pe.Graphics.DrawString(Convert.ToString(markPoint.value), markFont, markBrush, textPoint);
                 }
             }
+        }
+
+        private float lastValue = -1;
+        protected void ScrollCounter(PaintEventArgs pe, Image imgBand, Point originPosition, float minValue,float maxValue, float currValue, float scaleFactor)
+        {
+            float currPos = currValue * (maxValue - minValue);
+            originPosition.Y += (int)(imgBand.Height * currPos);
+            bool up = lastValue <= currValue ? true : false;
+            if(up&& currPos > 0.5)//向上滚动并超过一半长度
+            {
+
+            }
+
+            //绘制三条
+            pe.Graphics.DrawImage(imgBand, originPosition);
+            originPosition.Y += originPosition.Y;
+            pe.Graphics.DrawImage(imgBand, originPosition);
+            originPosition.Y -= originPosition.Y*2;
+            pe.Graphics.DrawImage(imgBand, originPosition);
+        }
+
+        /// <summary>
+        /// 单条
+        /// </summary>
+        /// <param name="pe"></param>
+        /// <param name="imgBand"></param>
+        /// <param name="originPosition"></param>
+        /// <param name="minValue"></param>
+        /// <param name="maxValue"></param>
+        /// <param name="currValue"></param>
+        /// <param name="scaleFactor"></param>
+        protected void DrawScrollCounter(PaintEventArgs pe, Image imgBand, Point originPosition, float minValue, float maxValue, float currValue, float scaleFactor)
+        {
+            //int sigleHeight = imgBand.Height / 3;
+            float currPos = currValue * (maxValue - minValue);
+            originPosition.Y += (int)((imgBand.Height / 3) * currPos);
+            pe.Graphics.DrawImage(imgBand, originPosition.X * scaleFactor, originPosition.Y * scaleFactor, imgBand.Width * scaleFactor, imgBand.Height * scaleFactor); ;
         }
 
 

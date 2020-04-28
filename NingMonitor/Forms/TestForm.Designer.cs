@@ -28,51 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.instrument21 = new MonitorControlsLibrary.Instrument2.Instrument2();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.button1 = new System.Windows.Forms.Button();
+            this.timeControl1 = new MonitorControlsLibrary.TimeControl();
+            this.netSpeedControl1 = new MonitorControlsLibrary.NetSpeedControl();
             this.SuspendLayout();
             // 
-            // instrument21
+            // button1
             // 
-            this.instrument21.BackColor = System.Drawing.Color.Black;
-            this.instrument21.Location = new System.Drawing.Point(109, 40);
-            this.instrument21.Name = "instrument21";
-            this.instrument21.Size = new System.Drawing.Size(795, 441);
-            this.instrument21.TabIndex = 0;
-            this.instrument21.Text = "instrument21";
-            this.instrument21.Value = 1F;
-            this.instrument21.刷新间隔 = 1000;
-            this.instrument21.Click += new System.EventHandler(this.instrument21_Click);
+            this.button1.Location = new System.Drawing.Point(555, 475);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // trackBar1
+            // timeControl1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(157, 545);
-            this.trackBar1.Maximum = 1000;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(685, 69);
-            this.trackBar1.TabIndex = 1;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            this.timeControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.timeControl1.Location = new System.Drawing.Point(63, 32);
+            this.timeControl1.Name = "timeControl1";
+            this.timeControl1.Size = new System.Drawing.Size(497, 203);
+            this.timeControl1.TabIndex = 4;
+            this.timeControl1.Text = "timeControl1";
+            // 
+            // netSpeedControl1
+            // 
+            this.netSpeedControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.netSpeedControl1.Download = "0.00 KB/s";
+            this.netSpeedControl1.DownloadBigger = true;
+            this.netSpeedControl1.Location = new System.Drawing.Point(476, 312);
+            this.netSpeedControl1.Name = "netSpeedControl1";
+            this.netSpeedControl1.Size = new System.Drawing.Size(249, 75);
+            this.netSpeedControl1.TabIndex = 3;
+            this.netSpeedControl1.Text = "netSpeedControl1";
+            this.netSpeedControl1.Upload = "0.00 KB/s";
             // 
             // TestForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1048, 704);
-            this.Controls.Add(this.trackBar1);
-            this.Controls.Add(this.instrument21);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(849, 544);
+            this.Controls.Add(this.timeControl1);
+            this.Controls.Add(this.netSpeedControl1);
+            this.Controls.Add(this.button1);
             this.Name = "TestForm";
             this.Text = "TestForm";
             this.Load += new System.EventHandler(this.TestForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private MonitorControlsLibrary.Instrument2.Instrument2 instrument21;
-        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Button button1;
+        private MonitorControlsLibrary.NetSpeedControl netSpeedControl1;
+        private MonitorControlsLibrary.TimeControl timeControl1;
     }
 }

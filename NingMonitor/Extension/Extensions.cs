@@ -145,7 +145,7 @@ namespace NingMonitor.Extension
 
         public static void AddOrUpdate<K, V>(this Dictionary<K, V> dic, K key, V value)
         {
-            if (dic.Keys.Contains(key))
+            if (dic.ContainsKey(key))
             {
                 dic[key] = value;
             }
@@ -154,7 +154,6 @@ namespace NingMonitor.Extension
                 dic.Add(key, value);
             }
         }
-
 
         /// <summary>
         /// 将本程序设为开启自启

@@ -210,7 +210,7 @@ namespace NingMonitor.Handlers
     {
         public static void ExtensionAdd<K, V>(this Dictionary<K, V> dic, K key, V value)
         {
-            if (dic.Keys.Contains(key))
+            if (dic.ContainsKey(key))
             {
                 dic[key] = value;
             }

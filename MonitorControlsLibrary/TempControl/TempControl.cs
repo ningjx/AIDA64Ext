@@ -52,7 +52,8 @@ namespace MonitorControlsLibrary.TempControl
             //获取控件缩放比
             scale = (float)Width / temBack.Width;
             pe.Graphics.DrawImage(temBack, 0, 0, temBack.Width * scale, temBack.Height * scale);
-            Font font = new Font("宋体", 8 * scale);
+            Font font = new Font("Consloas", 11 * scale);
+            Font font1 = new Font("Consloas", 14 * scale);
             pe.Graphics.DrawString(显示文字, font, drawBrush, 5 * scale, 382 * scale);
             //pe.Graphics.DrawString(tem.ToString("f2").PadLeft(5,'0')+ "℃", font, drawBrush,  3 * scale, 360 * scale);
 
@@ -63,7 +64,7 @@ namespace MonitorControlsLibrary.TempControl
             else
                 coverPoistion = new Point(0, -(int)((temperature - Min) * (348 / (Max-Min))));
             TranslateImage(pe, cover, 0, 0, coverPoistion, scale);
-            pe.Graphics.DrawString(temperature.ToString("f2").PadLeft(5, '0') + "℃", font, drawBrush, 3 * scale, (360 + coverPoistion.Y) * scale);
+            pe.Graphics.DrawString(temperature.ToString("f0").PadLeft(2, ' ')/* + "℃"*/, font1, drawBrush, 8* scale, (346 + coverPoistion.Y) * scale);
             pe.Graphics.DrawImage(topCover, 0, 0, topCover.Width * scale, topCover.Height * scale);
         }
 

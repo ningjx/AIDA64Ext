@@ -77,13 +77,19 @@ namespace NingMonitor.Forms
             var item1 = PerformanceDatas.GetByName("CPU Total", CustomType.Load);
             instrument11.SetValueWithPID(item1.Value, item1.Unit, 100, "CPU占用");
 
-            //instrument21.Value = item1.Value;
+            instrument21.Value = item1.Value;
 
             var item2 = PerformanceDatas.GetByName("Memory", CustomType.Load);
             instrument12.SetValueWithPID(item2.Value, item2.Unit, 100, "内存占用");
 
             var item3 = PerformanceDatas.GetByName("CPU Package", CustomType.Power);
             instrument13.SetValueWithPID(item3.Value, item3.Unit, 100, "CPU功率");
+
+            var item4 = PerformanceDatas.GetByName("Intel[R] Wireless-AC 9560 Bytes Received/sec", CustomType.Download);
+            
+            var item5 = PerformanceDatas.GetByName("Intel[R] Wireless-AC 9560 Bytes Sent/sec", CustomType.Upload);
+
+            netSpeedControl1.SetNetSpeed(item4.Value, item4.Unit, item5.Value, item5.Unit);
         }
 
         private void OHMHandler_GotData2(object sender, System.Timers.ElapsedEventArgs e)
@@ -91,11 +97,6 @@ namespace NingMonitor.Forms
             var item1 = PerformanceDatas.GetByName("CPU Total", CustomType.Load);
 
             instrument21.Value = item1.Value;
-        }
-
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-            this.Width = trackBar1.Value;
         }
     }
 }

@@ -36,6 +36,9 @@ namespace MonitorControlsLibrary.Instrument1
         private float max = 10;//最大数值
         private Point spinPosition = new Point(48, 239);
         private Point spinRotation = new Point(242, 242);
+        private double beta;
+        private double d;
+
 
         public Instrument1()
         {
@@ -44,6 +47,8 @@ namespace MonitorControlsLibrary.Instrument1
             BackColor = Color.FromArgb(0, 0, 0, 0);
             CheckForIllegalCrossThreadCalls = false;
             PID.PIDOutEvent_Float += PID_PIDOutEvent_Float;
+
+            CaclulateBetaNd(spinPosition, spinRotation, out beta, out d);
         }
         
         private void PID_PIDOutEvent_Float(float value)
@@ -98,7 +103,7 @@ namespace MonitorControlsLibrary.Instrument1
                     break;
             }
 
-            Font font = new Font("宋体", 20 * scale, FontStyle.Bold);
+            Font font = new Font("Consloas", 20 * scale, FontStyle.Bold);
 
             SolidBrush drawBrush;
             if (buf < 5)
@@ -115,19 +120,19 @@ namespace MonitorControlsLibrary.Instrument1
             }
 
             //pe.Graphics.DrawString($"{(value*10F).ToString("f2").PadLeft(5,'0')}%\n{lable}", font, drawBrush, 200 * scale, 100 * scale);
-            pe.Graphics.DrawString($"{value.ToString("f2").PadLeft(5, '0')}{unit}\n{显示文字}", font, drawBrush, 190 * scale, 100 * scale);
+            pe.Graphics.DrawString($"{value.ToString("f2").PadLeft(7, ' ')}{unit}\n{显示文字}", font, drawBrush, 150 * scale, 100 * scale);
 
             if (buf < 5)//绘制绿色指针
             {
-                RotateImage(pe, spinGreen, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, spinRotation, scale);
+                RotateImage(pe, spinGreen, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, beta,d, scale);
             }
             else if (buf < 8)
             {
-                RotateImage(pe, spinYellow, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, spinRotation, scale);
+                RotateImage(pe, spinYellow, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, beta, d, scale);
             }
             else//绘制红色指针
             {
-                RotateImage(pe, spinRed, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, spinRotation, scale);
+                RotateImage(pe, spinRed, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, beta, d, scale);
             }
         }
 

@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.netSpeedControl1 = new MonitorControlsLibrary.NetSpeedControl();
+            this.timeControl1 = new MonitorControlsLibrary.TimeControl();
             this.tempControl4 = new MonitorControlsLibrary.TempControl.TempControl();
             this.tempControl3 = new MonitorControlsLibrary.TempControl.TempControl();
             this.tempControl2 = new MonitorControlsLibrary.TempControl.TempControl();
@@ -38,19 +39,28 @@
             this.instrument11 = new MonitorControlsLibrary.Instrument1.Instrument1();
             this.tempControl1 = new MonitorControlsLibrary.TempControl.TempControl();
             this.instrument21 = new MonitorControlsLibrary.Instrument2.Instrument2();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
-            // trackBar1
+            // netSpeedControl1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(191, 986);
-            this.trackBar1.Maximum = 1500;
-            this.trackBar1.Minimum = 800;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(667, 69);
-            this.trackBar1.TabIndex = 8;
-            this.trackBar1.Value = 1000;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            this.netSpeedControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.netSpeedControl1.Download = "0.00 KB/s";
+            this.netSpeedControl1.DownloadBigger = true;
+            this.netSpeedControl1.Location = new System.Drawing.Point(652, 615);
+            this.netSpeedControl1.Name = "netSpeedControl1";
+            this.netSpeedControl1.Size = new System.Drawing.Size(394, 143);
+            this.netSpeedControl1.TabIndex = 13;
+            this.netSpeedControl1.Text = "netSpeedControl1";
+            this.netSpeedControl1.Upload = "0.00 KB/s";
+            // 
+            // timeControl1
+            // 
+            this.timeControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.timeControl1.Location = new System.Drawing.Point(8, 558);
+            this.timeControl1.Name = "timeControl1";
+            this.timeControl1.Size = new System.Drawing.Size(729, 261);
+            this.timeControl1.TabIndex = 12;
+            this.timeControl1.Text = "timeControl1";
             // 
             // tempControl4
             // 
@@ -168,7 +178,7 @@
             this.tempControl1.Value = 0F;
             this.tempControl1.刷新系数 = 4;
             this.tempControl1.微分 = 0.05F;
-            this.tempControl1.显示文字 = "CPU温度";
+            this.tempControl1.显示文字 = "CPU";
             this.tempControl1.比例 = 0.5F;
             this.tempControl1.积分 = 0.08F;
             // 
@@ -188,16 +198,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1058, 1410);
+            this.Controls.Add(this.netSpeedControl1);
             this.Controls.Add(this.tempControl4);
             this.Controls.Add(this.tempControl3);
             this.Controls.Add(this.tempControl2);
-            this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.instrument14);
             this.Controls.Add(this.instrument13);
             this.Controls.Add(this.instrument12);
             this.Controls.Add(this.instrument11);
             this.Controls.Add(this.tempControl1);
             this.Controls.Add(this.instrument21);
+            this.Controls.Add(this.timeControl1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DisplayForm";
             this.Text = "DisplayForm";
@@ -206,9 +217,7 @@
             this.Shown += new System.EventHandler(this.DisplayForm_Shown);
             this.DoubleClick += new System.EventHandler(this.DisplayForm_DoubleClick);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DisplayForm_KeyPress);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -220,9 +229,10 @@
         private MonitorControlsLibrary.Instrument1.Instrument1 instrument13;
         private MonitorControlsLibrary.Instrument1.Instrument1 instrument14;
         private MonitorControlsLibrary.Instrument2.Instrument2 instrument21;
-        private System.Windows.Forms.TrackBar trackBar1;
         private MonitorControlsLibrary.TempControl.TempControl tempControl2;
         private MonitorControlsLibrary.TempControl.TempControl tempControl3;
         private MonitorControlsLibrary.TempControl.TempControl tempControl4;
+        private MonitorControlsLibrary.TimeControl timeControl1;
+        private MonitorControlsLibrary.NetSpeedControl netSpeedControl1;
     }
 }
