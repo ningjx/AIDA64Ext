@@ -21,7 +21,7 @@ namespace MonitorControlsLibrary
         {
             SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            BackColor = Color.FromArgb(0, 0, 0, 0);
+            BackColor = Color.FromArgb(0, 0, 0);
             CheckForIllegalCrossThreadCalls = false;
             Timer.AutoReset = true;
             Timer.Elapsed += RefreshData;
@@ -45,10 +45,10 @@ namespace MonitorControlsLibrary
             Font secFont = new Font("等线", 50 * scale, FontStyle.Bold);
             Font dateFont = new Font("等线", 30 * scale, FontStyle.Bold);
             pe.Graphics.DrawString(DateTime.Now.ToString("hh mm"), timeFont, SolidBrush, 0, 0);
-            pe.Graphics.DrawString(DateTime.Now.ToString("ss"), secFont, SolidBrush, 800 * scale, 170 * scale);
+            pe.Graphics.DrawString(DateTime.Now.ToString("ss"), secFont, SolidBrush, timeFont.Height * 2.6F, timeFont.Height*.55F);
             if (kick)
             {
-                pe.Graphics.DrawString(":", timeFont, SolidBrush, 340 * scale, -30 * scale);
+                pe.Graphics.DrawString(":", timeFont, SolidBrush, timeFont.Height * 1.1F, -30 * scale);
                 kick = false;
             }
             else

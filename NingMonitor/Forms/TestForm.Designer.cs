@@ -46,12 +46,11 @@
             // timeControl1
             // 
             this.timeControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.timeControl1.Location = new System.Drawing.Point(12, 12);
+            this.timeControl1.Location = new System.Drawing.Point(63, 32);
             this.timeControl1.Name = "timeControl1";
-            this.timeControl1.Size = new System.Drawing.Size(635, 224);
-            this.timeControl1.TabIndex = 0;
+            this.timeControl1.Size = new System.Drawing.Size(497, 203);
+            this.timeControl1.TabIndex = 4;
             this.timeControl1.Text = "timeControl1";
-            this.timeControl1.Click += new System.EventHandler(this.timeControl1_Click);
             // 
             // netSpeedControl1
             // 
@@ -69,9 +68,9 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(849, 544);
+            this.Controls.Add(this.timeControl1);
             this.Controls.Add(this.netSpeedControl1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.timeControl1);
             this.Name = "TestForm";
             this.Text = "TestForm";
             this.Load += new System.EventHandler(this.TestForm_Load);
@@ -80,9 +79,8 @@
         }
 
         #endregion
-
-        private MonitorControlsLibrary.TimeControl timeControl1;
         private System.Windows.Forms.Button button1;
         private MonitorControlsLibrary.NetSpeedControl netSpeedControl1;
+        private MonitorControlsLibrary.TimeControl timeControl1;
     }
 }
