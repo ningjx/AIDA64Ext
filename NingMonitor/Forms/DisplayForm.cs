@@ -77,7 +77,7 @@ namespace NingMonitor.Forms
             var item1 = PerformanceDatas.GetByName("CPU Total", CustomType.Load);
             instrument11.SetValueWithPID(item1.Value, item1.Unit, 100, "CPU占用");
 
-            //instrument21.Value = item1.Value;
+            instrument21.Value = item1.Value;
 
             var item2 = PerformanceDatas.GetByName("Memory", CustomType.Load);
             instrument12.SetValueWithPID(item2.Value, item2.Unit, 100, "内存占用");
