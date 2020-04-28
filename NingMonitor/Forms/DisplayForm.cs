@@ -84,6 +84,12 @@ namespace NingMonitor.Forms
 
             var item3 = PerformanceDatas.GetByName("CPU Package", CustomType.Power);
             instrument13.SetValueWithPID(item3.Value, item3.Unit, 100, "CPU功率");
+
+            var item4 = PerformanceDatas.GetByName("Intel[R] Wireless-AC 9560 Bytes Received/sec", CustomType.Download);
+            
+            var item5 = PerformanceDatas.GetByName("Intel[R] Wireless-AC 9560 Bytes Sent/sec", CustomType.Upload);
+
+            netSpeedControl1.SetNetSpeed(item4.Value, item4.Unit, item5.Value, item5.Unit);
         }
 
         private void OHMHandler_GotData2(object sender, System.Timers.ElapsedEventArgs e)

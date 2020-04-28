@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.netSpeedControl1 = new MonitorControlsLibrary.NetSpeedControl();
+            this.timeControl1 = new MonitorControlsLibrary.TimeControl();
             this.tempControl4 = new MonitorControlsLibrary.TempControl.TempControl();
             this.tempControl3 = new MonitorControlsLibrary.TempControl.TempControl();
             this.tempControl2 = new MonitorControlsLibrary.TempControl.TempControl();
@@ -38,6 +40,27 @@
             this.tempControl1 = new MonitorControlsLibrary.TempControl.TempControl();
             this.instrument21 = new MonitorControlsLibrary.Instrument2.Instrument2();
             this.SuspendLayout();
+            // 
+            // netSpeedControl1
+            // 
+            this.netSpeedControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.netSpeedControl1.Download = "0.00 KB/s";
+            this.netSpeedControl1.DownloadBigger = true;
+            this.netSpeedControl1.Location = new System.Drawing.Point(652, 615);
+            this.netSpeedControl1.Name = "netSpeedControl1";
+            this.netSpeedControl1.Size = new System.Drawing.Size(394, 143);
+            this.netSpeedControl1.TabIndex = 13;
+            this.netSpeedControl1.Text = "netSpeedControl1";
+            this.netSpeedControl1.Upload = "0.00 KB/s";
+            // 
+            // timeControl1
+            // 
+            this.timeControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.timeControl1.Location = new System.Drawing.Point(8, 558);
+            this.timeControl1.Name = "timeControl1";
+            this.timeControl1.Size = new System.Drawing.Size(729, 261);
+            this.timeControl1.TabIndex = 12;
+            this.timeControl1.Text = "timeControl1";
             // 
             // tempControl4
             // 
@@ -175,6 +198,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1058, 1410);
+            this.Controls.Add(this.netSpeedControl1);
             this.Controls.Add(this.tempControl4);
             this.Controls.Add(this.tempControl3);
             this.Controls.Add(this.tempControl2);
@@ -184,6 +208,7 @@
             this.Controls.Add(this.instrument11);
             this.Controls.Add(this.tempControl1);
             this.Controls.Add(this.instrument21);
+            this.Controls.Add(this.timeControl1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DisplayForm";
             this.Text = "DisplayForm";
@@ -207,5 +232,7 @@
         private MonitorControlsLibrary.TempControl.TempControl tempControl2;
         private MonitorControlsLibrary.TempControl.TempControl tempControl3;
         private MonitorControlsLibrary.TempControl.TempControl tempControl4;
+        private MonitorControlsLibrary.TimeControl timeControl1;
+        private MonitorControlsLibrary.NetSpeedControl netSpeedControl1;
     }
 }

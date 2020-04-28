@@ -16,12 +16,12 @@ namespace MonitorControlsLibrary
     public partial class TimeControl : BaseControl
     {
         private Timer Timer = new Timer(1000);
-        
+
         public TimeControl()
         {
             SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            BackColor = Color.FromArgb(0, 0, 0);
+            BackColor = Color.FromArgb(0, 0, 0, 0);
             CheckForIllegalCrossThreadCalls = false;
             Timer.AutoReset = true;
             Timer.Elapsed += RefreshData;
@@ -41,9 +41,9 @@ namespace MonitorControlsLibrary
         protected override void OnPaint(PaintEventArgs pe)
         {
             scale = (float)Width / 1080;
-            Font timeFont = new Font("等线", 150 * scale,FontStyle.Bold);
-            Font secFont = new Font("等线", 50 * scale,FontStyle.Bold);
-            Font dateFont = new Font("等线", 30 * scale,FontStyle.Bold);
+            Font timeFont = new Font("等线", 150 * scale, FontStyle.Bold);
+            Font secFont = new Font("等线", 50 * scale, FontStyle.Bold);
+            Font dateFont = new Font("等线", 30 * scale, FontStyle.Bold);
             pe.Graphics.DrawString(DateTime.Now.ToString("hh mm"), timeFont, SolidBrush, 0, 0);
             pe.Graphics.DrawString(DateTime.Now.ToString("ss"), secFont, SolidBrush, 800 * scale, 170 * scale);
             if (kick)
