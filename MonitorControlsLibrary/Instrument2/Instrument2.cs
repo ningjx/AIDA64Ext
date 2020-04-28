@@ -33,7 +33,7 @@ namespace MonitorControlsLibrary.Instrument2
             pixPerTime = 90 / (1000 / micSec);
 
             Timer.Elapsed += Timer_Elapsed;
-            //Timer.Enabled = true;
+            Timer.Enabled = true;
             Timer.AutoReset = true;
             pointCount = 10000 / micSec + 1;
         }
