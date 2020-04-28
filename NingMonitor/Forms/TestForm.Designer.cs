@@ -28,51 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.instrument21 = new MonitorControlsLibrary.Instrument2.Instrument2();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.timeControl1 = new MonitorControlsLibrary.TimeControl();
             this.SuspendLayout();
             // 
-            // instrument21
+            // timeControl1
             // 
-            this.instrument21.BackColor = System.Drawing.Color.Black;
-            this.instrument21.Location = new System.Drawing.Point(109, 40);
-            this.instrument21.Name = "instrument21";
-            this.instrument21.Size = new System.Drawing.Size(795, 441);
-            this.instrument21.TabIndex = 0;
-            this.instrument21.Text = "instrument21";
-            this.instrument21.Value = 1F;
-            this.instrument21.刷新间隔 = 1000;
-            this.instrument21.Click += new System.EventHandler(this.instrument21_Click);
-            // 
-            // trackBar1
-            // 
-            this.trackBar1.Location = new System.Drawing.Point(157, 545);
-            this.trackBar1.Maximum = 1000;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(685, 69);
-            this.trackBar1.TabIndex = 1;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            this.timeControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.timeControl1.Location = new System.Drawing.Point(44, 94);
+            this.timeControl1.Name = "timeControl1";
+            this.timeControl1.Size = new System.Drawing.Size(635, 551);
+            this.timeControl1.TabIndex = 0;
+            this.timeControl1.Text = "timeControl1";
+            this.timeControl1.Click += new System.EventHandler(this.timeControl1_Click);
             // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1048, 704);
-            this.Controls.Add(this.trackBar1);
-            this.Controls.Add(this.instrument21);
+            this.Controls.Add(this.timeControl1);
             this.Name = "TestForm";
             this.Text = "TestForm";
             this.Load += new System.EventHandler(this.TestForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private MonitorControlsLibrary.Instrument2.Instrument2 instrument21;
-        private System.Windows.Forms.TrackBar trackBar1;
+        private MonitorControlsLibrary.TimeControl timeControl1;
     }
 }

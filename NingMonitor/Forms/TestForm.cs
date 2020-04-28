@@ -17,17 +17,11 @@ namespace AIDA64Ext.Forms
             InitializeComponent();
         }
 
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-            instrument21.Value = trackBar1.Value / 10F;
-        }
-
         private void TestForm_Load(object sender, EventArgs e)
         {
-            instrument21.刷新间隔 = 500;
         }
 
-        private void instrument21_Click(object sender, EventArgs e)
+        private void timeControl1_Click(object sender, EventArgs e)
         {
 
         }
