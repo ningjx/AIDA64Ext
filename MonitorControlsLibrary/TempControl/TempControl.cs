@@ -70,6 +70,7 @@ namespace MonitorControlsLibrary.TempControl
             //this.tem = temp;
             //Refresh();
             //return;
+            }
 
         public float Min { get; set; } = 0;
 
