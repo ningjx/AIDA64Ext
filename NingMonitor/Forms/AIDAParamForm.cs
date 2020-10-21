@@ -73,7 +73,7 @@ namespace NingMonitor.Forms
 
         private void tabPage5_Click(object sender, EventArgs e)
         {
-            Dispose();
+            Hide();
             StaticForms.Forms["MainForm"].Show();
         }
 
@@ -81,7 +81,7 @@ namespace NingMonitor.Forms
         {
             if (e.KeyChar == (char)Keys.Escape)
             {
-                Dispose();
+                Hide();
                 StaticForms.Forms["MainForm"].Show();
             }
         }
@@ -90,7 +90,7 @@ namespace NingMonitor.Forms
         {
             if (e.KeyChar == (char)Keys.Escape)
             {
-                Dispose();
+                Hide();
                 StaticForms.Forms["MainForm"].Show();
             }
         }
@@ -102,6 +102,15 @@ namespace NingMonitor.Forms
 
         private void AIDAParamForm_FormClosing_1(object sender, FormClosingEventArgs e)
         {
+            Config.ConfigData.FormsInfo.AddOrUpdate(Name, new ScreenPositon
+            {
+                FormName = Name,
+                Top = Top,
+                Left = Left,
+                Width = Width,
+                Height = Height,
+                ScreenName = Screen.FromControl(this).DeviceName.Replace("\\", "").Replace(".", "")
+            });
             StaticForms.Forms["MainForm"].Show();
         }
     }

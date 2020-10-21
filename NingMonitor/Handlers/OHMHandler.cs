@@ -30,7 +30,7 @@ namespace NingMonitor.Handlers
             computer.MainboardEnabled = true;
             computer.RAMEnabled = true;
             computer.Open();
-            Timer timer = new Timer(1000)
+            Timer timer = new Timer(500)
             {
                 AutoReset = true,
                 Enabled = true,

@@ -31,31 +31,6 @@ namespace MonitorControlsLibrary.Instrument1
             return 0;
         }
 
-        Bitmap back = new Bitmap(Instrument1Reasource.back);
-        Bitmap spinRed = new Bitmap(Instrument1Reasource.spinred);
-        Bitmap spinGreen = new Bitmap(Instrument1Reasource.apingreen);
-        Bitmap spinYellow = new Bitmap(Instrument1Reasource.yellowSpin);
-        Bitmap p0 = new Bitmap(Instrument1Reasource._0);
-        Bitmap p1 = new Bitmap(Instrument1Reasource._1);
-        Bitmap p2 = new Bitmap(Instrument1Reasource._2);
-        Bitmap p3 = new Bitmap(Instrument1Reasource._3);
-        Bitmap p4 = new Bitmap(Instrument1Reasource._4);
-        Bitmap p5 = new Bitmap(Instrument1Reasource._5);
-        Bitmap p6 = new Bitmap(Instrument1Reasource._6);
-        Bitmap p7 = new Bitmap(Instrument1Reasource._7);
-        Bitmap p8 = new Bitmap(Instrument1Reasource._8);
-        Bitmap p9 = new Bitmap(Instrument1Reasource._9);
-        Bitmap p10 = new Bitmap(Instrument1Reasource._10);
-
-        //SolidBrush drawBrush = new SolidBrush(Color.White);
-        string lable = "";
-        float value;
-        string unit = "";
-        float scale;
-        float max = 10;
-        Point spinPosition = new Point(48, 239);
-        Point spinRotation = new Point(242, 242);
-
         protected override void OnPaint(PaintEventArgs pe)
         {
             //获取控件缩放比
@@ -103,7 +78,7 @@ namespace MonitorControlsLibrary.Instrument1
                     break;
             }
 
-            Font font = new Font("宋体", 20 * scale, FontStyle.Bold);
+            Font font = new Font("Consloas", 20 * scale, FontStyle.Bold);
 
             SolidBrush drawBrush;
             if (buf < 5)
@@ -120,27 +95,27 @@ namespace MonitorControlsLibrary.Instrument1
             }
 
             //pe.Graphics.DrawString($"{(value*10F).ToString("f2").PadLeft(5,'0')}%\n{lable}", font, drawBrush, 200 * scale, 100 * scale);
-            pe.Graphics.DrawString($"{value.ToString("f2").PadLeft(5, '0')}{unit}\n{lable}", font, drawBrush, 190 * scale, 100 * scale);
+            pe.Graphics.DrawString($"{value.ToString("f2").PadLeft(7, ' ')}{unit}\n{显示文字}", font, drawBrush, 150 * scale, 100 * scale);
 
             if (buf < 5)//绘制绿色指针
             {
-                RotateImage(pe, spinGreen, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, spinRotation, scale);
+                RotateImage(pe, spinGreen, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, beta,d, scale);
             }
             else if (buf < 8)
             {
-                RotateImage(pe, spinYellow, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, spinRotation, scale);
+                RotateImage(pe, spinYellow, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, beta, d, scale);
             }
             else//绘制红色指针
             {
-                RotateImage(pe, spinRed, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, spinRotation, scale);
+                RotateImage(pe, spinRed, InterpolPhyToAngle((float)value, 0, max, 0, 180), spinPosition, beta, d, scale);
             }
         }
 
-        int skip = 0;
+        private int skip = 0;
         private void SetValueForPID(float value)
         {
             skip++;
-            if (skip > 4)
+            if (skip > 刷新系数)
             {
                 skip = 0;
                 if (value == this.value || value == 0)
@@ -150,18 +125,21 @@ namespace MonitorControlsLibrary.Instrument1
             }
         }
 
-        public void SetValue(string text, float value, string unit, float max)
+        public int 刷新系数 { get; set; } = 4;
+
+        public string 显示文字 { get; set; }
+
+        public void SetValue(float value, string unit, float max)
         {
             if (value == this.value || value == 0)
                 return;
-            lable = text;
             this.unit = unit;
             this.max = max;
             this.value = value;
             Refresh();
         }
 
-        float currentValue;
+        private float currentValue;
         /// <summary>
         /// 赋值（带PID算法）CPU占用有点高
         /// </summary>
@@ -176,7 +154,8 @@ namespace MonitorControlsLibrary.Instrument1
             //value *= 10;//0-100
             if (value == 0 || value == this.value || currentValue == value)
                 return;
-            lable = text;
+            if (text != null)
+                显示文字 = text;
             this.unit = unit;
             this.max = max;
             PID.Restart(currentValue, value);

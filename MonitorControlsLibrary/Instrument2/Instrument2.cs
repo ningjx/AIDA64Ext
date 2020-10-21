@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-
+using Timer = System.Timers.Timer;
 namespace MonitorControlsLibrary.Instrument2
 {
     public partial class Instrument2 : BaseControl
@@ -28,41 +28,58 @@ namespace MonitorControlsLibrary.Instrument2
             return 0;
         }
 
-        //0-100
-        public void SetValue(float value)
+        private void Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (lockValue)
                 return;
             lockValue = true;
-            value = value < 1 ? 1 : value;
-
-            for (int i = 300; i > 0; i--)
+            Value = Value < 1 ? 1 : Value;
+            Value = Value > 100 ? 100 : Value;
+            points = new Point[900];
+            //向右位移
+            for (int i = pointCount; i > 0; i--)
             {
                 if (i < buffer.Length)
                     buffer[i] = buffer[i - 1];
             }
+            //插入0
+            buffer[0] = (int)((400 - (int)(Value * 4)) * scale);
 
 
-            buffer[0] = 400 - (int)(value * 4);
-
-
-            for (int i = 0; i < buffer.Length; i++)
+            for (int i = 0; i < pointCount; i++)
             {
                 if (buffer[i] >= 1)
-                    points[i] = new Point(900 - i * 3, buffer[i]);
+                    points[i] = new Point((int)((900 - i * pixPerTime + 90) * scale), (int)(buffer[i] + 50 * scale));
             }
-            //this.value = value;
             Refresh();
             lockValue = false;
         }
 
+        /// <summary>
+        /// 0-100
+        /// </summary>
+        public float Value { get; set; }
+
+        private int currDrawPosition;
         protected override void OnPaint(PaintEventArgs pe)
         {
-            //pe.Graphics.DrawCurve()
-            //pe.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            pe.Graphics.DrawCurve(maskPen, points);
-            //pe.Graphics.DrawLines(maskPen, points);
-            pe.Graphics.DrawString($"{points.First().X}  {points.First().Y}", new Font("宋体", 20), new SolidBrush(Color.White), 10, 10);
+            scale = (float)Width / back.Width;
+            pe.Graphics.DrawImage(back, 0, 0, back.Width * scale, back.Height * scale);
+            if (currDrawPosition < pointCount)
+            {
+                currDrawPosition++;
+                if (currDrawPosition > 1)
+                {
+                    Point[] currPoints = points.Take(currDrawPosition - 1).ToArray();
+                    if (currPoints.Length > 1)
+                        pe.Graphics.DrawCurve(maskPen, currPoints);
+                }
+            }
+            else
+            {
+                Point[] currPoints = points.Take(pointCount).ToArray();
+                pe.Graphics.DrawCurve(maskPen, currPoints);
+            }
         }
     }
 }

@@ -37,7 +37,7 @@ namespace NingMonitor
     public class ConfigData
     {
         public AIDAShownItems AIDAShownItems = new AIDAShownItems();
-        public Dictionary<string,ScreenPositon> ScreenPositons = new Dictionary<string, ScreenPositon>();
+        public Dictionary<string,ScreenPositon> FormsInfo = new Dictionary<string, ScreenPositon>();
         public bool IsAutoShowDisplayForm = false;
     }
 

@@ -145,7 +145,7 @@ namespace NingMonitor.Extension
 
         public static void AddOrUpdate<K, V>(this Dictionary<K, V> dic, K key, V value)
         {
-            if (dic.Keys.Contains(key))
+            if (dic.ContainsKey(key))
             {
                 dic[key] = value;
             }
@@ -154,7 +154,6 @@ namespace NingMonitor.Extension
                 dic.Add(key, value);
             }
         }
-
 
         /// <summary>
         /// 将本程序设为开启自启
@@ -177,7 +176,7 @@ namespace NingMonitor.Extension
         public static void SaveScreenObject(this Form form)
         {
             string CurrentScreenName = Screen.FromControl(form).DeviceName.Replace("\\", "").Replace(".", "");
-            Config.ConfigData.ScreenPositons.AddOrUpdate(CurrentScreenName, new ScreenPositon
+            Config.ConfigData.FormsInfo.AddOrUpdate(CurrentScreenName, new ScreenPositon
             {
                 ScreenName = CurrentScreenName,
                 FormName = form.Name,
@@ -194,7 +193,7 @@ namespace NingMonitor.Extension
         /// <param name="form"></param>
         public static void SetFormPosition(this Form form, bool isFullScreen)
         {
-            if (!Config.ConfigData.ScreenPositons.TryGetValue(form.Name, out ScreenPositon info))
+            if (!Config.ConfigData.FormsInfo.TryGetValue(form.Name, out ScreenPositon info))
             {
                 return;
             }
@@ -217,6 +216,18 @@ namespace NingMonitor.Extension
                 form.Width = info.Width;
                 form.Height = info.Height;
             }
+        }
+
+        public static void ShowWithInfo(this Form form)
+        {
+            if (Config.ConfigData.FormsInfo.TryGetValue(form.Name, out ScreenPositon position))
+            {
+                form.Top = position.Top;
+                form.Left = position.Left;
+                form.Width = position.Width;
+                form.Height = position.Height;
+            }
+            form.Show();
         }
 
         /// <summary>
