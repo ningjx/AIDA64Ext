@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DotNetPID;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -13,7 +14,7 @@ namespace MonitorControlsLibrary.Instrument1
 {
     public partial class Instrument1 : BaseControl
     {
-        PID PID = new PID(0.5F, 0.08F, 0.05F);
+        PID PID = PID.Create(0.05, 0.2, 0.02, 10, PIDType.Positional);
 
         public Instrument1()
         {
@@ -21,12 +22,13 @@ namespace MonitorControlsLibrary.Instrument1
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             BackColor = Color.FromArgb(0, 0, 0, 0);
             CheckForIllegalCrossThreadCalls = false;
-            PID.PIDOutEvent_Float += PID_PIDOutEvent_Float;
+            PID.StepEvent += PID_PIDOutEvent_Float;
         }
-        
-        private void PID_PIDOutEvent_Float(float value)
+
+        private float PID_PIDOutEvent_Float(float value, float per)
         {
             SetValueForPID(value);
+            return 0;
         }
 
         Bitmap back = new Bitmap(Instrument1Reasource.back);
@@ -61,7 +63,7 @@ namespace MonitorControlsLibrary.Instrument1
             pe.Graphics.DrawImage(back, 0, 0, back.Width * scale, back.Height * scale);
             int buf = (int)(value / max * 10);
             //绘制仪表
-            switch (Math.Round(value/max*10))
+            switch (Math.Round(value / max * 10))
             {
                 case 0:
                     pe.Graphics.DrawImage(p0, 0, 0, p0.Width * scale, p0.Height * scale);
@@ -108,7 +110,7 @@ namespace MonitorControlsLibrary.Instrument1
             {
                 drawBrush = new SolidBrush(Color.FromArgb(26, 255, 0));
             }
-            else if(buf < 8)
+            else if (buf < 8)
             {
                 drawBrush = new SolidBrush(Color.FromArgb(255, 196, 0));
             }
@@ -167,7 +169,7 @@ namespace MonitorControlsLibrary.Instrument1
         /// <param name="value">数值</param>
         /// <param name="unit">单位</param>
         /// <param name="max">最大值</param>
-        public void SetValueWithPID(string text,float value,string unit,float max)
+        public void SetValueWithPID(string text, float value, string unit, float max)
         {
             value = value > max ? max : value;
             value = value < 0 ? 0 : value;
@@ -177,7 +179,7 @@ namespace MonitorControlsLibrary.Instrument1
             lable = text;
             this.unit = unit;
             this.max = max;
-            PID.SetWithPID(currentValue, value);
+            PID.Restart(currentValue, value);
             currentValue = value;
         }
     }

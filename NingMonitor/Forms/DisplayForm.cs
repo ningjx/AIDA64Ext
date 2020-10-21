@@ -1,6 +1,7 @@
 ﻿using NingMonitor.Handlers;
 using NingMonitor.Models;
 using OpenHardwareMonitor.Hardware;
+using PerformanceTools;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

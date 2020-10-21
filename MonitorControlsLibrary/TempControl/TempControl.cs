@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
+﻿using DotNetPID;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Timer = System.Timers.Timer;
 
 namespace MonitorControlsLibrary.TempControl
 {
@@ -20,15 +12,16 @@ namespace MonitorControlsLibrary.TempControl
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             BackColor = Color.FromArgb(0, 0, 0, 0);
             Control.CheckForIllegalCrossThreadCalls = false;
-            PID.PIDOutEvent_Float += PID_PIDOutEvent_Float;
+            PID.StepEvent += PID_PIDOutEvent_Float;
         }
 
-        private void PID_PIDOutEvent_Float(float value)
+        private float PID_PIDOutEvent_Float(float value, float per)
         {
             SetTempForPID(value);
+            return 0;
         }
 
-        PID PID = new PID(0.5F, 0.08F, 0.05F);
+        PID PID = PID.Create(0.05, 0.3, 0.02, 10, PIDType.Positional);
         Bitmap cover = new Bitmap(TempControlReasource.temCover);
         Bitmap temBack = new Bitmap(TempControlReasource.temBack);
         Bitmap topCover = new Bitmap(TempControlReasource.topCover);
@@ -60,11 +53,11 @@ namespace MonitorControlsLibrary.TempControl
         int skip = 0;
         private void SetTempForPID(float temp)
         {
-           //if (this.tem == temp || temp == 0)
-           //    return;
-           //this.tem = temp;
-           //Refresh();
-           //return;
+            //if (this.tem == temp || temp == 0)
+            //    return;
+            //this.tem = temp;
+            //Refresh();
+            //return;
 
 
             skip++;
@@ -100,7 +93,7 @@ namespace MonitorControlsLibrary.TempControl
             if (this.tem == temp || temp == 0 || currentTemp == temp)
                 return;
             lable = text;
-            PID.SetWithPID(currentTemp, temp);
+            PID.Restart(currentTemp, temp);
             currentTemp = temp;
         }
     }

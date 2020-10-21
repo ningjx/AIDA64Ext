@@ -1,9 +1,6 @@
 ﻿using NingMonitor.Models;
-using System;
+using PerformanceTools;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NingMonitor.Handlers
 {
@@ -12,22 +9,22 @@ namespace NingMonitor.Handlers
         private static readonly PerformanceCounters pCounters;
         static PerformanceHandler()
         {
-            
+
             List<CounterConfig> pCounterInfos = new List<CounterConfig>
             {
                 new CounterConfig("Network Interface","Bytes Received/sec",CustomType.Download,NetFunc),
                 new CounterConfig("Network Interface","Bytes Sent/sec",CustomType.Upload,NetFunc),
             };
-            pCounters = new PerformanceCounters(pCounterInfos,1000);
+            pCounters = new PerformanceCounters(pCounterInfos, 1000);
             pCounters.ReciveData += PCounters_ReciveData;
             pCounters.Start();
         }
 
         private static void PCounters_ReciveData(List<CountersResult> datas)
         {
-            for(int i=0;i< datas.Count; i++)
+            for (int i = 0; i < datas.Count; i++)
             {
-                PerformanceDatas.ADD(datas[i].InstanceName+ " "+datas[i].CounterName, datas[i].Type, datas[i].Value, datas[i].Unit);
+                PerformanceDatas.ADD(datas[i].InstanceName + " " + datas[i].CounterName, datas[i].Type, datas[i].Value, datas[i].Unit);
             }
         }
 

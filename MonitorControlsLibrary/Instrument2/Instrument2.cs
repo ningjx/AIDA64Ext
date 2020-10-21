@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
+﻿using DotNetPID;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MonitorControlsLibrary.Instrument2
 {
     public partial class Instrument2 : BaseControl
     {
-        PID PID = new PID(0.05F, 0.05F, 0.02F);
+        PID PID = PID.Create(0.05, 0.3, 0.02, 10, PIDType.Positional);
         public Instrument2()
         {
             SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
             BackColor = Color.Black;
             CheckForIllegalCrossThreadCalls = false;
-            PID.PIDOutEvent_Float += PID_PIDOutEvent_Float;
+            PID.StepEvent += PID_PIDOutEvent_Float;
         }
         //每三个像素绘制一个点，每秒绘制30个点，十秒钟300个点，900像素
         //纵向400像素
@@ -27,9 +22,10 @@ namespace MonitorControlsLibrary.Instrument2
         Point[] points = new Point[300];
         bool lockValue = false;
         Pen maskPen = new Pen(Color.LightGreen, 2);
-        private void PID_PIDOutEvent_Float(float value)
+        private float PID_PIDOutEvent_Float(float value, float per)
         {
             SetValue(value);
+            return 0;
         }
 
         //0-100

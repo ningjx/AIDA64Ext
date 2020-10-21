@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetPID, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetPID.1.1.0\lib\net45\DotNetPID.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -65,7 +68,6 @@
     <Compile Include="Instrument2\Instrument2.Designer.cs">
       <DependentUpon>Instrument2.cs</DependentUpon>
     </Compile>
-    <Compile Include="PID.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TempControl\TempControl.cs">
       <SubType>Component</SubType>
@@ -110,6 +112,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TempControlReasource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
